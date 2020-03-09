@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.tempsattente.sdk;
+package com.github.adriens.opt.tempsattente.sdk;
 
+import com.github.adriens.opt.tempsattente.sdk.Agence;
+import com.github.adriens.opt.tempsattente.sdk.Agences;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 

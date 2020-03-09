@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.tempsattente.sdk;
+package com.github.adriens.opt.tempsattente.sdk;
 
+import com.github.adriens.opt.tempsattente.sdk.Agences;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -113,7 +114,7 @@ public class AgencesTest {
 
     /**
      * Test of getCommune method, of class Agences.
-     */ 
+     
     @Test
     public void testGetCommune() {
         System.out.println("\ngetCommune_TEST");
@@ -123,7 +124,7 @@ public class AgencesTest {
 
         assertEquals(expResult, result, "Nom de commune différents.");
     }
-
+*/
     /**
      * Test of convertWaintingTimeToMillis method, of class Agences.
      */
