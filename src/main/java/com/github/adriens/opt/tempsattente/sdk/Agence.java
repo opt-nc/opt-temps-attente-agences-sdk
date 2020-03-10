@@ -91,7 +91,7 @@ public class Agence {
      */
     @Override
     public String toString() {
-        return "designation: <" + this.designation + ">, realMaxWaitingTime: <" + this.realMaxWaitingTime + ">";
+        return "Agence <designation: " + this.designation + ", realMaxWaitingTime: " + this.realMaxWaitingTime + ">";
     }
 
 }
