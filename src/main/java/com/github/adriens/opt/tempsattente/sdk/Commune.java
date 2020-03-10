@@ -10,7 +10,6 @@ package com.github.adriens.opt.tempsattente.sdk;
  * @author meilie
  */
 enum Commune {
-    ALL,
     BOULOUPARIS,
     MOINDOU,
     NOUMEA,
@@ -34,129 +33,125 @@ enum Commune {
     POUEMBOUT,
     KOUMAC,
     PAITA,
-    WE,
     SARRAMEA,
     LIFOU,
     OUEGOA,
     YATE,
     LA_FOA,
     HIENGHENE,
-    MARE,
-    POINDIMIE,
-    PONERIHOUEN,
-    VOH;
+    MARE, 
+    POINDIMIE, 
+    PONERIHOUEN, 
+    VOH; 
 
-    String url;
+    private String url;
 
     public String getUrl() {
-        setUrl(this);
         return this.url;
     }
 
     public void setUrl(Commune commune) {
         switch (commune) {
             case BOULOUPARIS:
-                this.url = "&q=pointAdresse:(BOULOUPARIS)%20OR%20localiteRefloc:(BOULOUPARIS)%20OR%20designation:(BOULOUPARIS)";
+                this.url = "&q=localiteRefloc:(BOULOUPARIS)";
                 break;
             case MOINDOU:
-                this.url = "&q=pointAdresse:(MOINDOU)%20OR%20localiteRefloc:(MOINDOU)%20OR%20designation:(MOINDOU)";
+                this.url = "&q=localiteRefloc:(MOINDOU)";
                 break;
             case NOUMEA:
-                this.url = "&q=pointAdresse:(NOUMEA)%20OR%20localiteRefloc:(NOUMEA)%20OR%20designation:(NOUMEA)";
+                this.url = "&q=localiteRefloc:(NOUMEA)";
                 break;
             case HOUAILOU:
-                this.url = "&q=pointAdresse:(HOUAILOU)%20OR%20localiteRefloc:(HOUAILOU)%20OR%20designation:(HOUAILOU)";
+                this.url = "&q=localiteRefloc:(HOUAILOU)";
                 break;
             case KONE:
-                this.url = "&q=pointAdresse:(KONE)%20OR%20localiteRefloc:(KONE)%20OR%20designation:(KONE)";
+                this.url = "&q=localiteRefloc:(KONE)";
                 break;
             case KAALA_GOMEN:
-                this.url = "&q=pointAdresse:(KAALA-GOMEN)%20OR%20localiteRefloc:(KAALA-GOMEN)%20OR%20designation:(KAALA-GOMEN)";
+                this.url = "&q=localiteRefloc:(KAALA-GOMEN)";
                 break;
             case POUEBO:
-                this.url = "&q=pointAdresse:(POUEBO)%20OR%20localiteRefloc:(POUEBO)%20OR%20designation:(POUEBO)";
+                this.url = "&q=localiteRefloc:(POUEBO)";
                 break;
             case THIO:
-                this.url = "&q=pointAdresse:(THIO)%20OR%20localiteRefloc:(THIO)%20OR%20designation:(THIO)";
+                this.url = "&q=localiteRefloc:(THIO)";
                 break;
             case TADINE:
-                this.url = "&q=pointAdresse:(TADINE)%20OR%20localiteRefloc:(TADINE)%20OR%20designation:(TADINE)";
+                this.url = "&q=localiteRefloc:(TADINE)";
                 break;
             case MONT_DORE:
-                this.url = "&q=pointAdresse:(MONT-D%20OR%20E)%20OR%20localiteRefloc:(MONT-D%20OR%20E)%20OR%20designation:(MONT-D%20OR%20E)";
+                this.url = "&q=localiteRefloc:(MONT-DORE)";
                 break;
             case KOUAOUA:
-                this.url = "&q=pointAdresse:(KOUAOUA)%20OR%20localiteRefloc:(KOUAOUA)%20OR%20designation:(KOUAOUA)";
+                this.url = "&q=localiteRefloc:(KOUAOUA)";
                 break;
             case POYA:
-                this.url = "&q=pointAdresse:(POYA)%20OR%20localiteRefloc:(POYA)%20OR%20designation:(POYA)";
+                this.url = "&q=localiteRefloc:(POYA)";
                 break;
             case BELEP:
-                this.url = "&q=pointAdresse:(BELEP)%20OR%20localiteRefloc:(BELEP)%20OR%20designation:(BELEP)";
+                this.url = "&q=localiteRefloc:(BELEP)";
                 break;
             case ILE_DES_PINS:
-                this.url = "&q=pointAdresse:(ILE%20AND%20DES%20AND%20PINS)%20OR%20localiteRefloc:(ILE%20AND%20DES%20AND%20PINS)%20OR%20designation:(ILE%20AND%20DES%20AND%20PINS)";
+                this.url = "&q=localiteRefloc:(ILE%20AND%20DES%20AND%20PINS)";
                 break;
             case DUMBEA:
-                this.url = "&q=pointAdresse:(DUMBEA)%20OR%20localiteRefloc:(DUMBEA)%20OR%20designation:(DUMBEA)";
+                this.url = "&q=localiteRefloc:(DUMBEA)";
                 break;
             case BOURAIL:
-                this.url = "&q=pointAdresse:(BOURAIL)%20OR%20localiteRefloc:(BOURAIL)%20OR%20designation:(BOURAIL)";
+                this.url = "&q=localiteRefloc:(BOURAIL)";
                 break;
             case CANALA:
-                this.url = "&q=pointAdresse:(CANALA)%20OR%20localiteRefloc:(CANALA)%20OR%20designation:(CANALA)";
+                this.url = "&q=localiteRefloc:(CANALA)";
                 break;
             case FAYAOUE:
-                this.url = "&q=pointAdresse:(FAYAOUE)%20OR%20localiteRefloc:(FAYAOUE)%20OR%20designation:(FAYAOUE)";
+                this.url = "&q=localiteRefloc:(FAYAOUE)";
                 break;
             case POUM:
-                this.url = "&q=pointAdresse:(POUM)%20OR%20localiteRefloc:(POUM)%20OR%20designation:(POUM)";
+                this.url = "&q=localiteRefloc:(POUM)";
                 break;
             case TOUHO:
-                this.url = "&q=pointAdresse:(TOUHO)%20OR%20localiteRefloc:(TOUHO)%20OR%20designation:(TOUHO)";
+                this.url = "&q=localiteRefloc:(TOUHO)";
                 break;
             case POUEMBOUT:
-                this.url = "&q=pointAdresse:(POUEMBOUT)%20OR%20localiteRefloc:(POUEMBOUT)%20OR%20designation:(POUEMBOUT)";
+                this.url = "&q=localiteRefloc:(POUEMBOUT)";
                 break;
             case KOUMAC:
-                this.url = "&q=pointAdresse:(KOUMAC)%20OR%20localiteRefloc:(KOUMAC)%20OR%20designation:(KOUMAC)";
+                this.url = "&q=localiteRefloc:(KOUMAC)";
                 break;
             case PAITA:
-                this.url = "&q=pointAdresse:(PAITA)%20OR%20localiteRefloc:(PAITA)%20OR%20designation:(PAITA)";
-                break;
-            case WE:
-                this.url = "&q=pointAdresse:(WE)%20OR%20localiteRefloc:(WE)%20OR%20designation:(WE)";
+                this.url = "&q=localiteRefloc:(PAITA)";
                 break;
             case SARRAMEA:
-                this.url = "&q=pointAdresse:(SARRAMEA)%20OR%20localiteRefloc:(SARRAMEA)%20OR%20designation:(SARRAMEA)";
+                this.url = "&q=localiteRefloc:(SARRAMEA)";
                 break;
             case LIFOU:
-                this.url = "&q=pointAdresse:(LIFOU)%20OR%20localiteRefloc:(LIFOU)%20OR%20designation:(LIFOU)";
+                this.url = "&q=localiteRefloc:(LIFOU)%20OR%20localiteRefloc:(WE)";
                 break;
             case OUEGOA:
-                this.url = "&q=pointAdresse:(OUEGOA)%20OR%20localiteRefloc:(OUEGOA)%20OR%20designation:(OUEGOA)";
+                this.url = "&q=localiteRefloc:(OUEGOA)";
                 break;
             case YATE:
-                this.url = "&q=pointAdresse:(YATE)%20OR%20localiteRefloc:(YATE)%20OR%20designation:(YATE)";
+                this.url = "&q=localiteRefloc:(YATE)";
                 break;
             case LA_FOA:
-                this.url = "&q=pointAdresse:(LA%20AND%20FOA)%20OR%20localiteRefloc:(LA%20AND%20FOA)%20OR%20designation:(LA%20AND%20FOA)";
+                this.url = "&q=localiteRefloc:(LA%20AND%20FOA)";
                 break;
             case HIENGHENE:
-                this.url = "&q=pointAdresse:(HIENGHENE)%20OR%20localiteRefloc:(HIENGHENE)%20OR%20designation:(HIENGHENE)";
+                this.url = "&q=localiteRefloc:(HIENGHENE)";
                 break;
             case MARE:
-                this.url = "&q=pointAdresse:(MARE)%20OR%20localiteRefloc:(MARE)%20OR%20designation:(MARE)";
+                this.url = "&q=localiteRefloc:(MARE)";
                 break;
             case POINDIMIE:
-                this.url = "&q=pointAdresse:(POINDIMIE)%20OR%20localiteRefloc:(POINDIMIE)%20OR%20designation:(POINDIMIE)";
+                this.url = "&q=localiteRefloc:(POINDIMIE)";
                 break;
             case PONERIHOUEN:
-                this.url = "&q=pointAdresse:(PONERIHOUEN)%20OR%20localiteRefloc:(PONERIHOUEN)%20OR%20designation:(PONERIHOUEN)";
+                this.url = "&q=localiteRefloc:(PONERIHOUEN)";
                 break;
-            case VOH:
-                this.url = "&q=pointAdresse:(VOH)%20OR%20localiteRefloc:(VOH)%20OR%20designation:(VOH)";
+            case VOH: 
+                this.url = "&q=localiteRefloc:(VOH)";
                 break;
         }
     }
+
 }

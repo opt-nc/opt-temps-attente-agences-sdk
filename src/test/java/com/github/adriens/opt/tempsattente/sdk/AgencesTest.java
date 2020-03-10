@@ -5,7 +5,6 @@
  */
 package com.github.adriens.opt.tempsattente.sdk;
 
-import com.github.adriens.opt.tempsattente.sdk.Agences;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -31,30 +30,14 @@ public class AgencesTest {
 
     /**
      * Test of getAgences method, of class Agences.
-     
+     */
     @Test
     public void testGetAgences() {
         System.out.println("\ngetAgences(Commune)_TEST");
         
         try {
-            
-            for (Commune commune : Commune.values()) {
-                System.out.println("expResult : ");
-                ArrayList<Agence> expResult = new ArrayList<>();
-                expResult.addAll(Agences.getAgences(commune));
-                
-                System.out.println("result : ");
-                Agences agences = new Agences();
-                ArrayList<Agence> listResult = new ArrayList<>();
-                listResult.addAll(Agences.getAgences(commune));
-                agences.setAgences(listResult);
-                ArrayList<Agence> result = agences.agences();
+            assertEquals(17, Agences.getAgences(Commune.NOUMEA).size(), "Longueur de listes différentes");
 
-                assertEquals(expResult.size(), result.size(), "Longueur de listes différentes");
-                assertEquals(expResult.get(0).getDesignation(), result.get(0).getDesignation(), "Contenu de liste différents");
-            }
-            
-            
         } catch (IOException ex) {
             Logger.getLogger(AgencesTest.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -63,22 +46,13 @@ public class AgencesTest {
 
     /**
      * Test of getAll method, of class Agences.
-     
+     */
     @Test
     public void testGetAgences_all() {
         System.out.println("\ngetAgence()_TEST");
-
+       
         try {
-
-            System.out.println("expResult : ");
-            ArrayList<Agence> expResult = Agences.getAgences(Commune.ALL);
-
-            System.out.println("result : ");
-            Agences agences = new Agences(Agences.getAgences());
-            ArrayList<Agence> result = agences.agences();
-
-            assertEquals(expResult.size(), result.size(), "Longueur de liste différentes.");
-            assertEquals(expResult.get(0).getDesignation(), result.get(0).getDesignation(), "Contenu de liste différents.");
+            assertEquals(65, Agences.getAgences().size(), "Longueur de liste différentes.");
 
         } catch (IOException ex) {
             Logger.getLogger(AgencesTest.class.getName()).log(Level.SEVERE, null, ex);
@@ -86,45 +60,6 @@ public class AgencesTest {
 
     }
 
-    /**
-     * Test of setAgences method, of class Agences.
-     
-    @Test
-    public void testSetAgences() {
-        System.out.println("\nsetAgences_TEST");
-
-        try {
-
-            System.out.println("expResult : ");
-            ArrayList<Agence> expResult = Agences.getAgences(Commune.NOUMEA);
-
-            System.out.println("result : ");
-            Agences agences = new Agences();
-            agences.setAgences(Agences.getAgences(Commune.NOUMEA));
-            ArrayList<Agence> result = agences.agences();
-
-            assertEquals(expResult.size(), result.size(), "Longueur de liste différente.");
-            assertEquals(expResult.get(0).getDesignation(), result.get(0).getDesignation(), "Contenu de liste différent.");
-
-        } catch (IOException ex) {
-            Logger.getLogger(AgencesTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
-
-    /**
-     * Test of getCommune method, of class Agences.
-     
-    @Test
-    public void testGetCommune() {
-        System.out.println("\ngetCommune_TEST");
-
-        String expResult = "NOUMEA";
-        String result = Commune.NOUMEA.name();
-
-        assertEquals(expResult, result, "Nom de commune différents.");
-    }
-*/
     /**
      * Test of convertWaintingTimeToMillis method, of class Agences.
      */
@@ -145,22 +80,23 @@ public class AgencesTest {
 
     /**
      * Demo test method, of class Agences.
-     
+     */
     @Test
     public void testDemo() {
         System.out.println("\ndemo_TEST");
-
+        Agences agences = new Agences();
+        
         try {
-            Agences agences_noumea = new Agences(Agences.getAgences(Commune.NOUMEA));
-            System.out.println("<" + agences_noumea.agences().size() + "> agences trouvées pour <" + Commune.NOUMEA.name() + ">");
-            Agences agences_all = new Agences(Agences.getAgences());
-            System.out.println("<" + agences_all.agences().size() + "> agences trouvées");
-            assertFalse(agences_noumea.agences().isEmpty(), "La liste est vide.");
-            assertFalse(agences_all.agences().isEmpty(), "La liste est vide.");
+            
+            System.out.println("<" + Agences.getAgences().size() + "> agences trouvées");
+            System.out.println("<" + Agences.getAgences(Commune.NOUMEA).size() + "> agences trouvées pour <" + Commune.NOUMEA.name() + ">");
+            
+            assertEquals(17,Agences.getAgences(Commune.NOUMEA).size(), "La liste est vide.");
+            assertEquals(65,Agences.getAgences().size(), "La liste est vide.");
 
         } catch (IOException e) {
             Logger.getLogger(AgencesTest.class.getName()).log(Level.SEVERE, null, e);
         }
     }
-*/
+    
 }

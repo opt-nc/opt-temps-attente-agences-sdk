@@ -36,26 +36,20 @@ public class Agences {
      */
     public static final String BASE_URL = "https://open-data.opt.nc/agences/_search?size=1000";
 
-    private ArrayList<Agence> agences;
-
-    /**
-     * Constructor.
-     */
-    public Agences() {
-        this.agences = new ArrayList<>();
-    }
-
     /**
      * Return the list of all the agencies.
      *
      * @return the list of all the agencies.
      * @throws IOException
      */
-    public static ArrayList<Agence> getAgencesList() throws IOException {
+    public static ArrayList<Agence> getAgences() throws IOException {
         ArrayList<Agence> listeAgences = new ArrayList<>();
-        for (Commune commune : Commune.values()) {
-                listeAgences.addAll(Agences.getAgencesList(commune));
+        
+        for (Commune value : Commune.values()) {
+            ArrayList<Agence> listeAgences_commune = Agences.getAgences(value);
+            listeAgences.addAll(listeAgences_commune);
         }
+        
         return listeAgences;
     }
 
@@ -66,7 +60,7 @@ public class Agences {
      * @return the list of agencies for the Commune in parameter.
      * @throws IOException
      */
-    public static ArrayList<Agence> getAgencesList(Commune commune) throws IOException {
+    public static ArrayList<Agence> getAgences(Commune commune) throws IOException {
 
         logger.info("------------------------------------------------------------");
         commune.setUrl(commune);
@@ -80,11 +74,8 @@ public class Agences {
         JsonNode jsonNode = mapper.readValue(url, JsonNode.class);
         int total = jsonNode.get("hits").get("total").asInt();
 
-        if (commune.name() == "ALL") {
-            logger.info("Recherche des agences : " + total + " résultats.");
-        } else {
-            logger.info("Recherche des agences de " + commune + " : " + total + " résultats.");
-        }
+        logger.info("Recherche des agences de " + commune.name() + " : " + total + " résultats.");
+
         for (int i = 0; i < total; i++) {
 
             try {
@@ -124,5 +115,6 @@ public class Agences {
         long millis = ChronoUnit.MILLIS.between(LocalTime.MIN, duree_localTime);
         return millis;
     }
-
+   
+    
 }

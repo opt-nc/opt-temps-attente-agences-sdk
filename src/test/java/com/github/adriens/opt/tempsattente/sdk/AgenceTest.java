@@ -95,7 +95,7 @@ public class AgenceTest {
         long realMaxWaitingTime = Agences.ConvertToMillis("00:00:52");
         Agence instance = new Agence("designationTEST", Agences.ConvertToMillis("00:00:52"));
 
-        String expResult = "designation: <" + designation + ">, realMaxWaitingTime: <" + realMaxWaitingTime + ">";
+        String expResult = "Agence <designation: " + designation + ", realMaxWaitingTime: " + realMaxWaitingTime + ">";
         String result = instance.toString();
 
         assertEquals(expResult, result, "Les chaînes sont différentes.");
