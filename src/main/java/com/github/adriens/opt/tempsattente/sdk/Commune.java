@@ -39,10 +39,10 @@ enum Commune {
     YATE,
     LA_FOA,
     HIENGHENE,
-    MARE, 
-    POINDIMIE, 
-    PONERIHOUEN, 
-    VOH; 
+    MARE,
+    POINDIMIE,
+    PONERIHOUEN,
+    VOH;
 
     private String url;
 
@@ -148,7 +148,7 @@ enum Commune {
             case PONERIHOUEN:
                 this.url = "&q=localiteRefloc:(PONERIHOUEN)";
                 break;
-            case VOH: 
+            case VOH:
                 this.url = "&q=localiteRefloc:(VOH)";
                 break;
         }

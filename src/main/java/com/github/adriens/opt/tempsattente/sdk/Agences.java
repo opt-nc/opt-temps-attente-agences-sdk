@@ -44,12 +44,12 @@ public class Agences {
      */
     public static ArrayList<Agence> getAgences() throws IOException {
         ArrayList<Agence> listeAgences = new ArrayList<>();
-        
+
         for (Commune value : Commune.values()) {
             ArrayList<Agence> listeAgences_commune = Agences.getAgences(value);
             listeAgences.addAll(listeAgences_commune);
         }
-        
+
         return listeAgences;
     }
 
@@ -115,6 +115,5 @@ public class Agences {
         long millis = ChronoUnit.MILLIS.between(LocalTime.MIN, duree_localTime);
         return millis;
     }
-   
-    
+
 }
