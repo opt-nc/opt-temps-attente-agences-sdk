@@ -5,8 +5,6 @@
  */
 package com.github.adriens.opt.tempsattente.sdk;
 
-import com.github.adriens.opt.tempsattente.sdk.Agence;
-import com.github.adriens.opt.tempsattente.sdk.Agences;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
