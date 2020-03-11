@@ -9,7 +9,7 @@ package com.github.adriens.opt.tempsattente.sdk;
  *
  * @author meilie
  */
-enum Commune {
+public enum Commune {
     BOULOUPARIS,
     MOINDOU,
     NOUMEA,
