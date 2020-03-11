@@ -35,7 +35,7 @@ public class AgencesTest {
         System.out.println("\ngetAgences(Commune)_TEST");
 
         try {
-            assertEquals(17, Agences.getAgences(Commune.NOUMEA).size(), "Longueur de listes différentes");
+            assertEquals(17, Agences.getAgences(Agences.Commune.NOUMEA).size(), "Longueur de listes différentes");
 
         } catch (IOException ex) {
             Logger.getLogger(AgencesTest.class.getName()).log(Level.SEVERE, null, ex);
@@ -87,9 +87,9 @@ public class AgencesTest {
         try {
 
             System.out.println("<" + Agences.getAgences().size() + "> agences trouvées");
-            System.out.println("<" + Agences.getAgences(Commune.NOUMEA).size() + "> agences trouvées pour <" + Commune.NOUMEA + ">");
+            System.out.println("<" + Agences.getAgences(Agences.Commune.NOUMEA).size() + "> agences trouvées pour <" + Agences.Commune.NOUMEA + ">");
 
-            assertEquals(17, Agences.getAgences(Commune.NOUMEA).size(), "La liste est vide.");
+            assertEquals(17, Agences.getAgences(Agences.Commune.NOUMEA).size(), "La liste est vide.");
             assertEquals(65, Agences.getAgences().size(), "La liste est vide.");
 
         } catch (IOException e) {
