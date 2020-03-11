@@ -36,6 +36,8 @@ public class Agences {
      */
     public static final String BASE_URL = "https://open-data.opt.nc/agences/_search?size=1000";
     
+    public Commune commune;
+    
     public enum Commune {
         BOULOUPARIS,
         MOINDOU,
