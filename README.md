@@ -8,6 +8,29 @@ SDK pour le temps d'attente dans les agences de Nouvelle-Calédonie
 
 ## Utiliser
 
+### Dépendance
+
+Ajouter le dépôt:
+
+```xml
+<repositories>
+  <repository>
+    <id>jitpack.io</id>
+    <url>https://jitpack.io</url>
+  </repository>
+</repositories>
+```
+
+Puis la dépendance:
+
+```xml
+<dependency>
+  <groupId>com.github.adriens</groupId>
+  <artifactId>opt-temps-attente-agences-sdk</artifactId>
+  <version>${opt-temps-attente-agences-sdk.version}</version>
+</dependency>
+```
+
 ### Code snippet
 
 ```java
