@@ -35,8 +35,8 @@ public class Agences {
      * The base of the url where the data is retrieved.
      */
     public static final String BASE_URL = "https://open-data.opt.nc/agences/_search?size=1000";
-
-    enum Commune {
+    
+    public enum Commune {
         BOULOUPARIS,
         MOINDOU,
         NOUMEA,
