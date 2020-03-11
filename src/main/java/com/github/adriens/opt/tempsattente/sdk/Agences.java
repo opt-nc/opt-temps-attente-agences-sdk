@@ -36,9 +36,7 @@ public class Agences {
      */
     public static final String BASE_URL = "https://open-data.opt.nc/agences/_search?size=1000";
     
-    public Commune commune;
-    
-    public enum Commune {
+    enum Commune {
         BOULOUPARIS,
         MOINDOU,
         NOUMEA,
@@ -72,118 +70,116 @@ public class Agences {
         POINDIMIE,
         PONERIHOUEN,
         VOH;
+        
+    }
+    
 
-        private String url;
-
-        public String getUrl() {
-            return this.url;
-        }
-
-        public void setUrl(Commune commune) {
+        public static String getUrl(Commune commune) {
             switch (commune) {
                 case BOULOUPARIS:
-                    this.url = "&q=localiteRefloc:(BOULOUPARIS)";
-                    break;
+                    return "&q=localiteRefloc:(BOULOUPARIS)";
+                    
                 case MOINDOU:
-                    this.url = "&q=localiteRefloc:(MOINDOU)";
-                    break;
+                    return "&q=localiteRefloc:(MOINDOU)";
+                    
                 case NOUMEA:
-                    this.url = "&q=localiteRefloc:(NOUMEA)";
-                    break;
+                    return "&q=localiteRefloc:(NOUMEA)";
+                    
                 case HOUAILOU:
-                    this.url = "&q=localiteRefloc:(HOUAILOU)";
-                    break;
+                    return "&q=localiteRefloc:(HOUAILOU)";
+                    
                 case KONE:
-                    this.url = "&q=localiteRefloc:(KONE)";
-                    break;
+                    return "&q=localiteRefloc:(KONE)";
+                    
                 case KAALA_GOMEN:
-                    this.url = "&q=localiteRefloc:(KAALA-GOMEN)";
-                    break;
+                    return "&q=localiteRefloc:(KAALA-GOMEN)";
+                    
                 case POUEBO:
-                    this.url = "&q=localiteRefloc:(POUEBO)";
-                    break;
+                    return "&q=localiteRefloc:(POUEBO)";
+                    
                 case THIO:
-                    this.url = "&q=localiteRefloc:(THIO)";
-                    break;
+                    return "&q=localiteRefloc:(THIO)";
+                    
                 case TADINE:
-                    this.url = "&q=localiteRefloc:(TADINE)";
-                    break;
+                    return "&q=localiteRefloc:(TADINE)";
+                    
                 case MONT_DORE:
-                    this.url = "&q=localiteRefloc:(MONT-DORE)";
-                    break;
+                    return "&q=localiteRefloc:(MONT-DORE)";
+                    
                 case KOUAOUA:
-                    this.url = "&q=localiteRefloc:(KOUAOUA)";
-                    break;
+                    return "&q=localiteRefloc:(KOUAOUA)";
+                    
                 case POYA:
-                    this.url = "&q=localiteRefloc:(POYA)";
-                    break;
+                    return "&q=localiteRefloc:(POYA)";
+                    
                 case BELEP:
-                    this.url = "&q=localiteRefloc:(BELEP)";
-                    break;
+                    return "&q=localiteRefloc:(BELEP)";
+                    
                 case ILE_DES_PINS:
-                    this.url = "&q=localiteRefloc:(ILE%20AND%20DES%20AND%20PINS)";
-                    break;
+                    return "&q=localiteRefloc:(ILE%20AND%20DES%20AND%20PINS)";
+                    
                 case DUMBEA:
-                    this.url = "&q=localiteRefloc:(DUMBEA)";
-                    break;
+                    return "&q=localiteRefloc:(DUMBEA)";
+                    
                 case BOURAIL:
-                    this.url = "&q=localiteRefloc:(BOURAIL)";
-                    break;
+                    return "&q=localiteRefloc:(BOURAIL)";
+                    
                 case CANALA:
-                    this.url = "&q=localiteRefloc:(CANALA)";
-                    break;
+                    return "&q=localiteRefloc:(CANALA)";
+                    
                 case FAYAOUE:
-                    this.url = "&q=localiteRefloc:(FAYAOUE)";
-                    break;
+                    return "&q=localiteRefloc:(FAYAOUE)";
+                    
                 case POUM:
-                    this.url = "&q=localiteRefloc:(POUM)";
-                    break;
+                    return "&q=localiteRefloc:(POUM)";
+                    
                 case TOUHO:
-                    this.url = "&q=localiteRefloc:(TOUHO)";
-                    break;
+                    return "&q=localiteRefloc:(TOUHO)";
+                    
                 case POUEMBOUT:
-                    this.url = "&q=localiteRefloc:(POUEMBOUT)";
-                    break;
+                    return "&q=localiteRefloc:(POUEMBOUT)";
+                    
                 case KOUMAC:
-                    this.url = "&q=localiteRefloc:(KOUMAC)";
-                    break;
+                    return "&q=localiteRefloc:(KOUMAC)";
+                    
                 case PAITA:
-                    this.url = "&q=localiteRefloc:(PAITA)";
-                    break;
+                    return "&q=localiteRefloc:(PAITA)";
+                    
                 case SARRAMEA:
-                    this.url = "&q=localiteRefloc:(SARRAMEA)";
-                    break;
+                    return "&q=localiteRefloc:(SARRAMEA)";
+                    
                 case LIFOU:
-                    this.url = "&q=localiteRefloc:(LIFOU)%20OR%20localiteRefloc:(WE)";
-                    break;
+                    return "&q=localiteRefloc:(LIFOU)%20OR%20localiteRefloc:(WE)";
+                    
                 case OUEGOA:
-                    this.url = "&q=localiteRefloc:(OUEGOA)";
-                    break;
+                    return "&q=localiteRefloc:(OUEGOA)";
+                    
                 case YATE:
-                    this.url = "&q=localiteRefloc:(YATE)";
-                    break;
+                    return "&q=localiteRefloc:(YATE)";
+                    
                 case LA_FOA:
-                    this.url = "&q=localiteRefloc:(LA%20AND%20FOA)";
-                    break;
+                    return "&q=localiteRefloc:(LA%20AND%20FOA)";
+                    
                 case HIENGHENE:
-                    this.url = "&q=localiteRefloc:(HIENGHENE)";
-                    break;
+                    return "&q=localiteRefloc:(HIENGHENE)";
+                    
                 case MARE:
-                    this.url = "&q=localiteRefloc:(MARE)";
-                    break;
+                    return "&q=localiteRefloc:(MARE)";
+                    
                 case POINDIMIE:
-                    this.url = "&q=localiteRefloc:(POINDIMIE)";
-                    break;
+                    return "&q=localiteRefloc:(POINDIMIE)";
+                    
                 case PONERIHOUEN:
-                    this.url = "&q=localiteRefloc:(PONERIHOUEN)";
-                    break;
+                    return "&q=localiteRefloc:(PONERIHOUEN)";
+                    
                 case VOH:
-                    this.url = "&q=localiteRefloc:(VOH)";
-                    break;
+                    return "&q=localiteRefloc:(VOH)";
+                    
+                default : 
+                    return "";
+                    
             }
         }
-
-    }
     
     
     /**
@@ -218,8 +214,7 @@ public class Agences {
         ObjectMapper mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
         logger.info("Recherche de l'URL : ");
-        commune.setUrl(commune);
-        URL url = new URL("" + BASE_URL + commune.getUrl());
+        URL url = new URL("" + BASE_URL + Agences.getUrl(commune));
 
         logger.info("Recupération des données des agences : ");
         JsonNode jsonNode = mapper.readValue(url, JsonNode.class);
