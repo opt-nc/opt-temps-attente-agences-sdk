@@ -62,8 +62,7 @@ public class Agences {
      */
     public static ArrayList<Agence> getAgences(Commune commune) throws IOException {
 
-        logger.info("------------------------------------------------------------");
-        commune.setUrl(commune);
+        logger.info("------------------------------------------------------------");;
         ArrayList<Agence> listeAgences = new ArrayList<>();
         ObjectMapper mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
