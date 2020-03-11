@@ -67,7 +67,7 @@ public class Agences {
         ObjectMapper mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
         logger.info("Recherche de l'URL : ");
-        URL url = new URL("" + BASE_URL + commune.getUrl());
+        URL url = new URL("" + BASE_URL + commune.url);
 
         logger.info("Recupération des données des agences : ");
         JsonNode jsonNode = mapper.readValue(url, JsonNode.class);
