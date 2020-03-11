@@ -44,7 +44,7 @@ public enum Commune {
     PONERIHOUEN,
     VOH;
 
-    private String url;
+    String url;
 
     public String getUrl() {
         return this.url;
