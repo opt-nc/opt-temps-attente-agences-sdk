@@ -46,13 +46,10 @@ public enum Commune {
     PONERIHOUEN("&q=localiteRefloc:(PONERIHOUEN)"),
     VOH("&q=localiteRefloc:(VOH)");
     
-    private final String url;
+    public final String url;
     
     Commune(String url) {
         this.url = url;
-    }
-    public String getUrl() {
-        return this.url;
     }
 
 }
