@@ -84,11 +84,10 @@ public class AgencesTest {
     public void testDemo() {
         System.out.println("\ndemo_TEST");
         Agences agences = new Agences();
-
         try {
 
             System.out.println("<" + Agences.getAgences().size() + "> agences trouvées");
-            System.out.println("<" + Agences.getAgences(Commune.NOUMEA).size() + "> agences trouvées pour <" + Commune.NOUMEA.name() + ">");
+            System.out.println("<" + Agences.getAgences(Commune.NOUMEA).size() + "> agences trouvées pour <" + Commune.NOUMEA + ">");
 
             assertEquals(17, Agences.getAgences(Commune.NOUMEA).size(), "La liste est vide.");
             assertEquals(65, Agences.getAgences().size(), "La liste est vide.");
