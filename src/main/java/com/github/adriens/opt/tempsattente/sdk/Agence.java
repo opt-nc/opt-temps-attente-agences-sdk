@@ -36,6 +36,7 @@ public class Agence {
     /**
      * Contructor.
      *
+     * @param idAgence The agency's ID number as text.
      * @param designation The agency's designation name.
      * @param realMaxWaitingTime the maximum waiting time in the agency.
      */
@@ -48,6 +49,7 @@ public class Agence {
     /**
      * Constructor.
      *
+     * @param idAgence The agency's ID number as text.
      * @param designation The agency's designation name.
      */
     public Agence(String idAgence, String designation) {
@@ -56,6 +58,11 @@ public class Agence {
         this.realMaxWaitingTime = 0;
     }
     
+    /**
+     * Return the agency's ID number as text.
+     * 
+     * @return the agency's ID number.
+     */
     public String getIdAgence() {
         return this.idAgence;
     }
@@ -78,6 +85,11 @@ public class Agence {
         return this.realMaxWaitingTime;
     }
     
+    /**
+     * Set the agency's ID number. 
+     * 
+     * @param idAgence the agency's ID number as text.
+     */
     public void setIdAgence(String idAgence) {
         this.idAgence = idAgence;
     }
@@ -100,6 +112,13 @@ public class Agence {
         this.realMaxWaitingTime = realMaxWaitingTime;
     }
     
+    /**
+     * Return the agency with the ID number in parameter.
+     * 
+     * @param idAgence An angency's ID nuber as text.
+     * @return the agency with the ID number in parameter.
+     * @throws IOException
+     */
     public static Agence getAgence(String idAgence) throws IOException {
         ArrayList<Agence> agences = Agences.getAgences();
         Agence result = new Agence();
