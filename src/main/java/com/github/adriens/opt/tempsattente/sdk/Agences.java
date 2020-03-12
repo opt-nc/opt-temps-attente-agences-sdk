@@ -334,6 +334,11 @@ public class Agences {
         ArrayList<Agence> listeAgences = new ArrayList<>();
         ObjectMapper mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
+        if (commune == null) {
+            logger.error("Commune incorrecte.");
+            return listeAgences;
+        }
+        
         logger.info("Recherche de l'URL : ");
         URL url = new URL("" + BASE_URL + Agences.getUrl(commune));
 
