@@ -45,6 +45,23 @@ public class AgencesTest {
     }
 
     /**
+     * Test of getAgences method, of class Agences.
+     */
+    @Test
+    public void testGetAgencesNullCommune() {
+        System.out.println("\ngetAgences(Commune)_null_TEST");
+        Agences.Commune commune = null;
+        ArrayList<Agence> agences = new ArrayList<>();
+        try {
+            assertTrue(Agences.getAgences(commune).isEmpty(), "Longueur de listes différentes");
+
+        } catch (IOException ex) {
+            Logger.getLogger(AgencesTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+    
+    /**
      * Test of getAll method, of class Agences.
      */
     @Test
