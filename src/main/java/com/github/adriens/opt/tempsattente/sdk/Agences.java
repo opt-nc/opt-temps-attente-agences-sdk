@@ -15,7 +15,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
-import static jdk.nashorn.internal.objects.NativeString.toLowerCase;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -338,21 +337,23 @@ public class Agences {
         for (int i = 0; i < total; i++) {
 
             try {
+                String idAgence = jsonNode.get("hits").get("hits").get(i).get("_id").asText();
                 String designation = jsonNode.get("hits").get("hits").get(i).get("_source").get("designation").asText();
                 long realMaxWaitingTime = ConvertToMillis(jsonNode.get("hits").get("hits").get(i).get("_source").get("borneEsirius").get("realMaxWaitingTime").asText());
 
-                Agence agence = new Agence(designation, realMaxWaitingTime);
+                Agence agence = new Agence(idAgence, designation, realMaxWaitingTime);
                 listeAgences.add(agence);
 
                 logger.info("Agence : " + agence.toString());
 
             } catch (Exception e) {
 
+                String idAgence = jsonNode.get("hits").get("hits").get(i).get("_id").asText();
                 String designation = jsonNode.get("hits").get("hits").get(i).get("_source").get("designation").asText();
 
                 logger.warn("Le temps d'attente maximum de l'agence <" + designation + "> est introuvable...");
 
-                Agence agence = new Agence(designation);
+                Agence agence = new Agence(idAgence, designation);
                 listeAgences.add(agence);
 
                 logger.info("Agence : " + agence.toString());
