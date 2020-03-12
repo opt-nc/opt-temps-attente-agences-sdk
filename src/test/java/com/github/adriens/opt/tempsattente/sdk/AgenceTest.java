@@ -128,7 +128,18 @@ public class AgenceTest {
         } catch (IOException e) {
             Logger.getLogger(AgencesTest.class.getName()).log(Level.SEVERE, null, e);
         }
-
+    }
+    
+    @Test
+    public void testGetAgenceBadID() {
+        System.out.println("\ngetAgence_badID_TEST");
+        try {
+            Agence result = Agence.getAgence("456");
+            Agence expResult = new Agence();
+            assertTrue(result.toString().equals(expResult.toString()), "Aucune agence trouvée.");
+        } catch (IOException e) {
+            Logger.getLogger(AgencesTest.class.getName()).log(Level.SEVERE, null, e);
+        }
     }
 
     /**
