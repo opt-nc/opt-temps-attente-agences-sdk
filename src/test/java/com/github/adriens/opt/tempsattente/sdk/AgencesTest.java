@@ -81,21 +81,21 @@ public class AgencesTest {
     }
     
     @Test
-    public void testGetCommune_good_upper_accents() {
+    public void testGetCommuneGoodUpperAccents() {
         System.out.println("\ngetCommune_good_upper_accents_TEST");
         String commune_name = "Nouméa";
         assertNull(Agences.getCommune(commune_name),"Une correspondance a été trouvée.");
     }
     
     @Test
-    public void testGetCommune_good() {
+    public void testGetCommuneGood() {
         System.out.println("\ngetCommune_good_TEST");
         String commune_name = "noumea";
         assertEquals(Agences.Commune.NOUMEA, Agences.getCommune(commune_name),"Une correspondance a été trouvée.");
     }
     
     @Test
-    public void testGetCommune_bad() {
+    public void testGetCommuneBad() {
         System.out.println("\ngetCommune_bad_TEST");
         String commune_name = "test";
         assertNull(Agences.getCommune(commune_name),"Une correspondance a été trouvée.");
