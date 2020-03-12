@@ -190,6 +190,11 @@ public class Agences {
         return url;
     }
     
+    /**
+     * Return the list of all the Commune as text.
+     * 
+     * @return the list of Commune as text.
+     */
     public static ArrayList<String> getCommunesNames() {
         ArrayList<String> commune_name = new ArrayList<>();
         
@@ -237,6 +242,11 @@ public class Agences {
         return commune_name;
     }
     
+    /**
+     * Return the Commune matching with the Commune name as text in parameter.
+     * @param communeName a Commune name, as text.
+     * @return the Commune object with the name in parameter.
+     */
     public static Commune getCommune(String communeName) {
         HashMap<String, Commune> commune = new HashMap<>();
         
