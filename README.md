@@ -4,7 +4,7 @@
 
 # tempsattente-sdk
 
-SDK pour le temps d'attente dans les agences de Nouvelle-Calédonie
+Java SDK pour le temps d'attente dans les agences OPT de Nouvelle-Calédonie
 
 ## Utiliser
 
