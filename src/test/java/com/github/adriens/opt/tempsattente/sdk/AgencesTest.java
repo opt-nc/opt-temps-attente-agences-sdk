@@ -59,7 +59,7 @@ public class AgencesTest {
         }
 
     }
-    
+
     @Test
     public void testGetCommunesNames() {
         System.out.println("\ngetCommunesNames_TEST");
@@ -70,37 +70,37 @@ public class AgencesTest {
     public void testGetCommune_null() {
         System.out.println("\ngetCommune_null_TEST");
         String commune_name = null;
-        assertNull(Agences.getCommune(commune_name),"Une correspondance a été trouvée.");
+        assertNull(Agences.getCommune(commune_name), "Une correspondance a été trouvée.");
     }
-    
+
     @Test
     public void testGetCommune_empty() {
         System.out.println("\ngetCommune_empty_TEST");
         String commune_name = "";
-        assertNull(Agences.getCommune(commune_name),"Une correspondance a été trouvée.");
+        assertNull(Agences.getCommune(commune_name), "Une correspondance a été trouvée.");
     }
-    
+
     @Test
     public void testGetCommuneGoodUpperAccents() {
         System.out.println("\ngetCommune_good_upper_accents_TEST");
         String commune_name = "Nouméa";
-        assertNull(Agences.getCommune(commune_name),"Une correspondance a été trouvée.");
+        assertNull(Agences.getCommune(commune_name), "Une correspondance a été trouvée.");
     }
-    
+
     @Test
     public void testGetCommuneGood() {
         System.out.println("\ngetCommune_good_TEST");
         String commune_name = "noumea";
-        assertEquals(Agences.Commune.NOUMEA, Agences.getCommune(commune_name),"Une correspondance a été trouvée.");
+        assertEquals(Agences.Commune.NOUMEA, Agences.getCommune(commune_name), "Une correspondance a été trouvée.");
     }
-    
+
     @Test
     public void testGetCommuneBad() {
         System.out.println("\ngetCommune_bad_TEST");
         String commune_name = "test";
-        assertNull(Agences.getCommune(commune_name),"Une correspondance a été trouvée.");
+        assertNull(Agences.getCommune(commune_name), "Une correspondance a été trouvée.");
     }
-    
+
     /**
      * Test of convertWaintingTimeToMillis method, of class Agences.
      */
@@ -130,7 +130,7 @@ public class AgencesTest {
 
             System.out.println("<" + Agences.getAgences().size() + "> agences trouvées");
             System.out.println("<" + Agences.getAgences(Agences.Commune.NOUMEA).size() + "> agences trouvées pour <" + Agences.Commune.NOUMEA + ">");
-            System.out.println("Correspondance trouvée pour l'ID 4177 : " + Agence.getAgence("4177").toString());  
+            System.out.println("Correspondance trouvée pour l'ID 4177 : " + Agence.getAgence("4177").toString());
 
             assertEquals(17, Agences.getAgences(Agences.Commune.NOUMEA).size(), "La liste est vide.");
             assertEquals(65, Agences.getAgences().size(), "La liste est vide.");

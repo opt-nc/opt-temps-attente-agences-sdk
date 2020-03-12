@@ -24,19 +24,19 @@ public class AgenceTest {
      */
     public AgenceTest() {
     }
-    
+
     @Test
     public void testGetIdAgence() {
         System.out.println("\ngetIdAgence_TEST");
 
         Agence instance = new Agence("123456", "designationTEST");
-        
+
         String expResult = "123456";
         String result = instance.getIdAgence();
 
         assertEquals(expResult, result, "id non trouvé.");
     }
-    
+
     @Test
     public void testSetIdAgence() {
         System.out.println("\nsetIdAgence_TEST");
@@ -110,7 +110,7 @@ public class AgenceTest {
 
         assertEquals(expResult, result, "realMaxWaStringingTime non modifié");
     }
-    
+
     @Test
     public void testGetAgence() {
         System.out.println("\ngetAgence_TEST");
@@ -119,15 +119,16 @@ public class AgenceTest {
             Agence expResult = new Agence();
             String idAgence = "4177";
             for (Agence agence : agences) {
-                if(agence.getIdAgence().equals(idAgence)) expResult = agence;
+                if (agence.getIdAgence().equals(idAgence)) {
+                    expResult = agence;
+                }
             }
             Agence result = Agence.getAgence(idAgence);
             assertEquals(expResult.toString(), result.toString(), "Aucune agence trouvée.");
         } catch (IOException e) {
             Logger.getLogger(AgencesTest.class.getName()).log(Level.SEVERE, null, e);
         }
-        
-        
+
     }
 
     /**

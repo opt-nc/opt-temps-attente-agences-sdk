@@ -189,17 +189,17 @@ public class Agences {
         }
         return url;
     }
-    
+
     /**
      * Return the list of all the Commune as text.
-     * 
+     *
      * @return the list of Commune as text.
      */
     public static ArrayList<String> getCommunesNames() {
         ArrayList<String> commune_name = new ArrayList<>();
-        
+
         HashMap<Commune, String> commune_map = new HashMap<>();
-        
+
         commune_map.put(Commune.BOULOUPARIS, "boulouparis");
         commune_map.put(Commune.MOINDOU, "moindou");
         commune_map.put(Commune.NOUMEA, "noumea");
@@ -233,77 +233,76 @@ public class Agences {
         commune_map.put(Commune.POINDIMIE, "poindimie");
         commune_map.put(Commune.PONERIHOUEN, "ponerihouen");
         commune_map.put(Commune.VOH, "voh");
-        
+
         for (Commune commune : Commune.values()) {
-            logger.info("Ajout de la commune : " +commune_map.get(commune));
+            logger.info("Ajout de la commune : " + commune_map.get(commune));
             commune_name.add(commune_map.get(commune));
         }
-        logger.info("" +commune_name.size()+ " communes ajoutées.");
+        logger.info("" + commune_name.size() + " communes ajoutées.");
         return commune_name;
     }
-    
+
     /**
      * Return the Commune matching with the Commune name as text in parameter.
+     *
      * @param communeName a Commune name, as text.
      * @return the Commune object with the name in parameter.
      */
     public static Commune getCommune(String communeName) {
         HashMap<String, Commune> commune = new HashMap<>();
-        
+
         commune.put("boulouparis", Commune.BOULOUPARIS);
-        commune.put("moindou",Commune.MOINDOU);
-        commune.put("noumea",Commune.NOUMEA);
-        commune.put("houailou",Commune.HOUAILOU);
-        commune.put("kone",Commune.KONE);
-        commune.put("kaala-gomen",Commune.KAALA_GOMEN);
-        commune.put("pouebo",Commune.POUEBO);
-        commune.put("thio",Commune.THIO);
-        commune.put("tadine",Commune.TADINE);
-        commune.put("mont-dore",Commune.MONT_DORE);
-        commune.put("kouaoua",Commune.KOUAOUA);
-        commune.put("poya",Commune.POYA);
-        commune.put("belep",Commune.BELEP);
-        commune.put("ile des pins",Commune.ILE_DES_PINS);
-        commune.put("dumbea",Commune.DUMBEA);
-        commune.put("bourail",Commune.BOURAIL);
-        commune.put("canala",Commune.CANALA);
-        commune.put("fayaoue",Commune.FAYAOUE);
-        commune.put("poum",Commune.POUM);
-        commune.put("touho",Commune.TOUHO);
-        commune.put("pouembout",Commune.POUEMBOUT);
-        commune.put("koumac",Commune.KOUMAC);
-        commune.put("paita",Commune.PAITA);
-        commune.put("sarramea",Commune.SARRAMEA);
-        commune.put("lifou",Commune.LIFOU);
-        commune.put("ouegoa",Commune.OUEGOA);
-        commune.put("yate",Commune.YATE);
-        commune.put("la foa",Commune.LA_FOA);
-        commune.put("hienghene",Commune.HIENGHENE);
-        commune.put("mare",Commune.MARE);
-        commune.put("poindimie",Commune.POINDIMIE);
-        commune.put("ponerihouen",Commune.PONERIHOUEN);
-        commune.put("voh",Commune.VOH);
-        
-        if(communeName == null) {
-            logger.error("<" +communeName+ "> ne correspond à aucune commune.");
+        commune.put("moindou", Commune.MOINDOU);
+        commune.put("noumea", Commune.NOUMEA);
+        commune.put("houailou", Commune.HOUAILOU);
+        commune.put("kone", Commune.KONE);
+        commune.put("kaala-gomen", Commune.KAALA_GOMEN);
+        commune.put("pouebo", Commune.POUEBO);
+        commune.put("thio", Commune.THIO);
+        commune.put("tadine", Commune.TADINE);
+        commune.put("mont-dore", Commune.MONT_DORE);
+        commune.put("kouaoua", Commune.KOUAOUA);
+        commune.put("poya", Commune.POYA);
+        commune.put("belep", Commune.BELEP);
+        commune.put("ile des pins", Commune.ILE_DES_PINS);
+        commune.put("dumbea", Commune.DUMBEA);
+        commune.put("bourail", Commune.BOURAIL);
+        commune.put("canala", Commune.CANALA);
+        commune.put("fayaoue", Commune.FAYAOUE);
+        commune.put("poum", Commune.POUM);
+        commune.put("touho", Commune.TOUHO);
+        commune.put("pouembout", Commune.POUEMBOUT);
+        commune.put("koumac", Commune.KOUMAC);
+        commune.put("paita", Commune.PAITA);
+        commune.put("sarramea", Commune.SARRAMEA);
+        commune.put("lifou", Commune.LIFOU);
+        commune.put("ouegoa", Commune.OUEGOA);
+        commune.put("yate", Commune.YATE);
+        commune.put("la foa", Commune.LA_FOA);
+        commune.put("hienghene", Commune.HIENGHENE);
+        commune.put("mare", Commune.MARE);
+        commune.put("poindimie", Commune.POINDIMIE);
+        commune.put("ponerihouen", Commune.PONERIHOUEN);
+        commune.put("voh", Commune.VOH);
+
+        if (communeName == null) {
+            logger.error("<" + communeName + "> ne correspond à aucune commune.");
             return null;
         }
-        if(communeName == "") {
-            logger.error("<" +communeName+ "> ne correspond à aucune commune.");
+        if (communeName == "") {
+            logger.error("<" + communeName + "> ne correspond à aucune commune.");
             return null;
         }
-        
-        if(commune.containsKey(StringUtils.stripAccents(communeName.toLowerCase()))) {
-            logger.info("correspondance trouvée pour <" +communeName+ "> : <" +commune.get(StringUtils.stripAccents(communeName.toLowerCase()))+ ">");
+
+        if (commune.containsKey(StringUtils.stripAccents(communeName.toLowerCase()))) {
+            logger.info("correspondance trouvée pour <" + communeName + "> : <" + commune.get(StringUtils.stripAccents(communeName.toLowerCase())) + ">");
             return commune.get(communeName);
         } else {
-            logger.error("" +communeName+ " ne correspond à aucune commune.");
+            logger.error("" + communeName + " ne correspond à aucune commune.");
             return null;
         }
     }
 
-    
-    
     /**
      * Return the list of all the agencies.
      *

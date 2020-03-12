@@ -57,10 +57,10 @@ public class Agence {
         this.designation = designation;
         this.realMaxWaitingTime = 0;
     }
-    
+
     /**
      * Return the agency's ID number as text.
-     * 
+     *
      * @return the agency's ID number.
      */
     public String getIdAgence() {
@@ -84,10 +84,10 @@ public class Agence {
     public long getRealMaxWaitingTime() {
         return this.realMaxWaitingTime;
     }
-    
+
     /**
-     * Set the agency's ID number. 
-     * 
+     * Set the agency's ID number.
+     *
      * @param idAgence the agency's ID number as text.
      */
     public void setIdAgence(String idAgence) {
@@ -111,10 +111,10 @@ public class Agence {
     public void setRealMaxWaitingTime(long realMaxWaitingTime) {
         this.realMaxWaitingTime = realMaxWaitingTime;
     }
-    
+
     /**
      * Return the agency with the ID number in parameter.
-     * 
+     *
      * @param idAgence An angency's ID nuber as text.
      * @return the agency with the ID number in parameter.
      * @throws IOException
@@ -122,19 +122,21 @@ public class Agence {
     public static Agence getAgence(String idAgence) throws IOException {
         ArrayList<Agence> agences = Agences.getAgences();
         Agence result = new Agence();
-        
+
         for (Agence agence : agences) {
-            if (agence.idAgence.equals(idAgence)) result = agence;
+            if (agence.idAgence.equals(idAgence)) {
+                result = agence;
+            }
         }
-        
+
         if (result.idAgence.equals(idAgence)) {
-            logger.info("correspondance trouvée pour " +idAgence+ " : " +result.toString());
+            logger.info("correspondance trouvée pour " + idAgence + " : " + result.toString());
             return result;
         } else {
-            logger.info("Aucune correspondance pour " +idAgence);
+            logger.info("Aucune correspondance pour " + idAgence);
             return result;
         }
-        
+
     }
 
     /**
