@@ -336,7 +336,7 @@ public class Agences {
 
         if (commune == null) {
             logger.error("Commune incorrecte.");
-            return listeAgences;
+            return null;
         }
         
         logger.info("Recherche de l'URL : ");
