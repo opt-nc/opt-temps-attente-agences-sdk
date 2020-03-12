@@ -51,9 +51,8 @@ public class AgencesTest {
     public void testGetAgencesNullCommune() {
         System.out.println("\ngetAgences(Commune)_null_TEST");
         Agences.Commune commune = null;
-        ArrayList<Agence> agences = new ArrayList<>();
         try {
-            assertTrue(Agences.getAgences(commune).isEmpty(), "Longueur de listes différentes");
+            assertTrue(Agences.getAgences(commune).isEmpty(), "Liste non vide");
 
         } catch (IOException ex) {
             Logger.getLogger(AgencesTest.class.getName()).log(Level.SEVERE, null, ex);
