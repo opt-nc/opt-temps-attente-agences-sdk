@@ -14,6 +14,9 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.HashMap;
+import static jdk.nashorn.internal.objects.NativeString.toLowerCase;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,8 +38,11 @@ public class Agences {
      * The base of the url where the data is retrieved.
      */
     public static final String BASE_URL = "https://open-data.opt.nc/agences/_search?size=1000";
-    
-    enum Commune {
+
+    /**
+     * Locations enumeration.
+     */
+    public static enum Commune {
         BOULOUPARIS,
         MOINDOU,
         NOUMEA,
@@ -70,116 +76,223 @@ public class Agences {
         POINDIMIE,
         PONERIHOUEN,
         VOH;
-        
+
+    }
+
+    /**
+     * Return the query url, as text, for the Commune.
+     *
+     * @param commune a location.
+     * @return the url as text.
+     */
+    public static String getUrl(Commune commune) {
+        String url = null;
+        switch (commune) {
+            case BOULOUPARIS:
+                url = "&q=localiteRefloc:(BOULOUPARIS)";
+                break;
+            case MOINDOU:
+                url = "&q=localiteRefloc:(MOINDOU)";
+                break;
+            case NOUMEA:
+                url = "&q=localiteRefloc:(NOUMEA)";
+                break;
+            case HOUAILOU:
+                url = "&q=localiteRefloc:(HOUAILOU)";
+                break;
+            case KONE:
+                url = "&q=localiteRefloc:(KONE)";
+                break;
+            case KAALA_GOMEN:
+                url = "&q=localiteRefloc:(KAALA-GOMEN)";
+                break;
+            case POUEBO:
+                url = "&q=localiteRefloc:(POUEBO)";
+                break;
+            case THIO:
+                url = "&q=localiteRefloc:(THIO)";
+                break;
+            case TADINE:
+                url = "&q=localiteRefloc:(TADINE)";
+                break;
+            case MONT_DORE:
+                url = "&q=localiteRefloc:(MONT-DORE)";
+                break;
+            case KOUAOUA:
+                url = "&q=localiteRefloc:(KOUAOUA)";
+                break;
+            case POYA:
+                url = "&q=localiteRefloc:(POYA)";
+                break;
+            case BELEP:
+                url = "&q=localiteRefloc:(BELEP)";
+                break;
+            case ILE_DES_PINS:
+                url = "&q=localiteRefloc:(ILE%20AND%20DES%20AND%20PINS)";
+                break;
+            case DUMBEA:
+                url = "&q=localiteRefloc:(DUMBEA)";
+                break;
+            case BOURAIL:
+                url = "&q=localiteRefloc:(BOURAIL)";
+                break;
+            case CANALA:
+                url = "&q=localiteRefloc:(CANALA)";
+                break;
+            case FAYAOUE:
+                url = "&q=localiteRefloc:(FAYAOUE)";
+                break;
+            case POUM:
+                url = "&q=localiteRefloc:(POUM)";
+                break;
+            case TOUHO:
+                url = "&q=localiteRefloc:(TOUHO)";
+                break;
+            case POUEMBOUT:
+                url = "&q=localiteRefloc:(POUEMBOUT)";
+                break;
+            case KOUMAC:
+                url = "&q=localiteRefloc:(KOUMAC)";
+                break;
+            case PAITA:
+                url = "&q=localiteRefloc:(PAITA)";
+                break;
+            case SARRAMEA:
+                url = "&q=localiteRefloc:(SARRAMEA)";
+                break;
+            case LIFOU:
+                url = "&q=localiteRefloc:(LIFOU)%20OR%20localiteRefloc:(WE)";
+                break;
+            case OUEGOA:
+                url = "&q=localiteRefloc:(OUEGOA)";
+                break;
+            case YATE:
+                url = "&q=localiteRefloc:(YATE)";
+                break;
+            case LA_FOA:
+                url = "&q=localiteRefloc:(LA%20AND%20FOA)";
+                break;
+            case HIENGHENE:
+                url = "&q=localiteRefloc:(HIENGHENE)";
+                break;
+            case MARE:
+                url = "&q=localiteRefloc:(MARE)";
+                break;
+            case POINDIMIE:
+                url = "&q=localiteRefloc:(POINDIMIE)";
+                break;
+            case PONERIHOUEN:
+                url = "&q=localiteRefloc:(PONERIHOUEN)";
+                break;
+            case VOH:
+                url = "&q=localiteRefloc:(VOH)";
+                break;
+        }
+        return url;
     }
     
-
-        public static String getUrl(Commune commune) {
-            switch (commune) {
-                case BOULOUPARIS:
-                    return "&q=localiteRefloc:(BOULOUPARIS)";
-                    
-                case MOINDOU:
-                    return "&q=localiteRefloc:(MOINDOU)";
-                    
-                case NOUMEA:
-                    return "&q=localiteRefloc:(NOUMEA)";
-                    
-                case HOUAILOU:
-                    return "&q=localiteRefloc:(HOUAILOU)";
-                    
-                case KONE:
-                    return "&q=localiteRefloc:(KONE)";
-                    
-                case KAALA_GOMEN:
-                    return "&q=localiteRefloc:(KAALA-GOMEN)";
-                    
-                case POUEBO:
-                    return "&q=localiteRefloc:(POUEBO)";
-                    
-                case THIO:
-                    return "&q=localiteRefloc:(THIO)";
-                    
-                case TADINE:
-                    return "&q=localiteRefloc:(TADINE)";
-                    
-                case MONT_DORE:
-                    return "&q=localiteRefloc:(MONT-DORE)";
-                    
-                case KOUAOUA:
-                    return "&q=localiteRefloc:(KOUAOUA)";
-                    
-                case POYA:
-                    return "&q=localiteRefloc:(POYA)";
-                    
-                case BELEP:
-                    return "&q=localiteRefloc:(BELEP)";
-                    
-                case ILE_DES_PINS:
-                    return "&q=localiteRefloc:(ILE%20AND%20DES%20AND%20PINS)";
-                    
-                case DUMBEA:
-                    return "&q=localiteRefloc:(DUMBEA)";
-                    
-                case BOURAIL:
-                    return "&q=localiteRefloc:(BOURAIL)";
-                    
-                case CANALA:
-                    return "&q=localiteRefloc:(CANALA)";
-                    
-                case FAYAOUE:
-                    return "&q=localiteRefloc:(FAYAOUE)";
-                    
-                case POUM:
-                    return "&q=localiteRefloc:(POUM)";
-                    
-                case TOUHO:
-                    return "&q=localiteRefloc:(TOUHO)";
-                    
-                case POUEMBOUT:
-                    return "&q=localiteRefloc:(POUEMBOUT)";
-                    
-                case KOUMAC:
-                    return "&q=localiteRefloc:(KOUMAC)";
-                    
-                case PAITA:
-                    return "&q=localiteRefloc:(PAITA)";
-                    
-                case SARRAMEA:
-                    return "&q=localiteRefloc:(SARRAMEA)";
-                    
-                case LIFOU:
-                    return "&q=localiteRefloc:(LIFOU)%20OR%20localiteRefloc:(WE)";
-                    
-                case OUEGOA:
-                    return "&q=localiteRefloc:(OUEGOA)";
-                    
-                case YATE:
-                    return "&q=localiteRefloc:(YATE)";
-                    
-                case LA_FOA:
-                    return "&q=localiteRefloc:(LA%20AND%20FOA)";
-                    
-                case HIENGHENE:
-                    return "&q=localiteRefloc:(HIENGHENE)";
-                    
-                case MARE:
-                    return "&q=localiteRefloc:(MARE)";
-                    
-                case POINDIMIE:
-                    return "&q=localiteRefloc:(POINDIMIE)";
-                    
-                case PONERIHOUEN:
-                    return "&q=localiteRefloc:(PONERIHOUEN)";
-                    
-                case VOH:
-                    return "&q=localiteRefloc:(VOH)";
-                    
-                default : 
-                    return "";
-                    
-            }
+    public static ArrayList<String> getCommunesNames() {
+        ArrayList<String> commune_name = new ArrayList<>();
+        
+        HashMap<Commune, String> commune_map = new HashMap<>();
+        
+        commune_map.put(Commune.BOULOUPARIS, "boulouparis");
+        commune_map.put(Commune.MOINDOU, "moindou");
+        commune_map.put(Commune.NOUMEA, "noumea");
+        commune_map.put(Commune.HOUAILOU, "houailou");
+        commune_map.put(Commune.KONE, "kone");
+        commune_map.put(Commune.KAALA_GOMEN, "kaala-gomen");
+        commune_map.put(Commune.POUEBO, "pouebo");
+        commune_map.put(Commune.THIO, "thio");
+        commune_map.put(Commune.TADINE, "tadine");
+        commune_map.put(Commune.MONT_DORE, "mont-dore");
+        commune_map.put(Commune.KOUAOUA, "kouaoua");
+        commune_map.put(Commune.POYA, "poya");
+        commune_map.put(Commune.BELEP, "belep");
+        commune_map.put(Commune.ILE_DES_PINS, "ile des pins");
+        commune_map.put(Commune.DUMBEA, "dumbea");
+        commune_map.put(Commune.BOURAIL, "bourail");
+        commune_map.put(Commune.CANALA, "canala");
+        commune_map.put(Commune.FAYAOUE, "fayaoue");
+        commune_map.put(Commune.POUM, "poum");
+        commune_map.put(Commune.TOUHO, "touho");
+        commune_map.put(Commune.POUEMBOUT, "pouembout");
+        commune_map.put(Commune.KOUMAC, "koumac");
+        commune_map.put(Commune.PAITA, "paita");
+        commune_map.put(Commune.SARRAMEA, "sarramea");
+        commune_map.put(Commune.LIFOU, "lifou");
+        commune_map.put(Commune.OUEGOA, "ouegoa");
+        commune_map.put(Commune.YATE, "yate");
+        commune_map.put(Commune.LA_FOA, "la foa");
+        commune_map.put(Commune.HIENGHENE, "hienghene");
+        commune_map.put(Commune.MARE, "mare");
+        commune_map.put(Commune.POINDIMIE, "poindimie");
+        commune_map.put(Commune.PONERIHOUEN, "ponerihouen");
+        commune_map.put(Commune.VOH, "voh");
+        
+        for (Commune commune : Commune.values()) {
+            logger.info("Ajout de la commune : " +commune_map.get(commune));
+            commune_name.add(commune_map.get(commune));
         }
+        logger.info("" +commune_name.size()+ " communes ajoutées.");
+        return commune_name;
+    }
+    
+    public static Commune getCommune(String communeName) {
+        HashMap<String, Commune> commune = new HashMap<>();
+        
+        commune.put("boulouparis", Commune.BOULOUPARIS);
+        commune.put("moindou",Commune.MOINDOU);
+        commune.put("noumea",Commune.NOUMEA);
+        commune.put("houailou",Commune.HOUAILOU);
+        commune.put("kone",Commune.KONE);
+        commune.put("kaala-gomen",Commune.KAALA_GOMEN);
+        commune.put("pouebo",Commune.POUEBO);
+        commune.put("thio",Commune.THIO);
+        commune.put("tadine",Commune.TADINE);
+        commune.put("mont-dore",Commune.MONT_DORE);
+        commune.put("kouaoua",Commune.KOUAOUA);
+        commune.put("poya",Commune.POYA);
+        commune.put("belep",Commune.BELEP);
+        commune.put("ile des pins",Commune.ILE_DES_PINS);
+        commune.put("dumbea",Commune.DUMBEA);
+        commune.put("bourail",Commune.BOURAIL);
+        commune.put("canala",Commune.CANALA);
+        commune.put("fayaoue",Commune.FAYAOUE);
+        commune.put("poum",Commune.POUM);
+        commune.put("touho",Commune.TOUHO);
+        commune.put("pouembout",Commune.POUEMBOUT);
+        commune.put("koumac",Commune.KOUMAC);
+        commune.put("paita",Commune.PAITA);
+        commune.put("sarramea",Commune.SARRAMEA);
+        commune.put("lifou",Commune.LIFOU);
+        commune.put("ouegoa",Commune.OUEGOA);
+        commune.put("yate",Commune.YATE);
+        commune.put("la foa",Commune.LA_FOA);
+        commune.put("hienghene",Commune.HIENGHENE);
+        commune.put("mare",Commune.MARE);
+        commune.put("poindimie",Commune.POINDIMIE);
+        commune.put("ponerihouen",Commune.PONERIHOUEN);
+        commune.put("voh",Commune.VOH);
+        
+        if(communeName == null) {
+            logger.error("<" +communeName+ "> ne correspond à aucune commune.");
+            return null;
+        }
+        if(communeName == "") {
+            logger.error("<" +communeName+ "> ne correspond à aucune commune.");
+            return null;
+        }
+        
+        if(commune.containsKey(StringUtils.stripAccents(communeName.toLowerCase()))) {
+            logger.info("correspondance trouvée pour <" +communeName+ "> : <" +commune.get(StringUtils.stripAccents(communeName.toLowerCase()))+ ">");
+            return commune.get(communeName);
+        } else {
+            logger.error("" +communeName+ " ne correspond à aucune commune.");
+            return null;
+        }
+    }
+
     
     
     /**
@@ -209,7 +322,7 @@ public class Agences {
     public static ArrayList<Agence> getAgences(Commune commune) throws IOException {
 
         logger.info("------------------------------------------------------------");
-     
+
         ArrayList<Agence> listeAgences = new ArrayList<>();
         ObjectMapper mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 

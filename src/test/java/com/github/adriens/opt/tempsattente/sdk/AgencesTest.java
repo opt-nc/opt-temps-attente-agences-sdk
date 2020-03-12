@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.jupiter.api.Test;
@@ -58,7 +59,48 @@ public class AgencesTest {
         }
 
     }
+    
+    @Test
+    public void testGetCommunesNames() {
+        System.out.println("\ngetCommunesNames_TEST");
+        assertEquals(33, Agences.getCommunesNames().size(), "Longueur de liste différentes.");
+    }
 
+    @Test
+    public void testGetCommune_null() {
+        System.out.println("\ngetCommune_null_TEST");
+        String commune_name = null;
+        assertNull(Agences.getCommune(commune_name),"Une correspondance a été trouvée.");
+    }
+    
+    @Test
+    public void testGetCommune_empty() {
+        System.out.println("\ngetCommune_empty_TEST");
+        String commune_name = "";
+        assertNull(Agences.getCommune(commune_name),"Une correspondance a été trouvée.");
+    }
+    
+    @Test
+    public void testGetCommune_good_upper_accents() {
+        System.out.println("\ngetCommune_good_upper_accents_TEST");
+        String commune_name = "Nouméa";
+        assertNull(Agences.getCommune(commune_name),"Une correspondance a été trouvée.");
+    }
+    
+    @Test
+    public void testGetCommune_good() {
+        System.out.println("\ngetCommune_good_TEST");
+        String commune_name = "noumea";
+        assertEquals(Agences.Commune.NOUMEA, Agences.getCommune(commune_name),"Une correspondance a été trouvée.");
+    }
+    
+    @Test
+    public void testGetCommune_bad() {
+        System.out.println("\ngetCommune_bad_TEST");
+        String commune_name = "test";
+        assertNull(Agences.getCommune(commune_name),"Une correspondance a été trouvée.");
+    }
+    
     /**
      * Test of convertWaintingTimeToMillis method, of class Agences.
      */
