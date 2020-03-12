@@ -38,5 +38,6 @@ System.out.println("<" + Agences.getAgences().size() + "> agences trouvées");
 System.out.println(Agences.getAgences());
 System.out.println("<" + Agences.getAgences(Commune.NOUMEA).size() + "> agences trouvées pour <" + Commune.NOUMEA + ">");
 System.out.println(Agences.getAgences(Commune.NOUMEA));
+System.out.println("Correspondance trouvée pour l'ID 4177 : " + Agence.getAgence("4177").toString());  
 System.exit(0);
 ```
