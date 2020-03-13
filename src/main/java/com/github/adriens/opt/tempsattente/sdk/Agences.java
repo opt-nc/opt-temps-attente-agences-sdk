@@ -353,7 +353,7 @@ public class Agences {
             try {
                 String idAgence = jsonNode.get("hits").get("hits").get(i).get("_id").asText();
                 String designation = jsonNode.get("hits").get("hits").get(i).get("_source").get("designation").asText();
-                long realMaxWaitingTimeMs = ConvertToMillis(jsonNode.get("hits").get("hits").get(i).get("_source").get("borneEsirius").get("realMaxWaitingTimeMs").asText());
+                long realMaxWaitingTimeMs = ConvertToMillis(jsonNode.get("hits").get("hits").get(i).get("_source").get("borneEsirius").get("realMaxWaitingTime").asText());
 
                 Agence agence = new Agence(idAgence, designation, realMaxWaitingTimeMs);
                 listeAgences.add(agence);
