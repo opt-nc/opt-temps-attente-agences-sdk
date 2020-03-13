@@ -134,7 +134,7 @@ public class Agence {
             return result;
         } else {
             logger.info("Aucune correspondance pour " + idAgence);
-            return result;
+            return null;
         }
 
     }
