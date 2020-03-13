@@ -353,9 +353,9 @@ public class Agences {
             try {
                 String idAgence = jsonNode.get("hits").get("hits").get(i).get("_id").asText();
                 String designation = jsonNode.get("hits").get("hits").get(i).get("_source").get("designation").asText();
-                long realMaxWaitingTime = ConvertToMillis(jsonNode.get("hits").get("hits").get(i).get("_source").get("borneEsirius").get("realMaxWaitingTime").asText());
+                long realMaxWaitingTimeMs = ConvertToMillis(jsonNode.get("hits").get("hits").get(i).get("_source").get("borneEsirius").get("realMaxWaitingTimeMs").asText());
 
-                Agence agence = new Agence(idAgence, designation, realMaxWaitingTime);
+                Agence agence = new Agence(idAgence, designation, realMaxWaitingTimeMs);
                 listeAgences.add(agence);
 
                 logger.info("Agence : " + agence.toString());
