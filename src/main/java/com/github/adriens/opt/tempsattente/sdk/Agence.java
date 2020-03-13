@@ -22,7 +22,7 @@ public class Agence {
 
     private String idAgence;
     private String designation;
-    private long realMaxWaitingTime;
+    private long realMaxWaitingTimeMs;
 
     /**
      * Default constructor.
@@ -30,7 +30,7 @@ public class Agence {
     public Agence() {
         this.idAgence = "";
         this.designation = "";
-        this.realMaxWaitingTime = 0;
+        this.realMaxWaitingTimeMs = 0;
     }
 
     /**
@@ -38,12 +38,12 @@ public class Agence {
      *
      * @param idAgence The agency's ID number as text.
      * @param designation The agency's designation name.
-     * @param realMaxWaitingTime the maximum waiting time in the agency.
+     * @param realMaxWaitingTimeMs the maximum waiting time in the agency.
      */
-    public Agence(String idAgence, String designation, long realMaxWaitingTime) {
+    public Agence(String idAgence, String designation, long realMaxWaitingTimeMs) {
         this.idAgence = idAgence;
         this.designation = designation;
-        this.realMaxWaitingTime = realMaxWaitingTime;
+        this.realMaxWaitingTimeMs = realMaxWaitingTimeMs;
     }
 
     /**
@@ -55,7 +55,7 @@ public class Agence {
     public Agence(String idAgence, String designation) {
         this.idAgence = idAgence;
         this.designation = designation;
-        this.realMaxWaitingTime = 0;
+        this.realMaxWaitingTimeMs = 0;
     }
 
     /**
@@ -82,7 +82,7 @@ public class Agence {
      * @return the maximum waiting time in the agency.
      */
     public long getRealMaxWaitingTime() {
-        return this.realMaxWaitingTime;
+        return this.realMaxWaitingTimeMs;
     }
 
     /**
@@ -106,10 +106,10 @@ public class Agence {
     /**
      * Set the maximum waiting time in the agency.
      *
-     * @param realMaxWaitingTime The maximum waiting time in the agency.
+     * @param realMaxWaitingTimeMs The maximum waiting time in the agency.
      */
-    public void setRealMaxWaitingTime(long realMaxWaitingTime) {
-        this.realMaxWaitingTime = realMaxWaitingTime;
+    public void setRealMaxWaitingTime(long realMaxWaitingTimeMs) {
+        this.realMaxWaitingTimeMs = realMaxWaitingTimeMs;
     }
 
     /**
@@ -146,7 +146,7 @@ public class Agence {
      */
     @Override
     public String toString() {
-        return "Agence " + this.idAgence + " <designation: " + this.designation + ", realMaxWaitingTime: " + this.realMaxWaitingTime + ">";
+        return "Agence " + this.idAgence + " <designation: " + this.designation + ", realMaxWaitingTimeMs: " + this.realMaxWaitingTimeMs + ">";
     }
 
 }
