@@ -150,10 +150,10 @@ public class AgenceTest {
 
         String idAgence = "123456";
         String designation = "designationTEST";
-        long realMaxWaitingTime = Agences.ConvertToMillis("00:00:52");
+        long realMaxWaitingTimeMs = Agences.ConvertToMillis("00:00:52");
         Agence instance = new Agence("123456", "designationTEST", Agences.ConvertToMillis("00:00:52"));
 
-        String expResult = "Agence " + idAgence + " <designation: " + designation + ", realMaxWaitingTime: " + realMaxWaitingTime + ">";
+        String expResult = "Agence " + idAgence + " <designation: " + designation + ", realMaxWaitingTimeMs: " + realMaxWaitingTimeMs + ">";
         String result = instance.toString();
 
         assertEquals(expResult, result, "Les chaînes sont différentes.");
