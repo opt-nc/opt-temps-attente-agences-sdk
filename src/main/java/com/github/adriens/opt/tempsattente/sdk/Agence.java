@@ -81,7 +81,7 @@ public class Agence {
      *
      * @return the maximum waiting time in the agency.
      */
-    public long getRealMaxWaitingTime() {
+    public long getRealMaxWaitingTimeMs() {
         return this.realMaxWaitingTimeMs;
     }
 
@@ -108,7 +108,7 @@ public class Agence {
      *
      * @param realMaxWaitingTimeMs The maximum waiting time in the agency.
      */
-    public void setRealMaxWaitingTime(long realMaxWaitingTimeMs) {
+    public void setRealMaxWaitingTimeMs(long realMaxWaitingTimeMs) {
         this.realMaxWaitingTimeMs = realMaxWaitingTimeMs;
     }
 

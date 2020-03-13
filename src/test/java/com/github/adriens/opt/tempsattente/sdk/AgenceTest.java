@@ -91,7 +91,7 @@ public class AgenceTest {
         Agence instance = new Agence("123456", "designationTEST", Agences.ConvertToMillis("00:00:52"));
 
         long expResult = Agences.ConvertToMillis("00:00:52");
-        long result = instance.getRealMaxWaitingTime();
+        long result = instance.getRealMaxWaitingTimeMs();
         assertEquals(expResult, result, "realMaxWaStringingTime non trouvé");
     }
 
@@ -105,8 +105,8 @@ public class AgenceTest {
         Agence instance = new Agence();
 
         long expResult = Agences.ConvertToMillis("00:00:52");
-        instance.setRealMaxWaitingTime(Agences.ConvertToMillis("00:00:52"));
-        long result = instance.getRealMaxWaitingTime();
+        instance.setRealMaxWaitingTimeMs(Agences.ConvertToMillis("00:00:52"));
+        long result = instance.getRealMaxWaitingTimeMs();
 
         assertEquals(expResult, result, "realMaxWaStringingTime non modifié");
     }
