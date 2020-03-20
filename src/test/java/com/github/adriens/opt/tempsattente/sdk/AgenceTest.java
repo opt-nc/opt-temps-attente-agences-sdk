@@ -29,10 +29,10 @@ public class AgenceTest {
     public void testGetIdAgence() {
         System.out.println("\ngetIdAgence_TEST");
 
-        Agence instance = new Agence("123456", "designationTEST");
+        Agence instance = new Agence(123456, "designationTEST");
 
-        String expResult = "123456";
-        String result = instance.getIdAgence();
+        int expResult = 123456;
+        int result = instance.getIdAgence();
 
         assertEquals(expResult, result, "id non trouvé.");
     }
@@ -43,9 +43,9 @@ public class AgenceTest {
 
         Agence instance = new Agence();
 
-        String expResult = "123456";
-        instance.setIdAgence("123456");
-        String result = instance.getIdAgence();
+        int expResult = 123456;
+        instance.setIdAgence(123456);
+        int result = instance.getIdAgence();
 
         assertEquals(expResult, result, "id non modifié");
     }
@@ -57,7 +57,7 @@ public class AgenceTest {
     public void testGetDesignation() {
         System.out.println("\ngetDesignation_TEST");
 
-        Agence instance = new Agence("123456", "designationTEST");
+        Agence instance = new Agence(123456, "designationTEST");
 
         String expResult = "designationTEST";
         String result = instance.getDesignation();
@@ -88,7 +88,7 @@ public class AgenceTest {
     public void testGetRealMaxWaitingTime() {
         System.out.println("\ngetRealMaxWaitingTime_TEST");
 
-        Agence instance = new Agence("123456", "designationTEST", Agences.ConvertToMillis("00:00:52"));
+        Agence instance = new Agence(123456, "designationTEST", Agences.ConvertToMillis("00:00:52"));
 
         long expResult = Agences.ConvertToMillis("00:00:52");
         long result = instance.getRealMaxWaitingTimeMs();
@@ -117,9 +117,9 @@ public class AgenceTest {
         try {
             ArrayList<Agence> agences = Agences.getAgences(Agences.Commune.NOUMEA);
             Agence expResult = new Agence();
-            String idAgence = "4177";
+            int idAgence = 4177;
             for (Agence agence : agences) {
-                if (agence.getIdAgence().equals(idAgence)) {
+                if (agence.getIdAgence() == idAgence) {
                     expResult = agence;
                 }
             }
@@ -134,7 +134,7 @@ public class AgenceTest {
     public void testGetAgenceBadID() {
         System.out.println("\ngetAgence_badID_TEST");
         try {
-            Agence result = Agence.getAgence("456");
+            Agence result = Agence.getAgence(456);
             assertNull(result, "Aucune agence trouvée.");
         } catch (IOException e) {
             Logger.getLogger(AgencesTest.class.getName()).log(Level.SEVERE, null, e);
@@ -148,10 +148,10 @@ public class AgenceTest {
     public void testToString() {
         System.out.println("\ntoString_TEST");
 
-        String idAgence = "123456";
+        int idAgence = 123456;
         String designation = "designationTEST";
         long realMaxWaitingTimeMs = Agences.ConvertToMillis("00:00:52");
-        Agence instance = new Agence("123456", "designationTEST", Agences.ConvertToMillis("00:00:52"));
+        Agence instance = new Agence(123456, "designationTEST", Agences.ConvertToMillis("00:00:52"));
 
         String expResult = "Agence " + idAgence + " <designation: " + designation + ", realMaxWaitingTimeMs: " + realMaxWaitingTimeMs + ">";
         String result = instance.toString();
