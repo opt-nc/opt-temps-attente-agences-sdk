@@ -351,7 +351,7 @@ public class Agences {
         for (int i = 0; i < total; i++) {
 
             try {
-                String idAgence = jsonNode.get("hits").get("hits").get(i).get("_id").asText();
+                int idAgence = jsonNode.get("hits").get("hits").get(i).get("_source").get("id").asInt();
                 String designation = jsonNode.get("hits").get("hits").get(i).get("_source").get("designation").asText();
                 long realMaxWaitingTimeMs = ConvertToMillis(jsonNode.get("hits").get("hits").get(i).get("_source").get("borneEsirius").get("realMaxWaitingTime").asText());
 
@@ -362,7 +362,7 @@ public class Agences {
 
             } catch (Exception e) {
 
-                String idAgence = jsonNode.get("hits").get("hits").get(i).get("_id").asText();
+                int idAgence = jsonNode.get("hits").get("hits").get("_source").get("id").asInt();
                 String designation = jsonNode.get("hits").get("hits").get(i).get("_source").get("designation").asText();
 
                 logger.warn("Le temps d'attente maximum de l'agence <" + designation + "> est introuvable...");
