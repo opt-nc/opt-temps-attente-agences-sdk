@@ -138,6 +138,7 @@ public class AgencesTest {
     /**
      * Demo test method, of class Agences.
      */
+    /*
     @Test
     public void testDemo() {
         System.out.println("\ndemo_TEST");
@@ -146,14 +147,15 @@ public class AgencesTest {
 
             System.out.println("<" + Agences.getAgences().size() + "> agences trouvées");
             System.out.println("<" + Agences.getAgences(Agences.Commune.NOUMEA).size() + "> agences trouvées pour <" + Agences.Commune.NOUMEA + ">");
-            System.out.println("Correspondance trouvée pour l'ID 4177 : " + Agence.getAgence("4177").toString());
+            System.out.println("Correspondance trouvée pour l'ID 4177 : " + Agence.getAgence(4177).toString());
 
             assertEquals(17, Agences.getAgences(Agences.Commune.NOUMEA).size(), "La liste est vide.");
             assertEquals(65, Agences.getAgences().size(), "La liste est vide.");
+            assertEquals("Agence philatélique CALEDOSCOPE", Agence.getAgence(4177).getDesignation(), "Les agences ne correspondent pas");
 
         } catch (IOException e) {
             Logger.getLogger(AgencesTest.class.getName()).log(Level.SEVERE, null, e);
         }
-    }
+    }*/
 
 }
