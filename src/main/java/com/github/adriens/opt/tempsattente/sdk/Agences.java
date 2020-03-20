@@ -362,7 +362,7 @@ public class Agences {
 
             } catch (Exception e) {
 
-                int idAgence = jsonNode.get("hits").get("hits").get("_source").get("id").asInt();
+                int idAgence = jsonNode.get("hits").get("hits").get(i).get("_source").get("id").asInt();
                 String designation = jsonNode.get("hits").get("hits").get(i).get("_source").get("designation").asText();
 
                 logger.warn("Le temps d'attente maximum de l'agence <" + designation + "> est introuvable...");
