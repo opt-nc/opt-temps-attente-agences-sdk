@@ -20,7 +20,7 @@ import java.util.ArrayList;
  */
 public class Agence {
 
-    private String idAgence;
+    private int idAgence;
     private String designation;
     private long realMaxWaitingTimeMs;
 
@@ -28,7 +28,7 @@ public class Agence {
      * Default constructor.
      */
     public Agence() {
-        this.idAgence = "";
+        this.idAgence = 0;
         this.designation = "";
         this.realMaxWaitingTimeMs = 0;
     }
@@ -40,7 +40,7 @@ public class Agence {
      * @param designation The agency's designation name.
      * @param realMaxWaitingTimeMs the maximum waiting time in the agency.
      */
-    public Agence(String idAgence, String designation, long realMaxWaitingTimeMs) {
+    public Agence(int idAgence, String designation, long realMaxWaitingTimeMs) {
         this.idAgence = idAgence;
         this.designation = designation;
         this.realMaxWaitingTimeMs = realMaxWaitingTimeMs;
@@ -52,7 +52,7 @@ public class Agence {
      * @param idAgence The agency's ID number as text.
      * @param designation The agency's designation name.
      */
-    public Agence(String idAgence, String designation) {
+    public Agence(int idAgence, String designation) {
         this.idAgence = idAgence;
         this.designation = designation;
         this.realMaxWaitingTimeMs = 0;
@@ -63,7 +63,7 @@ public class Agence {
      *
      * @return the agency's ID number.
      */
-    public String getIdAgence() {
+    public int getIdAgence() {
         return this.idAgence;
     }
 
@@ -90,7 +90,7 @@ public class Agence {
      *
      * @param idAgence the agency's ID number as text.
      */
-    public void setIdAgence(String idAgence) {
+    public void setIdAgence(int idAgence) {
         this.idAgence = idAgence;
     }
 
@@ -119,17 +119,17 @@ public class Agence {
      * @return the agency with the ID number in parameter.
      * @throws IOException
      */
-    public static Agence getAgence(String idAgence) throws IOException {
+    public static Agence getAgence(int idAgence) throws IOException {
         ArrayList<Agence> agences = Agences.getAgences();
         Agence result = new Agence();
 
         for (Agence agence : agences) {
-            if (agence.idAgence.equals(idAgence)) {
+            if (agence.idAgence == idAgence) {
                 result = agence;
             }
         }
 
-        if (result.idAgence.equals(idAgence)) {
+        if (result.idAgence == idAgence) {
             logger.info("correspondance trouvée pour " + idAgence + " : " + result.toString());
             return result;
         } else {
