@@ -338,7 +338,7 @@ public class Agences {
             logger.error("Commune incorrecte.");
             return listeAgences;
         }
-        
+
         logger.info("Recherche de l'URL : ");
         URL url = new URL("" + BASE_URL + Agences.getUrl(commune));
 
@@ -354,8 +354,18 @@ public class Agences {
                 int idAgence = jsonNode.get("hits").get("hits").get(i).get("_source").get("id").asInt();
                 String designation = jsonNode.get("hits").get("hits").get(i).get("_source").get("designation").asText();
                 long realMaxWaitingTimeMs = ConvertToMillis(jsonNode.get("hits").get("hits").get(i).get("_source").get("borneEsirius").get("realMaxWaitingTime").asText());
+                String coordonneesXY = jsonNode.get("hits").get("hits").get(i).get("_source").get("coordonneesXyRefloc").asText();
+                JsonNode nodeCoordonneesXYPrecises = jsonNode.get("hits").get("hits").get(i).get("_source").get("coordonneesXyPrecisesRefloc");
 
-                Agence agence = new Agence(idAgence, designation, realMaxWaitingTimeMs);
+                String[] tcoordonneesXY = coordonneesXY.split(";");
+                double coordonneeX = Double.parseDouble(tcoordonneesXY[0]);
+                double coordonneeY = Double.parseDouble(tcoordonneesXY[1]);
+
+                long[] tCoordonneesXYPrecises = Agences.getCoordonneesXYPrecises(nodeCoordonneesXYPrecises);
+                long coordonneeXPrecise = tCoordonneesXYPrecises[0];
+                long coordonneeYPrecise = tCoordonneesXYPrecises[1];
+
+                Agence agence = new Agence(idAgence, designation, realMaxWaitingTimeMs, coordonneeX, coordonneeY, coordonneeXPrecise, coordonneeYPrecise);
                 listeAgences.add(agence);
 
                 logger.info("Agence : " + agence.toString());
@@ -364,13 +374,31 @@ public class Agences {
 
                 int idAgence = jsonNode.get("hits").get("hits").get(i).get("_source").get("id").asInt();
                 String designation = jsonNode.get("hits").get("hits").get(i).get("_source").get("designation").asText();
+                String coordonneesXY = jsonNode.get("hits").get("hits").get(i).get("_source").get("coordonneesXyRefloc").asText();
+                JsonNode nodeCoordonneesXYPrecises = jsonNode.get("hits").get("hits").get(i).get("_source").get("coordonneesXyPrecisesRefloc");
 
                 logger.warn("Le temps d'attente maximum de l'agence <" + designation + "> est introuvable...");
 
-                Agence agence = new Agence(idAgence, designation);
-                listeAgences.add(agence);
+                String[] tcoordonneesXY = coordonneesXY.split(";");
+                double coordonneeX = Double.parseDouble(tcoordonneesXY[0]);
+                double coordonneeY = Double.parseDouble(tcoordonneesXY[1]);
 
-                logger.info("Agence : " + agence.toString());
+                try {
+                    long[] tCoordonneesXYPrecises = Agences.getCoordonneesXYPrecises(nodeCoordonneesXYPrecises);
+                    long coordonneeXPrecise = tCoordonneesXYPrecises[0];
+                    long coordonneeYPrecise = tCoordonneesXYPrecises[1];
+
+                    Agence agence = new Agence(idAgence, designation, 0, coordonneeX, coordonneeY, coordonneeXPrecise, coordonneeYPrecise);
+                    listeAgences.add(agence);
+
+                    logger.info("Agence : " + agence.toString());
+
+                } catch (Exception ex) {
+                    Agence agence = new Agence(idAgence, designation, 0, coordonneeX, coordonneeY, 0, 0);
+                    listeAgences.add(agence);
+
+                    logger.info("Agence : " + agence.toString());
+                }
 
             }
         }
@@ -388,6 +416,21 @@ public class Agences {
         LocalTime duree_localTime = LocalTime.parse(duree, DateTimeFormatter.ISO_LOCAL_TIME);
         long millis = ChronoUnit.MILLIS.between(LocalTime.MIN, duree_localTime);
         return millis;
+    }
+
+    public static long[] getCoordonneesXYPrecises(JsonNode nodeCoordonnesXYPrecises) {
+        if (nodeCoordonnesXYPrecises.isNull()) {
+            return null;
+        } else {
+            String strCoordonneesXYPrecises = nodeCoordonnesXYPrecises.asText();
+            if ("".equals(strCoordonneesXYPrecises)) {
+                return null;
+            } else {
+                String[] tStrCoordonneesXYPrecises = strCoordonneesXYPrecises.split(",");
+                long[] tCoordonneesXYPrecises = {Long.parseLong(tStrCoordonneesXYPrecises[0]), Long.parseLong(tStrCoordonneesXYPrecises[1])};
+                return tCoordonneesXYPrecises;
+            }
+        }
     }
 
 }
