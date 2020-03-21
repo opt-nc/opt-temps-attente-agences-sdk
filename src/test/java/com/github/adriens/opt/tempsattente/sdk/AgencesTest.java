@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.jupiter.api.Test;
@@ -59,7 +58,7 @@ public class AgencesTest {
         }
 
     }
-    
+
     /**
      * Test of getAll method, of class Agences.
      */
@@ -76,12 +75,18 @@ public class AgencesTest {
 
     }
 
+    /**
+     * Test of getCommunesNames method, of class Agences.
+     */
     @Test
     public void testGetCommunesNames() {
         System.out.println("\ngetCommunesNames_TEST");
         assertEquals(33, Agences.getCommunesNames().size(), "Longueur de liste différentes.");
     }
 
+    /**
+     * Test of getCommune(null) method, of class Agences.
+     */
     @Test
     public void testGetCommune_null() {
         System.out.println("\ngetCommune_null_TEST");
@@ -89,6 +94,9 @@ public class AgencesTest {
         assertNull(Agences.getCommune(commune_name), "Une correspondance a été trouvée.");
     }
 
+    /**
+     * Test of getCommune("") method, of class Agences.
+     */
     @Test
     public void testGetCommune_empty() {
         System.out.println("\ngetCommune_empty_TEST");
@@ -96,6 +104,9 @@ public class AgencesTest {
         assertNull(Agences.getCommune(commune_name), "Une correspondance a été trouvée.");
     }
 
+    /**
+     * Test of getCommune("Nouméa") method, of class Agences.
+     */
     @Test
     public void testGetCommuneGoodUpperAccents() {
         System.out.println("\ngetCommune_good_upper_accents_TEST");
@@ -103,6 +114,9 @@ public class AgencesTest {
         assertNull(Agences.getCommune(commune_name), "Une correspondance a été trouvée.");
     }
 
+    /**
+     * Test of getCommune("noumea") method, of class Agences.
+     */
     @Test
     public void testGetCommuneGood() {
         System.out.println("\ngetCommune_good_TEST");
@@ -110,6 +124,9 @@ public class AgencesTest {
         assertEquals(Agences.Commune.NOUMEA, Agences.getCommune(commune_name), "Une correspondance a été trouvée.");
     }
 
+    /**
+     * Test of getCommune("test") method, of class Agences.
+     */
     @Test
     public void testGetCommuneBad() {
         System.out.println("\ngetCommune_bad_TEST");
@@ -138,7 +155,6 @@ public class AgencesTest {
     /**
      * Demo test method, of class Agences.
      */
-    /*
     @Test
     public void testDemo() {
         System.out.println("\ndemo_TEST");
@@ -156,6 +172,6 @@ public class AgencesTest {
         } catch (IOException e) {
             Logger.getLogger(AgencesTest.class.getName()).log(Level.SEVERE, null, e);
         }
-    }*/
+    }
 
 }
