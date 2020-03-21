@@ -42,6 +42,7 @@ public class Agences {
      * Locations enumeration.
      */
     public static enum Commune {
+
         BOULOUPARIS,
         MOINDOU,
         NOUMEA,
@@ -75,7 +76,7 @@ public class Agences {
         POINDIMIE,
         PONERIHOUEN,
         VOH;
-
+        
     }
 
     /**
@@ -196,6 +197,9 @@ public class Agences {
      * @return the list of Commune as text.
      */
     public static ArrayList<String> getCommunesNames() {
+
+        logger.info("Récupération de la liste des communes");
+
         ArrayList<String> commune_name = new ArrayList<>();
 
         HashMap<Commune, String> commune_map = new HashMap<>();
@@ -239,6 +243,8 @@ public class Agences {
             commune_name.add(commune_map.get(commune));
         }
         logger.info("" + commune_name.size() + " communes ajoutées.");
+
+        logger.info("------------------------------------------------------------");
         return commune_name;
     }
 
@@ -249,6 +255,9 @@ public class Agences {
      * @return the Commune object with the name in parameter.
      */
     public static Commune getCommune(String communeName) {
+
+        logger.info("Récupération de la commune: <" + communeName + ">");
+
         HashMap<String, Commune> commune = new HashMap<>();
 
         commune.put("boulouparis", Commune.BOULOUPARIS);
@@ -287,18 +296,22 @@ public class Agences {
 
         if (communeName == null) {
             logger.error("<" + communeName + "> ne correspond à aucune commune.");
+            logger.info("------------------------------------------------------------");
             return null;
         }
-        if (communeName == "") {
+        if ("".equals(communeName)) {
             logger.error("<" + communeName + "> ne correspond à aucune commune.");
+            logger.info("------------------------------------------------------------");
             return null;
         }
 
         if (commune.containsKey(StringUtils.stripAccents(communeName.toLowerCase()))) {
             logger.info("correspondance trouvée pour <" + communeName + "> : <" + commune.get(StringUtils.stripAccents(communeName.toLowerCase())) + ">");
+            logger.info("------------------------------------------------------------");
             return commune.get(communeName);
         } else {
             logger.error("" + communeName + " ne correspond à aucune commune.");
+            logger.info("------------------------------------------------------------");
             return null;
         }
     }
@@ -310,6 +323,9 @@ public class Agences {
      * @throws IOException
      */
     public static ArrayList<Agence> getAgences() throws IOException {
+
+        logger.info("Récupération de la liste de toutes les agences");
+
         ArrayList<Agence> listeAgences = new ArrayList<>();
 
         for (Commune value : Commune.values()) {
@@ -317,6 +333,7 @@ public class Agences {
             listeAgences.addAll(listeAgences_commune);
         }
 
+        logger.info("------------------------------------------------------------");
         return listeAgences;
     }
 
@@ -329,7 +346,7 @@ public class Agences {
      */
     public static ArrayList<Agence> getAgences(Commune commune) throws IOException {
 
-        logger.info("------------------------------------------------------------");
+        logger.info("Récupération de la liste des agences de <" + commune + ">");
 
         ArrayList<Agence> listeAgences = new ArrayList<>();
         ObjectMapper mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
@@ -346,7 +363,7 @@ public class Agences {
         JsonNode jsonNode = mapper.readValue(url, JsonNode.class);
         int total = jsonNode.get("hits").get("total").asInt();
 
-        logger.info("Recherche des agences de " + commune.name() + " : " + total + " résultats.");
+        logger.info("" + total + " résultats trouvés.");
 
         for (int i = 0; i < total; i++) {
 
@@ -394,6 +411,8 @@ public class Agences {
                     logger.info("Agence : " + agence.toString());
 
                 } catch (Exception ex) {
+                    logger.warn("Les coordonnées X et Y précises de l'agence <" + designation + "> sont introuvables...");
+
                     Agence agence = new Agence(idAgence, designation, 0, coordonneeX, coordonneeY, 0, 0);
                     listeAgences.add(agence);
 
@@ -402,6 +421,7 @@ public class Agences {
 
             }
         }
+
         logger.info("------------------------------------------------------------");
         return listeAgences;
     }
@@ -413,21 +433,40 @@ public class Agences {
      * @return the converted duration in milliseconds
      */
     public static long ConvertToMillis(String duree) {
+        logger.info("Conversion de la duree en millisecondes");
+
         LocalTime duree_localTime = LocalTime.parse(duree, DateTimeFormatter.ISO_LOCAL_TIME);
         long millis = ChronoUnit.MILLIS.between(LocalTime.MIN, duree_localTime);
+
+        logger.info("------------------------------------------------------------");
         return millis;
     }
 
+    /**
+     * Return the precise X and Y coordinates of the agency converted as long.
+     *
+     * @param nodeCoordonnesXYPrecises the node where the coordinate data is
+     * located.
+     * @return a array of the precise X and Y coordinates of the agency as long.
+     */
     public static long[] getCoordonneesXYPrecises(JsonNode nodeCoordonnesXYPrecises) {
+        logger.info("------------------------------------------------------------");
+
         if (nodeCoordonnesXYPrecises.isNull()) {
+            logger.info("coordonneesXyPrecises null");
+            logger.info("------------------------------------------------------------");
             return null;
         } else {
             String strCoordonneesXYPrecises = nodeCoordonnesXYPrecises.asText();
             if ("".equals(strCoordonneesXYPrecises)) {
+                logger.info("coordonneesXyPrecises vide");
+                logger.info("------------------------------------------------------------");
                 return null;
             } else {
+                logger.info("coordonneesXyPrecises récupérées. conversion...");
                 String[] tStrCoordonneesXYPrecises = strCoordonneesXYPrecises.split(",");
                 long[] tCoordonneesXYPrecises = {Long.parseLong(tStrCoordonneesXYPrecises[0]), Long.parseLong(tStrCoordonneesXYPrecises[1])};
+                logger.info("------------------------------------------------------------");
                 return tCoordonneesXYPrecises;
             }
         }
