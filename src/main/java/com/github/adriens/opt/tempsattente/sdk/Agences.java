@@ -86,108 +86,46 @@ public class Agences {
      * @return the url as text.
      */
     public static String getUrl(Commune commune) {
-        String url = null;
-        switch (commune) {
-            case BOULOUPARIS:
-                url = "&q=localiteRefloc:(BOULOUPARIS)";
-                break;
-            case MOINDOU:
-                url = "&q=localiteRefloc:(MOINDOU)";
-                break;
-            case NOUMEA:
-                url = "&q=localiteRefloc:(NOUMEA)";
-                break;
-            case HOUAILOU:
-                url = "&q=localiteRefloc:(HOUAILOU)";
-                break;
-            case KONE:
-                url = "&q=localiteRefloc:(KONE)";
-                break;
-            case KAALA_GOMEN:
-                url = "&q=localiteRefloc:(KAALA-GOMEN)";
-                break;
-            case POUEBO:
-                url = "&q=localiteRefloc:(POUEBO)";
-                break;
-            case THIO:
-                url = "&q=localiteRefloc:(THIO)";
-                break;
-            case TADINE:
-                url = "&q=localiteRefloc:(TADINE)";
-                break;
-            case MONT_DORE:
-                url = "&q=localiteRefloc:(MONT-DORE)";
-                break;
-            case KOUAOUA:
-                url = "&q=localiteRefloc:(KOUAOUA)";
-                break;
-            case POYA:
-                url = "&q=localiteRefloc:(POYA)";
-                break;
-            case BELEP:
-                url = "&q=localiteRefloc:(BELEP)";
-                break;
-            case ILE_DES_PINS:
-                url = "&q=localiteRefloc:(ILE%20AND%20DES%20AND%20PINS)";
-                break;
-            case DUMBEA:
-                url = "&q=localiteRefloc:(DUMBEA)";
-                break;
-            case BOURAIL:
-                url = "&q=localiteRefloc:(BOURAIL)";
-                break;
-            case CANALA:
-                url = "&q=localiteRefloc:(CANALA)";
-                break;
-            case FAYAOUE:
-                url = "&q=localiteRefloc:(FAYAOUE)";
-                break;
-            case POUM:
-                url = "&q=localiteRefloc:(POUM)";
-                break;
-            case TOUHO:
-                url = "&q=localiteRefloc:(TOUHO)";
-                break;
-            case POUEMBOUT:
-                url = "&q=localiteRefloc:(POUEMBOUT)";
-                break;
-            case KOUMAC:
-                url = "&q=localiteRefloc:(KOUMAC)";
-                break;
-            case PAITA:
-                url = "&q=localiteRefloc:(PAITA)";
-                break;
-            case SARRAMEA:
-                url = "&q=localiteRefloc:(SARRAMEA)";
-                break;
-            case LIFOU:
-                url = "&q=localiteRefloc:(LIFOU)%20OR%20localiteRefloc:(WE)";
-                break;
-            case OUEGOA:
-                url = "&q=localiteRefloc:(OUEGOA)";
-                break;
-            case YATE:
-                url = "&q=localiteRefloc:(YATE)";
-                break;
-            case LA_FOA:
-                url = "&q=localiteRefloc:(LA%20AND%20FOA)";
-                break;
-            case HIENGHENE:
-                url = "&q=localiteRefloc:(HIENGHENE)";
-                break;
-            case MARE:
-                url = "&q=localiteRefloc:(MARE)";
-                break;
-            case POINDIMIE:
-                url = "&q=localiteRefloc:(POINDIMIE)";
-                break;
-            case PONERIHOUEN:
-                url = "&q=localiteRefloc:(PONERIHOUEN)";
-                break;
-            case VOH:
-                url = "&q=localiteRefloc:(VOH)";
-                break;
-        }
+        
+        logger.info("Récupération de l'url de la commune: <" +commune+ ">");
+        
+        String url = "";
+
+        if ("BOULOUPARIS".equals(commune.name())) url = "&q=localiteRefloc:(BOULOUPARIS)";
+        if ("MOINDOU".equals(commune.name())) url = "&q=localiteRefloc:(MOINDOU)";
+        if ("NOUMEA".equals(commune.name())) url = "&q=localiteRefloc:(NOUMEA)";
+        if ("HOUAILOU".equals(commune.name())) url = "&q=localiteRefloc:(HOUAILOU)";
+        if ("KONE".equals(commune.name())) url = "&q=localiteRefloc:(KONE)";
+        if ("KAALA_GOMEN".equals(commune.name())) url = "&q=localiteRefloc:(KAALA-GOMEN)";
+        if ("POUEBO".equals(commune.name())) url = "&q=localiteRefloc:(POUEBO)";
+        if ("THIO".equals(commune.name())) url = "&q=localiteRefloc:(THIO)";
+        if ("TADINE".equals(commune.name())) url = "&q=localiteRefloc:(TADINE)";
+        if ("MONT_DORE".equals(commune.name())) url = "&q=localiteRefloc:(MONT-DORE)";
+        if ("KOUAOUA".equals(commune.name())) url = "&q=localiteRefloc:(KOUAOUA)";
+        if ("POYA".equals(commune.name())) url = "&q=localiteRefloc:(POYA)";
+        if ("BELEP".equals(commune.name())) url = "&q=localiteRefloc:(BELEP)";
+        if ("ILE_DES_PINS".equals(commune.name())) url = "&q=localiteRefloc:(ILE%20AND%20DES%20AND%20PINS)";
+        if ("DUMBEA".equals(commune.name())) url = "&q=localiteRefloc:(DUMBEA)";
+        if ("BOURAIL".equals(commune.name())) url = "&q=localiteRefloc:(BOURAIL)";
+        if ("CANALA".equals(commune.name())) url = "&q=localiteRefloc:(CANALA)";
+        if ("FAYAOUE".equals(commune.name())) url = "&q=localiteRefloc:(FAYAOUE)";
+        if ("POUM".equals(commune.name())) url = "&q=localiteRefloc:(POUM)";
+        if ("TOUHO".equals(commune.name())) url = "&q=localiteRefloc:(TOUHO)";
+        if ("POUEMBOUT".equals(commune.name())) url = "&q=localiteRefloc:(POUEMBOUT)";
+        if ("KOUMAC".equals(commune.name())) url = "&q=localiteRefloc:(KOUMAC)";
+        if ("PAITA".equals(commune.name())) url = "&q=localiteRefloc:(PAITA)";
+        if ("SARRAMEA".equals(commune.name())) url = "&q=localiteRefloc:(SARRAMEA)";
+        if ("LIFOU".equals(commune.name())) url = "&q=localiteRefloc:(LIFOU)%20OR%20localiteRefloc:(WE)";
+        if ("OUEGOA".equals(commune.name())) url = "&q=localiteRefloc:(OUEGOA)";
+        if ("YATE".equals(commune.name())) url = "&q=localiteRefloc:(YATE)";
+        if ("LA_FOA".equals(commune.name())) url = "&q=localiteRefloc:(LA%20AND%20FOA)";
+        if ("HIENGHENE".equals(commune.name())) url = "&q=localiteRefloc:(HIENGHENE)";
+        if ("MARE".equals(commune.name())) url = "&q=localiteRefloc:(MARE)";
+        if ("POINDIMIE".equals(commune.name())) url = "&q=localiteRefloc:(POINDIMIE)";
+        if ("PONERIHOUEN".equals(commune.name())) url = "&q=localiteRefloc:(PONERIHOUEN)"; 
+        if ("VOH".equals(commune.name())) url = "&q=localiteRefloc:(VOH)";
+
+        logger.info("------------------------------------------------------------");
         return url;
     }
 
