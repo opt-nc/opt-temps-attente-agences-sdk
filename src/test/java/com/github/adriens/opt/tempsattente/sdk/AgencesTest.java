@@ -6,7 +6,6 @@
 package com.github.adriens.opt.tempsattente.sdk;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
