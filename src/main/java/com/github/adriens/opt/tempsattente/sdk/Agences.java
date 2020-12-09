@@ -342,7 +342,7 @@ public class Agences {
 
                     if (coordonneesXYPrecises != null) {
                         agence.setCoordonneeXPrecise(coordonneesXYPrecises[0]);
-                        agence.setCoordonneeXPrecise(coordonneesXYPrecises[1]);
+                        agence.setCoordonneeYPrecise(coordonneesXYPrecises[1]);
                     }
                 } catch (Exception e) {
                     logger.warn("Les coordonnées X et Y précises de l'agence <{}> sont introuvables...", agence.getDesignation());
