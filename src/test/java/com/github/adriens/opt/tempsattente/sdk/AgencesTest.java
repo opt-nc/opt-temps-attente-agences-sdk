@@ -6,12 +6,20 @@
 package com.github.adriens.opt.tempsattente.sdk;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
+
+import static com.github.adriens.opt.tempsattente.sdk.Agences.BASE_URL;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -63,11 +71,17 @@ public class AgencesTest {
      * Test of getAll method, of class Agences.
      */
     @Test
-    public void testGetAgences_all() {
+    public void testGetAgences_all() throws IOException {
         System.out.println("\ngetAgence()_TEST");
 
+        URL url = new URL(BASE_URL);
+        ObjectMapper mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        JsonNode jsonNode = mapper.readValue(url, JsonNode.class);
+        int total = jsonNode.get("hits").get("total").asInt();
+
         try {
-            assertEquals(65, Agences.getAgences().size(), "Longueur de liste différentes.");
+            System.out.println("\n" + Agences.getAgences().size() );
+            assertEquals(total, Agences.getAgences().size(), "Longueur de liste différentes.");
 
         } catch (IOException ex) {
             Logger.getLogger(AgencesTest.class.getName()).log(Level.SEVERE, null, ex);
@@ -81,7 +95,7 @@ public class AgencesTest {
     @Test
     public void testGetCommunesNames() {
         System.out.println("\ngetCommunesNames_TEST");
-        assertEquals(33, Agences.getCommunesNames().size(), "Longueur de liste différentes.");
+        assertEquals(34, Agences.getCommunesNames().size(), "Longueur de liste différentes.");
     }
 
     /**

@@ -15,6 +15,10 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,6 +41,8 @@ public class Agences {
      * The base of the url where the data is retrieved.
      */
     public static final String BASE_URL = "https://open-data.opt.nc/agences/_search?size=1000";
+
+    private static final String HYPHEN_SEPARATOR = "------------------------------------------------------------";
 
     /**
      * Locations enumeration.
@@ -75,7 +81,8 @@ public class Agences {
         MARE,
         POINDIMIE,
         PONERIHOUEN,
-        VOH;
+        VOH,
+        TONTOUTA
         
     }
 
@@ -124,8 +131,9 @@ public class Agences {
         if ("POINDIMIE".equals(commune.name())) url = "&q=localiteRefloc:(POINDIMIE)";
         if ("PONERIHOUEN".equals(commune.name())) url = "&q=localiteRefloc:(PONERIHOUEN)"; 
         if ("VOH".equals(commune.name())) url = "&q=localiteRefloc:(VOH)";
+        if ("TONTOUTA".equals(commune.name())) url = "&q=localiteRefloc:(TONTOUTA)";
 
-        logger.info("------------------------------------------------------------");
+        logger.info(HYPHEN_SEPARATOR);
         return url;
     }
 
@@ -175,6 +183,7 @@ public class Agences {
         commune_map.put(Commune.POINDIMIE, "poindimie");
         commune_map.put(Commune.PONERIHOUEN, "ponerihouen");
         commune_map.put(Commune.VOH, "voh");
+        commune_map.put(Commune.TONTOUTA, "tontouta");
 
         for (Commune commune : Commune.values()) {
             logger.info("Ajout de la commune : " + commune_map.get(commune));
@@ -182,7 +191,7 @@ public class Agences {
         }
         logger.info("" + commune_name.size() + " communes ajoutées.");
 
-        logger.info("------------------------------------------------------------");
+        logger.info(HYPHEN_SEPARATOR);
         return commune_name;
     }
 
@@ -231,25 +240,26 @@ public class Agences {
         commune.put("poindimie", Commune.POINDIMIE);
         commune.put("ponerihouen", Commune.PONERIHOUEN);
         commune.put("voh", Commune.VOH);
+        commune.put("tontouta", Commune.TONTOUTA);
 
         if (communeName == null) {
             logger.error("<" + communeName + "> ne correspond à aucune commune.");
-            logger.info("------------------------------------------------------------");
+            logger.info(HYPHEN_SEPARATOR);
             return null;
         }
         if ("".equals(communeName)) {
             logger.error("<" + communeName + "> ne correspond à aucune commune.");
-            logger.info("------------------------------------------------------------");
+            logger.info(HYPHEN_SEPARATOR);
             return null;
         }
 
         if (commune.containsKey(StringUtils.stripAccents(communeName.toLowerCase()))) {
             logger.info("correspondance trouvée pour <" + communeName + "> : <" + commune.get(StringUtils.stripAccents(communeName.toLowerCase())) + ">");
-            logger.info("------------------------------------------------------------");
+            logger.info(HYPHEN_SEPARATOR);
             return commune.get(communeName);
         } else {
             logger.error("" + communeName + " ne correspond à aucune commune.");
-            logger.info("------------------------------------------------------------");
+            logger.info(HYPHEN_SEPARATOR);
             return null;
         }
     }
@@ -266,12 +276,36 @@ public class Agences {
 
         ArrayList<Agence> listeAgences = new ArrayList<>();
 
+        logger.info("Recherche de l'URL : ");
+        URL url = new URL(BASE_URL);
+
+        logger.info("Recupération des données des agences : ");
+
+        ObjectMapper mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        JsonNode jsonNode = mapper.readValue(url, JsonNode.class);
+        int total = jsonNode.get("hits").get("total").asInt();
+
+        ArrayList<Integer> ids = new ArrayList<>();
+
+        for (int i = 0; i < total; i++) {
+            JsonNode nodeAgency = jsonNode.get("hits").get("hits").get(i).get("_source");
+            ids.add(nodeAgency.get("id").asInt());
+        }
+
         for (Commune value : Commune.values()) {
             ArrayList<Agence> listeAgences_commune = Agences.getAgences(value);
             listeAgences.addAll(listeAgences_commune);
         }
 
-        logger.info("------------------------------------------------------------");
+        for (Integer id : ids) {
+          List<Agence> agence = listeAgences.stream().filter(a -> a.getIdAgence() == id).collect(Collectors.toList());
+          if (agence.isEmpty()) {
+              logger.error("Agence {} absent de la liste", id);
+          }
+
+        }
+
+        logger.info(HYPHEN_SEPARATOR);
         return listeAgences;
     }
 
@@ -284,7 +318,7 @@ public class Agences {
      */
     public static ArrayList<Agence> getAgences(Commune commune) throws IOException {
 
-        logger.info("Récupération de la liste des agences de <" + commune + ">");
+        logger.info("Récupération de la liste des agences de <{}>", commune);
 
         ArrayList<Agence> listeAgences = new ArrayList<>();
         ObjectMapper mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
@@ -301,66 +335,64 @@ public class Agences {
         JsonNode jsonNode = mapper.readValue(url, JsonNode.class);
         int total = jsonNode.get("hits").get("total").asInt();
 
-        logger.info("" + total + " résultats trouvés.");
+        logger.info("{} résultats trouvés.", total);
 
         for (int i = 0; i < total; i++) {
 
             try {
-                int idAgence = jsonNode.get("hits").get("hits").get(i).get("_source").get("id").asInt();
-                String designation = jsonNode.get("hits").get("hits").get(i).get("_source").get("designation").asText();
-                long realMaxWaitingTimeMs = ConvertToMillis(jsonNode.get("hits").get("hits").get(i).get("_source").get("borneEsirius").get("realMaxWaitingTime").asText());
-                String coordonneesXY = jsonNode.get("hits").get("hits").get(i).get("_source").get("coordonneesXyRefloc").asText();
-                JsonNode nodeCoordonneesXYPrecises = jsonNode.get("hits").get("hits").get(i).get("_source").get("coordonneesXyPrecisesRefloc");
+                Agence agence = new Agence();
+                JsonNode nodeAgency = jsonNode.get("hits").get("hits").get(i).get("_source");
+                String[] coordonneesXY = Agences.getCoordonneesXY(nodeAgency.get("coordonneesXyRefloc"));
 
-                String[] tcoordonneesXY = coordonneesXY.split(";");
-                double coordonneeX = Double.parseDouble(tcoordonneesXY[0]);
-                double coordonneeY = Double.parseDouble(tcoordonneesXY[1]);
+                agence.setCommune(commune.toString());
+                agence.setIdAgence(nodeAgency.get("id").asInt());
+                agence.setDesignation(nodeAgency.get("designation").asText());
+                agence.setType(nodeAgency.get("type").asText());
+                agence.setCodeESirius(nodeAgency.get("codeESirius").asText());
+                agence.setIdRefloc(nodeAgency.get("idRefloc").asText());
+                agence.setCodePostalRefloc(nodeAgency.get("codePostalRefloc").asText());
+                agence.setCodePostal(nodeAgency.get("codePostal").asText());
+                agence.setLieuDitOuTribu(nodeAgency.get("lieuDitOuTribu").asText());
+                agence.setLocaliteRefloc(nodeAgency.get("localiteRefloc").asText());
+                agence.setLocalite(nodeAgency.get("localite").asText());
 
-                long[] tCoordonneesXYPrecises = Agences.getCoordonneesXYPrecises(nodeCoordonneesXYPrecises);
-                long coordonneeXPrecise = tCoordonneesXYPrecises[0];
-                long coordonneeYPrecise = tCoordonneesXYPrecises[1];
-
-                Agence agence = new Agence(idAgence, designation, realMaxWaitingTimeMs, coordonneeX, coordonneeY, coordonneeXPrecise, coordonneeYPrecise);
-                listeAgences.add(agence);
-
-                logger.info("Agence : " + agence.toString());
-
-            } catch (Exception e) {
-
-                int idAgence = jsonNode.get("hits").get("hits").get(i).get("_source").get("id").asInt();
-                String designation = jsonNode.get("hits").get("hits").get(i).get("_source").get("designation").asText();
-                String coordonneesXY = jsonNode.get("hits").get("hits").get(i).get("_source").get("coordonneesXyRefloc").asText();
-                JsonNode nodeCoordonneesXYPrecises = jsonNode.get("hits").get("hits").get(i).get("_source").get("coordonneesXyPrecisesRefloc");
-
-                logger.warn("Le temps d'attente maximum de l'agence <" + designation + "> est introuvable...");
-
-                String[] tcoordonneesXY = coordonneesXY.split(";");
-                double coordonneeX = Double.parseDouble(tcoordonneesXY[0]);
-                double coordonneeY = Double.parseDouble(tcoordonneesXY[1]);
-
-                try {
-                    long[] tCoordonneesXYPrecises = Agences.getCoordonneesXYPrecises(nodeCoordonneesXYPrecises);
-                    long coordonneeXPrecise = tCoordonneesXYPrecises[0];
-                    long coordonneeYPrecise = tCoordonneesXYPrecises[1];
-
-                    Agence agence = new Agence(idAgence, designation, 0, coordonneeX, coordonneeY, coordonneeXPrecise, coordonneeYPrecise);
-                    listeAgences.add(agence);
-
-                    logger.info("Agence : " + agence.toString());
-
-                } catch (Exception ex) {
-                    logger.warn("Les coordonnées X et Y précises de l'agence <" + designation + "> sont introuvables...");
-
-                    Agence agence = new Agence(idAgence, designation, 0, coordonneeX, coordonneeY, 0, 0);
-                    listeAgences.add(agence);
-
-                    logger.info("Agence : " + agence.toString());
+                if (coordonneesXY != null) {
+                    agence.setCoordonneeX(Double.parseDouble(coordonneesXY[0]));
+                    agence.setCoordonneeY(Double.parseDouble(coordonneesXY[1]));
                 }
 
+                try {
+                    agence.setRealMaxWaitingTimeMs(ConvertToMillis(nodeAgency.get("borneEsirius").get("realMaxWaitingTime").asText()));
+                } catch (Exception e) {
+                    logger.warn("Le temps d'attente maximum de l'agence <{}> est introuvable...", agence.getDesignation(), e);
+                }
+
+                try {
+                    long[] coordonneesXYPrecises = Agences.getCoordonneesXYPrecises(nodeAgency.get("coordonneesXyPrecisesRefloc"));
+
+                    if (coordonneesXYPrecises != null) {
+                        agence.setCoordonneeXPrecise(coordonneesXYPrecises[0]);
+                        agence.setCoordonneeXPrecise(coordonneesXYPrecises[1]);
+                    }
+                } catch (Exception e) {
+                    logger.warn("Les coordonnées X et Y précises de l'agence <{}> sont introuvables...", agence.getDesignation(), e);
+                }
+
+                listeAgences.add(agence);
+
+                logger.info("Agence : {}", agence.toString());
+
+            } catch (Exception e) {
+                logger.warn("Erreur lors de la récupération des informations...", e);
             }
         }
 
-        logger.info("------------------------------------------------------------");
+        if (listeAgences.size() != total)
+            logger.warn("Erreur compteurs agences pour la comunne : {}", commune.toString());
+        else
+            logger.info("Compteurs agences OK pour la comunne : {}", commune.toString());
+
+        logger.info(HYPHEN_SEPARATOR);
         return listeAgences;
     }
 
@@ -376,8 +408,19 @@ public class Agences {
         LocalTime duree_localTime = LocalTime.parse(duree, DateTimeFormatter.ISO_LOCAL_TIME);
         long millis = ChronoUnit.MILLIS.between(LocalTime.MIN, duree_localTime);
 
-        logger.info("------------------------------------------------------------");
+        logger.info(HYPHEN_SEPARATOR);
         return millis;
+    }
+
+    /**
+     * Return the X and Y coordinates of the agency converted as string.
+     *
+     * @param nodeCoordonnesXY the node where the coordinate data is
+     * located.
+     * @return a array of the X and Y coordinates of the agency as String.
+     */
+    public static String[] getCoordonneesXY(JsonNode nodeCoordonnesXY) {
+        return nodeCoordonnesXY == null ? null : nodeCoordonnesXY.asText().split(";");
     }
 
     /**
@@ -388,23 +431,23 @@ public class Agences {
      * @return a array of the precise X and Y coordinates of the agency as long.
      */
     public static long[] getCoordonneesXYPrecises(JsonNode nodeCoordonnesXYPrecises) {
-        logger.info("------------------------------------------------------------");
+        logger.info(HYPHEN_SEPARATOR);
 
         if (nodeCoordonnesXYPrecises.isNull()) {
             logger.info("coordonneesXyPrecises null");
-            logger.info("------------------------------------------------------------");
+            logger.info(HYPHEN_SEPARATOR);
             return null;
         } else {
             String strCoordonneesXYPrecises = nodeCoordonnesXYPrecises.asText();
             if ("".equals(strCoordonneesXYPrecises)) {
                 logger.info("coordonneesXyPrecises vide");
-                logger.info("------------------------------------------------------------");
+                logger.info(HYPHEN_SEPARATOR);
                 return null;
             } else {
                 logger.info("coordonneesXyPrecises récupérées. conversion...");
                 String[] tStrCoordonneesXYPrecises = strCoordonneesXYPrecises.split(",");
                 long[] tCoordonneesXYPrecises = {Long.parseLong(tStrCoordonneesXYPrecises[0]), Long.parseLong(tStrCoordonneesXYPrecises[1])};
-                logger.info("------------------------------------------------------------");
+                logger.info(HYPHEN_SEPARATOR);
                 return tCoordonneesXYPrecises;
             }
         }

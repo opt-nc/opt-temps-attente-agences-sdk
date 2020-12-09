@@ -32,7 +32,7 @@ public class AgenceTest {
     public void testGetIdAgence() {
         System.out.println("\ngetIdAgence_TEST");
 
-        Agence instance = new Agence(123456, "designationTEST", 0, 0, 0, 0, 0);
+        Agence instance = new Agence(123456, "designationTEST", 0, 0, 0, 0, 0, "", "", "", "", "", "", "", "", "");
 
         int expResult = 123456;
         int result = instance.getIdAgence();
@@ -63,7 +63,7 @@ public class AgenceTest {
     public void testGetDesignation() {
         System.out.println("\ngetDesignation_TEST");
 
-        Agence instance = new Agence(123456, "designationTEST", 0, 0, 0, 0, 0);
+        Agence instance = new Agence(123456, "designationTEST", 0, 0, 0, 0, 0, "", "", "", "", "", "", "", "", "");
 
         String expResult = "designationTEST";
         String result = instance.getDesignation();
@@ -94,7 +94,7 @@ public class AgenceTest {
     public void testGetRealMaxWaitingTime() {
         System.out.println("\ngetRealMaxWaitingTime_TEST");
 
-        Agence instance = new Agence(123456, "designationTEST", Agences.ConvertToMillis("00:00:52"), 0, 0, 0, 0);
+        Agence instance = new Agence(123456, "designationTEST", Agences.ConvertToMillis("00:00:52"), 0, 0, 0, 0, "", "", "", "", "", "", "", "", "");
 
         long expResult = Agences.ConvertToMillis("00:00:52");
         long result = instance.getRealMaxWaitingTimeMs();
@@ -124,7 +124,7 @@ public class AgenceTest {
     public void testGetCoordonneeX() {
         System.out.println("\ngetCoordonneeX_TEST");
 
-        Agence instance = new Agence(123456, "designationTEST", 0, 422331.96350000054, 0, 0, 0);
+        Agence instance = new Agence(123456, "designationTEST", 0, 422331.96350000054, 0, 0, 0, "", "", "", "", "", "", "", "", "");
 
         double expResult = 422331.96350000054;
         double result = instance.getCoordonneeX();
@@ -154,7 +154,7 @@ public class AgenceTest {
     public void testGetCoordonneeY() {
         System.out.println("\ngetCoordonneeY_TEST");
 
-        Agence instance = new Agence(123456, "designationTEST", 0, 0, 242663.05560000055, 0, 0);
+        Agence instance = new Agence(123456, "designationTEST", 0, 0, 242663.05560000055, 0, 0, "", "", "", "", "", "", "", "", "");
 
         double expResult = 242663.05560000055;
         double result = instance.getCoordonneeY();
@@ -184,7 +184,7 @@ public class AgenceTest {
     public void testGetCoordonneeXPrecise() {
         System.out.println("\ngetCoordonneeXPrecise_TEST");
 
-        Agence instance = new Agence(123456, "designationTEST", 0, 0, 0, 422655, 0);
+        Agence instance = new Agence(123456, "designationTEST", 0, 0, 0, 422655, 0, "", "", "", "", "", "", "", "", "");
 
         long expResult = 422655;
         long result = instance.getCoordonneeXPrecise();
@@ -214,7 +214,7 @@ public class AgenceTest {
     public void testGetCoordonneeYPrecise() {
         System.out.println("\ngetCoordonneeYPrecise_TEST");
 
-        Agence instance = new Agence(123456, "designationTEST", 0, 0, 0, 0, 242977);
+        Agence instance = new Agence(123456, "designationTEST", 0, 0, 0, 0, 242977, "", "", "", "", "", "", "", "", "");
 
         long expResult = 242977;
         long result = instance.getCoordonneeYPrecise();
@@ -287,7 +287,7 @@ public class AgenceTest {
         double coordonneeY = 242663.05560000055;
         long coordonneeXPrecise = 422655;
         long coordonneeYPrecise = 242977;
-        Agence instance = new Agence(123456, "designationTEST", Agences.ConvertToMillis("00:00:52"), 422331.96350000054, 242663.05560000055, 422655, 242977);
+        Agence instance = new Agence(123456, "designationTEST", Agences.ConvertToMillis("00:00:52"), 422331.96350000054, 242663.05560000055, 422655, 242977, "", "", "", "", "", "", "", "", "");
 
         String expResult = "Agence " + idAgence
                 + " <designation: " + designation
