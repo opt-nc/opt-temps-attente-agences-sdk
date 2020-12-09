@@ -32,7 +32,7 @@ public class AgenceTest {
     public void testGetIdAgence() {
         System.out.println("\ngetIdAgence_TEST");
 
-        Agence instance = new Agence(123456, "designationTEST", 0, 0, 0, 0, 0);
+        Agence instance = new Agence(123456, "designationTEST", 0, 0, 0, 0, 0, "", "", "", "", "", "", "", "", "");
 
         int expResult = 123456;
         int result = instance.getIdAgence();
@@ -63,7 +63,7 @@ public class AgenceTest {
     public void testGetDesignation() {
         System.out.println("\ngetDesignation_TEST");
 
-        Agence instance = new Agence(123456, "designationTEST", 0, 0, 0, 0, 0);
+        Agence instance = new Agence(123456, "designationTEST", 0, 0, 0, 0, 0, "", "", "", "", "", "", "", "", "");
 
         String expResult = "designationTEST";
         String result = instance.getDesignation();
@@ -94,7 +94,7 @@ public class AgenceTest {
     public void testGetRealMaxWaitingTime() {
         System.out.println("\ngetRealMaxWaitingTime_TEST");
 
-        Agence instance = new Agence(123456, "designationTEST", Agences.ConvertToMillis("00:00:52"), 0, 0, 0, 0);
+        Agence instance = new Agence(123456, "designationTEST", Agences.ConvertToMillis("00:00:52"), 0, 0, 0, 0, "", "", "", "", "", "", "", "", "");
 
         long expResult = Agences.ConvertToMillis("00:00:52");
         long result = instance.getRealMaxWaitingTimeMs();
@@ -124,7 +124,7 @@ public class AgenceTest {
     public void testGetCoordonneeX() {
         System.out.println("\ngetCoordonneeX_TEST");
 
-        Agence instance = new Agence(123456, "designationTEST", 0, 422331.96350000054, 0, 0, 0);
+        Agence instance = new Agence(123456, "designationTEST", 0, 422331.96350000054, 0, 0, 0, "", "", "", "", "", "", "", "", "");
 
         double expResult = 422331.96350000054;
         double result = instance.getCoordonneeX();
@@ -154,7 +154,7 @@ public class AgenceTest {
     public void testGetCoordonneeY() {
         System.out.println("\ngetCoordonneeY_TEST");
 
-        Agence instance = new Agence(123456, "designationTEST", 0, 0, 242663.05560000055, 0, 0);
+        Agence instance = new Agence(123456, "designationTEST", 0, 0, 242663.05560000055, 0, 0, "", "", "", "", "", "", "", "", "");
 
         double expResult = 242663.05560000055;
         double result = instance.getCoordonneeY();
@@ -184,7 +184,7 @@ public class AgenceTest {
     public void testGetCoordonneeXPrecise() {
         System.out.println("\ngetCoordonneeXPrecise_TEST");
 
-        Agence instance = new Agence(123456, "designationTEST", 0, 0, 0, 422655, 0);
+        Agence instance = new Agence(123456, "designationTEST", 0, 0, 0, 422655, 0, "", "", "", "", "", "", "", "", "");
 
         long expResult = 422655;
         long result = instance.getCoordonneeXPrecise();
@@ -214,7 +214,7 @@ public class AgenceTest {
     public void testGetCoordonneeYPrecise() {
         System.out.println("\ngetCoordonneeYPrecise_TEST");
 
-        Agence instance = new Agence(123456, "designationTEST", 0, 0, 0, 0, 242977);
+        Agence instance = new Agence(123456, "designationTEST", 0, 0, 0, 0, 242977, "", "", "", "", "", "", "", "", "");
 
         long expResult = 242977;
         long result = instance.getCoordonneeYPrecise();
@@ -274,6 +274,123 @@ public class AgenceTest {
     }
 
     /**
+     * Test of getCommune(testCommune) method, of class Agence.
+     */
+    @Test
+    public void testGetSetCommune() {
+        String commune = "testCommune";
+
+        Agence agence = new Agence();
+        agence.setCommune(commune);
+
+        assertEquals(commune, agence.getCommune(), "Commune non modifiée.");
+    }
+
+    /**
+     * Test of getType(testType) method, of class Agence.
+     */
+    @Test
+    public void testGetSetType() {
+        String type = "testType";
+
+        Agence agence = new Agence();
+        agence.setType(type);
+
+        assertEquals(type, agence.getType(), "Type non modifiée.");
+    }
+
+    /**
+     * Test of getCodeESirius(testCodeESirius) method, of class Agence.
+     */
+    @Test
+    public void testGetSetCodeESirius() {
+        String codeESirius = "testCodeESirius";
+
+        Agence agence = new Agence();
+        agence.setCodeESirius(codeESirius);
+
+        assertEquals(codeESirius, agence.getCodeESirius(), "CodeESirius non modifiée.");
+    }
+
+    /**
+     * Test of getCodePostale(testCodePostale) method, of class Agence.
+     */
+    @Test
+    public void testGetSetCodePostal() {
+        String codePostal = "testCodePostal";
+
+        Agence agence = new Agence();
+        agence.setCodePostal(codePostal);
+
+        assertEquals(codePostal, agence.getCodePostal(), "CodePostal non modifiée.");
+    }
+
+    /**
+     * Test of getlieuDitOuTribu(testLieuDitOuTribu) method, of class Agence.
+     */
+    @Test
+    public void testGetSetLieuDitOuTribu() {
+        String lieuDitOuTribu = "testCodeESirius";
+
+        Agence agence = new Agence();
+        agence.setLieuDitOuTribu(lieuDitOuTribu);
+
+        assertEquals(lieuDitOuTribu, agence.getLieuDitOuTribu(), "LieuDitOuTribu non modifiée.");
+    }
+
+    /**
+     * Test of getLocalite(testLocalite) method, of class Agence.
+     */
+    @Test
+    public void testGetSetLocalite() {
+        String localite = "testLocalite";
+
+        Agence agence = new Agence();
+        agence.setLocalite(localite);
+
+        assertEquals(localite, agence.getLocalite(), "Localite non modifiée.");
+    }
+
+    /**
+     * Test of getIdRefloc(testIdRefloc) method, of class Agence.
+     */
+    @Test
+    public void testGetSetIdRefloc() {
+        String idRefloc = "testIdRefloc";
+
+        Agence agence = new Agence();
+        agence.setIdRefloc(idRefloc);
+
+        assertEquals(idRefloc, agence.getIdRefloc(), "IdRefloc non modifiée.");
+    }
+
+    /**
+     * Test of getCodePostalRefloc(testCodePostalRefloc) method, of class Agence.
+     */
+    @Test
+    public void testGetSetCodePostalRefloc() {
+        String codePostalRefloc = "testCodePostalRefloc";
+
+        Agence agence = new Agence();
+        agence.setCodePostalRefloc(codePostalRefloc);
+
+        assertEquals(codePostalRefloc, agence.getCodePostalRefloc(), "CodePostalRefloc non modifiée.");
+    }
+
+    /**
+     * Test of getLocaliteRefloc(testLocaliteRefloc) method, of class Agence.
+     */
+    @Test
+    public void testGetSetLocaliteRefloc() {
+        String localiteRefloc = "testCodePostalRefloc";
+
+        Agence agence = new Agence();
+        agence.setLocaliteRefloc(localiteRefloc);
+
+        assertEquals(localiteRefloc, agence.getLocaliteRefloc(), "LocaliteRefloc non modifiée.");
+    }
+
+    /**
      * Test of toString method, of class Agence.
      */
     @Test
@@ -287,7 +404,25 @@ public class AgenceTest {
         double coordonneeY = 242663.05560000055;
         long coordonneeXPrecise = 422655;
         long coordonneeYPrecise = 242977;
-        Agence instance = new Agence(123456, "designationTEST", Agences.ConvertToMillis("00:00:52"), 422331.96350000054, 242663.05560000055, 422655, 242977);
+        String commune = "communeTEST";
+        String type = "typeTEST";
+        String codeESirius = "codeESiriusTEST";
+        String codePostal = "codePostalTEST";
+        String lieuDitOuTribu = "lieuDitOuTribuTEST";
+        String localite = "localiteTEST";
+        String idRefloc = "idReflocTEST";
+        String codePostalRefloc = "codePostalReflocTEST";
+        String localiteRefloc = "localiteReflocTEST";
+        Agence instance = new Agence(
+                123456,
+                "designationTEST",
+                Agences.ConvertToMillis("00:00:52"),
+                422331.96350000054,
+                242663.05560000055,
+                422655,
+                242977,
+                commune, type, codeESirius, codePostal, lieuDitOuTribu,
+                localite, idRefloc, codePostalRefloc, localiteRefloc);
 
         String expResult = "Agence " + idAgence
                 + " <designation: " + designation
@@ -296,6 +431,15 @@ public class AgenceTest {
                 + ", coordonneeY: " + coordonneeY
                 + ", coordonneeXPrecise: " + coordonneeXPrecise
                 + ", coordonneeYPrecise: " + coordonneeYPrecise
+                + ", commune: " + commune
+                + ", type: " + type
+                + ", codeESirius: " + codeESirius
+                + ", codePostal: " + codePostal
+                + ", lieuDitOuTribu: " + lieuDitOuTribu
+                + ", localite: " + localite
+                + ", idRefloc: " + idRefloc
+                + ", codePostalRefloc: " + codePostalRefloc
+                + ", localiteRefloc: " + localiteRefloc
                 + ">";
         String result = instance.toString();
 
