@@ -11,6 +11,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
@@ -272,15 +273,7 @@ public class Agences {
 
         logger.info("Récupération de la liste de toutes les agences");
 
-        ArrayList<Agence> agences = new ArrayList<>();
-
-        for (Commune value : Commune.values()) {
-            List<Agence> agencesCommune = Agences.getAgences(value);
-            agences.addAll(agencesCommune);
-        }
-
-        logger.info(HYPHEN_SEPARATOR);
-        return agences;
+        return load(new URL("" + BASE_URL));
     }
 
     /**
@@ -294,27 +287,29 @@ public class Agences {
  
         logger.info("Récupération de la liste des agences de <{}>", commune);
 
-        ArrayList<Agence> listeAgences = new ArrayList<>();
-        ObjectMapper mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-
         if (commune == null) {
             logger.error("Commune incorrecte.");
-            return listeAgences;
+            return Collections.emptyList();
         }
         
-        URL url = new URL("" + BASE_URL + Agences.getUrl(commune));
+        return load(new URL("" + BASE_URL + Agences.getUrl(commune)));
+    }
+
+    private static List<Agence> load(URL url) throws IOException {
+        ObjectMapper mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         JsonNode jsonNode = mapper.readValue(url, JsonNode.class);
         int total = jsonNode.get("hits").get("total").asInt();
 
         logger.info("{} résultats trouvés.", total);
 
+        ArrayList<Agence> listeAgences = new ArrayList<>();
         for (int i = 0; i < total; i++) {
 
             try {
                 Agence agence = new Agence();
                 JsonNode nodeAgence = jsonNode.get("hits").get("hits").get(i).get("_source");
 
-                agence.setCommune(commune.toString());
+                agence.setCommune(nodeAgence.get("localiteRefloc").asText());
                 agence.setIdAgence(nodeAgence.get("id").asInt());
                 agence.setDesignation(nodeAgence.get("designation").asText());
                 agence.setType(nodeAgence.get("type").asText());

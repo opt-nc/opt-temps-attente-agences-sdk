@@ -11,9 +11,9 @@ Java SDK pour le temps d'attente dans les agences OPT de Nouvelle-Calédonie
 
 ```xml
 <dependency>
-  <groupId>com.github.adriens</groupId>
-  <artifactId>opt-temps-attente-agences-sdk</artifactId>
-  <version>${opt-temps-attente-agences-sdk.version}</version>
+  <groupId>nc.opt.tempsattente</groupId>
+  <artifactId>tempsattente-sdk</artifactId>
+  <version>${opt-tempsattente-sdk.version}</version>
 </dependency>
 ```
 
