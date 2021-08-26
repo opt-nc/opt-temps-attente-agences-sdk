@@ -8,7 +8,7 @@ package nc.opt.tempsattente;
 import static nc.opt.tempsattente.Agences.logger;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -28,6 +28,7 @@ public class Agence {
     private double coordonneeY;
     private long coordonneeXPrecise;
     private long coordonneeYPrecise;
+    private LonLat position;
     private String commune;
     private String type;
     private String codeESirius;
@@ -71,7 +72,7 @@ public class Agence {
      * @param coordonneeXPrecise the precise X coordinate of the agency.
      * @param coordonneeYPrecise the precise Y coordinate of the agency.
      */
-    public Agence(int idAgence, String designation, long realMaxWaitingTimeMs, double coordonneeX, double coordonneeY, long coordonneeXPrecise, long coordonneeYPrecise, String commune, String type, String codeESirius, String codePostal, String lieuDitOuTribu, String localite, String idRefloc, String codePostalRefloc, String localiteRefloc) {
+    public Agence(int idAgence, String designation, long realMaxWaitingTimeMs, double coordonneeX, double coordonneeY, long coordonneeXPrecise, long coordonneeYPrecise, LonLat position, String commune, String type, String codeESirius, String codePostal, String lieuDitOuTribu, String localite, String idRefloc, String codePostalRefloc, String localiteRefloc) {
         this.idAgence = idAgence;
         this.designation = designation;
         this.realMaxWaitingTimeMs = realMaxWaitingTimeMs;
@@ -79,6 +80,7 @@ public class Agence {
         this.coordonneeY = coordonneeY;
         this.coordonneeXPrecise = coordonneeXPrecise;
         this.coordonneeYPrecise = coordonneeYPrecise;
+        this.position = position;
         this.commune = commune;
         this.type = type;
         this.codeESirius = codeESirius;
@@ -296,6 +298,14 @@ public class Agence {
         this.coordonneeYPrecise = coordonneeYPrecise;
     }
 
+    public void setPosition(LonLat position) {
+        this.position = position;
+    }
+
+    public LonLat getPosition() {
+        return position;
+    }
+
     /**
      * Set the commune of the agency.
      * @param commune the type of the agency.
@@ -376,7 +386,7 @@ public class Agence {
      * @throws IOException
      */
     public static Agence getAgence(int idAgence) throws IOException {
-        ArrayList<Agence> agences = Agences.getAgences();
+        List<Agence> agences = Agences.getAgences();
         Agence result = new Agence();
 
         for (Agence agence : agences) {
@@ -386,10 +396,10 @@ public class Agence {
         }
 
         if (result.idAgence == idAgence) {
-            logger.info("correspondance trouvée pour " + idAgence + " : " + result.toString());
+            logger.info("correspondance trouvée pour {} : {}",idAgence, result);
             return result;
         } else {
-            logger.info("Aucune correspondance pour " + idAgence);
+            logger.info("Aucune correspondance pour {}", idAgence);
             return null;
         }
 
@@ -409,6 +419,7 @@ public class Agence {
                 + ", coordonneeY: " + this.coordonneeY
                 + ", coordonneeXPrecise: " + this.coordonneeXPrecise
                 + ", coordonneeYPrecise: " + this.coordonneeYPrecise
+                + ", position: " + this.position
                 + ", commune: " + this.commune
                 + ", type: " + this.type
                 + ", codeESirius: " + this.codeESirius

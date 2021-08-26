@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -35,7 +35,7 @@ public class AgenceTest {
     public void testGetIdAgence() {
         System.out.println("\ngetIdAgence_TEST");
 
-        Agence instance = new Agence(123456, "designationTEST", 0, 0, 0, 0, 0, "", "", "", "", "", "", "", "", "");
+        Agence instance = new Agence(123456, "designationTEST", 0, 0, 0, 0, 0, new LonLat(1d, 2d), "", "", "", "", "", "", "", "", "");
 
         int expResult = 123456;
         int result = instance.getIdAgence();
@@ -66,7 +66,7 @@ public class AgenceTest {
     public void testGetDesignation() {
         System.out.println("\ngetDesignation_TEST");
 
-        Agence instance = new Agence(123456, "designationTEST", 0, 0, 0, 0, 0, "", "", "", "", "", "", "", "", "");
+        Agence instance = new Agence(123456, "designationTEST", 0, 0, 0, 0, 0, new LonLat(1d, 2d), "", "", "", "", "", "", "", "", "");
 
         String expResult = "designationTEST";
         String result = instance.getDesignation();
@@ -97,9 +97,9 @@ public class AgenceTest {
     public void testGetRealMaxWaitingTime() {
         System.out.println("\ngetRealMaxWaitingTime_TEST");
 
-        Agence instance = new Agence(123456, "designationTEST", Agences.ConvertToMillis("00:00:52"), 0, 0, 0, 0, "", "", "", "", "", "", "", "", "");
+        Agence instance = new Agence(123456, "designationTEST", Agences.convertToMillis("00:00:52"), 0, 0, 0, 0, new LonLat(1d, 2d), "", "", "", "", "", "", "", "", "");
 
-        long expResult = Agences.ConvertToMillis("00:00:52");
+        long expResult = Agences.convertToMillis("00:00:52");
         long result = instance.getRealMaxWaitingTimeMs();
         assertEquals(expResult, result, "realMaxWaStringingTime non trouvé");
     }
@@ -113,8 +113,8 @@ public class AgenceTest {
 
         Agence instance = new Agence();
 
-        long expResult = Agences.ConvertToMillis("00:00:52");
-        instance.setRealMaxWaitingTimeMs(Agences.ConvertToMillis("00:00:52"));
+        long expResult = Agences.convertToMillis("00:00:52");
+        instance.setRealMaxWaitingTimeMs(Agences.convertToMillis("00:00:52"));
         long result = instance.getRealMaxWaitingTimeMs();
 
         assertEquals(expResult, result, "realMaxWaStringingTime non modifié");
@@ -127,7 +127,7 @@ public class AgenceTest {
     public void testGetCoordonneeX() {
         System.out.println("\ngetCoordonneeX_TEST");
 
-        Agence instance = new Agence(123456, "designationTEST", 0, 422331.96350000054, 0, 0, 0, "", "", "", "", "", "", "", "", "");
+        Agence instance = new Agence(123456, "designationTEST", 0, 422331.96350000054, 0, 0, 0, new LonLat(1d, 2d), "", "", "", "", "", "", "", "", "");
 
         double expResult = 422331.96350000054;
         double result = instance.getCoordonneeX();
@@ -157,7 +157,7 @@ public class AgenceTest {
     public void testGetCoordonneeY() {
         System.out.println("\ngetCoordonneeY_TEST");
 
-        Agence instance = new Agence(123456, "designationTEST", 0, 0, 242663.05560000055, 0, 0, "", "", "", "", "", "", "", "", "");
+        Agence instance = new Agence(123456, "designationTEST", 0, 0, 242663.05560000055, 0, 0, new LonLat(1d, 2d), "", "", "", "", "", "", "", "", "");
 
         double expResult = 242663.05560000055;
         double result = instance.getCoordonneeY();
@@ -187,7 +187,7 @@ public class AgenceTest {
     public void testGetCoordonneeXPrecise() {
         System.out.println("\ngetCoordonneeXPrecise_TEST");
 
-        Agence instance = new Agence(123456, "designationTEST", 0, 0, 0, 422655, 0, "", "", "", "", "", "", "", "", "");
+        Agence instance = new Agence(123456, "designationTEST", 0, 0, 0, 422655, 0, new LonLat(1d, 2d), "", "", "", "", "", "", "", "", "");
 
         long expResult = 422655;
         long result = instance.getCoordonneeXPrecise();
@@ -217,7 +217,7 @@ public class AgenceTest {
     public void testGetCoordonneeYPrecise() {
         System.out.println("\ngetCoordonneeYPrecise_TEST");
 
-        Agence instance = new Agence(123456, "designationTEST", 0, 0, 0, 0, 242977, "", "", "", "", "", "", "", "", "");
+        Agence instance = new Agence(123456, "designationTEST", 0, 0, 0, 0, 242977, new LonLat(1d, 2d), "", "", "", "", "", "", "", "", "");
 
         long expResult = 242977;
         long result = instance.getCoordonneeYPrecise();
@@ -247,7 +247,7 @@ public class AgenceTest {
     public void testGetAgence() {
         System.out.println("\ngetAgence_TEST");
         try {
-            ArrayList<Agence> agences = Agences.getAgences(Agences.Commune.NOUMEA);
+            List<Agence> agences = Agences.getAgences(Agences.Commune.NOUMEA);
             Agence expResult = new Agence();
             int idAgence = 4177;
             for (Agence agence : agences) {
@@ -402,7 +402,7 @@ public class AgenceTest {
 
         int idAgence = 123456;
         String designation = "designationTEST";
-        long realMaxWaitingTimeMs = Agences.ConvertToMillis("00:00:52");
+        long realMaxWaitingTimeMs = Agences.convertToMillis("00:00:52");
         double coordonneeX = 422331.96350000054;
         double coordonneeY = 242663.05560000055;
         long coordonneeXPrecise = 422655;
@@ -419,11 +419,12 @@ public class AgenceTest {
         Agence instance = new Agence(
                 123456,
                 "designationTEST",
-                Agences.ConvertToMillis("00:00:52"),
+                Agences.convertToMillis("00:00:52"),
                 422331.96350000054,
                 242663.05560000055,
                 422655,
                 242977,
+                new LonLat(1d, 2d),
                 commune, type, codeESirius, codePostal, lieuDitOuTribu,
                 localite, idRefloc, codePostalRefloc, localiteRefloc);
 
@@ -434,6 +435,7 @@ public class AgenceTest {
                 + ", coordonneeY: " + coordonneeY
                 + ", coordonneeXPrecise: " + coordonneeXPrecise
                 + ", coordonneeYPrecise: " + coordonneeYPrecise
+                + ", position: {lon: 1.000000, lat: 2.000000}"
                 + ", commune: " + commune
                 + ", type: " + type
                 + ", codeESirius: " + codeESirius

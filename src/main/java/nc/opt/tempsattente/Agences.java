@@ -11,7 +11,10 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -45,7 +48,7 @@ public class Agences {
     /**
      * Locations enumeration.
      */
-    public static enum Commune {
+    public enum Commune {
 
         BOULOUPARIS,
         MOINDOU,
@@ -80,8 +83,7 @@ public class Agences {
         POINDIMIE,
         PONERIHOUEN,
         VOH,
-        TONTOUTA
-        
+        TONTOUTA        
     }
 
     /**
@@ -93,42 +95,42 @@ public class Agences {
     public static String getUrl(Commune commune) {
         String url = "";
 
-        if ("BOULOUPARIS".equals(commune.name())) url = "&q=localiteRefloc:(BOULOUPARIS)";
-        if ("MOINDOU".equals(commune.name())) url = "&q=localiteRefloc:(MOINDOU)";
-        if ("NOUMEA".equals(commune.name())) url = "&q=localiteRefloc:(NOUMEA)";
-        if ("HOUAILOU".equals(commune.name())) url = "&q=localiteRefloc:(HOUAILOU)";
-        if ("KONE".equals(commune.name())) url = "&q=localiteRefloc:(KONE)";
-        if ("KAALA_GOMEN".equals(commune.name())) url = "&q=localiteRefloc:(KAALA-GOMEN)";
-        if ("POUEBO".equals(commune.name())) url = "&q=localiteRefloc:(POUEBO)";
-        if ("THIO".equals(commune.name())) url = "&q=localiteRefloc:(THIO)";
-        if ("TADINE".equals(commune.name())) url = "&q=localiteRefloc:(TADINE)";
-        if ("MONT_DORE".equals(commune.name())) url = "&q=localiteRefloc:(MONT-DORE)";
-        if ("KOUAOUA".equals(commune.name())) url = "&q=localiteRefloc:(KOUAOUA)";
-        if ("POYA".equals(commune.name())) url = "&q=localiteRefloc:(POYA)";
-        if ("BELEP".equals(commune.name())) url = "&q=localiteRefloc:(BELEP)";
-        if ("ILE_DES_PINS".equals(commune.name())) url = "&q=localiteRefloc:(ILE%20AND%20DES%20AND%20PINS)";
-        if ("DUMBEA".equals(commune.name())) url = "&q=localiteRefloc:(DUMBEA)";
-        if ("BOURAIL".equals(commune.name())) url = "&q=localiteRefloc:(BOURAIL)";
-        if ("CANALA".equals(commune.name())) url = "&q=localiteRefloc:(CANALA)";
-        if ("FAYAOUE".equals(commune.name())) url = "&q=localiteRefloc:(FAYAOUE)";
-        if ("POUM".equals(commune.name())) url = "&q=localiteRefloc:(POUM)";
-        if ("TOUHO".equals(commune.name())) url = "&q=localiteRefloc:(TOUHO)";
-        if ("POUEMBOUT".equals(commune.name())) url = "&q=localiteRefloc:(POUEMBOUT)";
-        if ("KOUMAC".equals(commune.name())) url = "&q=localiteRefloc:(KOUMAC)";
-        if ("PAITA".equals(commune.name())) url = "&q=localiteRefloc:(PAITA)";
-        if ("SARRAMEA".equals(commune.name())) url = "&q=localiteRefloc:(SARRAMEA)";
-        if ("LIFOU".equals(commune.name())) url = "&q=localiteRefloc:(LIFOU)%20OR%20localiteRefloc:(WE)";
-        if ("OUEGOA".equals(commune.name())) url = "&q=localiteRefloc:(OUEGOA)";
-        if ("YATE".equals(commune.name())) url = "&q=localiteRefloc:(YATE)";
-        if ("LA_FOA".equals(commune.name())) url = "&q=localiteRefloc:(LA%20AND%20FOA)";
-        if ("HIENGHENE".equals(commune.name())) url = "&q=localiteRefloc:(HIENGHENE)";
-        if ("MARE".equals(commune.name())) url = "&q=localiteRefloc:(MARE)";
-        if ("POINDIMIE".equals(commune.name())) url = "&q=localiteRefloc:(POINDIMIE)";
-        if ("PONERIHOUEN".equals(commune.name())) url = "&q=localiteRefloc:(PONERIHOUEN)"; 
-        if ("VOH".equals(commune.name())) url = "&q=localiteRefloc:(VOH)";
-        if ("TONTOUTA".equals(commune.name())) url = "&q=localiteRefloc:(TONTOUTA)";
+        if (Commune.BOULOUPARIS == commune) url = "&q=localiteRefloc:(BOULOUPARIS)";
+        if (Commune.MOINDOU == commune) url = "&q=localiteRefloc:(MOINDOU)";
+        if (Commune.NOUMEA == commune) url = "&q=localiteRefloc:(NOUMEA)";
+        if (Commune.HOUAILOU == commune) url = "&q=localiteRefloc:(HOUAILOU)";
+        if (Commune.KONE == commune) url = "&q=localiteRefloc:(KONE)";
+        if (Commune.KAALA_GOMEN == commune) url = "&q=localiteRefloc:(KAALA-GOMEN)";
+        if (Commune.POUEBO == commune) url = "&q=localiteRefloc:(POUEBO)";
+        if (Commune.THIO == commune) url = "&q=localiteRefloc:(THIO)";
+        if (Commune.TADINE == commune) url = "&q=localiteRefloc:(TADINE)";
+        if (Commune.MONT_DORE == commune) url = "&q=localiteRefloc:(MONT-DORE)";
+        if (Commune.KOUAOUA == commune) url = "&q=localiteRefloc:(KOUAOUA)";
+        if (Commune.POYA == commune) url = "&q=localiteRefloc:(POYA)";
+        if (Commune.BELEP == commune) url = "&q=localiteRefloc:(BELEP)";
+        if (Commune.ILE_DES_PINS == commune) url = "&q=localiteRefloc:(ILE%20AND%20DES%20AND%20PINS)";
+        if (Commune.DUMBEA == commune) url = "&q=localiteRefloc:(DUMBEA)";
+        if (Commune.BOURAIL == commune) url = "&q=localiteRefloc:(BOURAIL)";
+        if (Commune.CANALA == commune) url = "&q=localiteRefloc:(CANALA)";
+        if (Commune.FAYAOUE == commune) url = "&q=localiteRefloc:(FAYAOUE)";
+        if (Commune.POUM == commune) url = "&q=localiteRefloc:(POUM)";
+        if (Commune.TOUHO == commune) url = "&q=localiteRefloc:(TOUHO)";
+        if (Commune.POUEMBOUT == commune) url = "&q=localiteRefloc:(POUEMBOUT)";
+        if (Commune.KOUMAC == commune) url = "&q=localiteRefloc:(KOUMAC)";
+        if (Commune.PAITA == commune) url = "&q=localiteRefloc:(PAITA)";
+        if (Commune.SARRAMEA == commune) url = "&q=localiteRefloc:(SARRAMEA)";
+        if (Commune.LIFOU == commune) url = "&q=localiteRefloc:(LIFOU)%20OR%20localiteRefloc:(WE)";
+        if (Commune.OUEGOA == commune) url = "&q=localiteRefloc:(OUEGOA)";
+        if (Commune.YATE == commune) url = "&q=localiteRefloc:(YATE)";
+        if (Commune.LA_FOA == commune) url = "&q=localiteRefloc:(LA%20AND%20FOA)";
+        if (Commune.HIENGHENE == commune) url = "&q=localiteRefloc:(HIENGHENE)";
+        if (Commune.MARE == commune) url = "&q=localiteRefloc:(MARE)";
+        if (Commune.POINDIMIE == commune) url = "&q=localiteRefloc:(POINDIMIE)";
+        if (Commune.PONERIHOUEN == commune) url = "&q=localiteRefloc:(PONERIHOUEN)"; 
+        if (Commune.VOH == commune) url = "&q=localiteRefloc:(VOH)";
+        if (Commune.TONTOUTA == commune) url = "&q=localiteRefloc:(TONTOUTA)";
 
-        logger.info("Récupération de l'url de la commune: <{}> : {}", commune, BASE_URL + url);
+        logger.info("Récupération de l'url de la commune: <{}> : {}{}", commune, BASE_URL, url);
         return url;
     }
 
@@ -137,57 +139,57 @@ public class Agences {
      *
      * @return the list of Commune as text.
      */
-    public static ArrayList<String> getCommunesNames() {
+    public static List<String> getCommunesNames() {
 
         logger.info("Récupération de la liste des communes");
 
-        ArrayList<String> commune_name = new ArrayList<>();
+        ArrayList<String> communeNames = new ArrayList<>();
 
-        HashMap<Commune, String> commune_map = new HashMap<>();
+        EnumMap<Commune, String> communeMap = new EnumMap<>(Commune.class);
 
-        commune_map.put(Commune.BOULOUPARIS, "boulouparis");
-        commune_map.put(Commune.MOINDOU, "moindou");
-        commune_map.put(Commune.NOUMEA, "noumea");
-        commune_map.put(Commune.HOUAILOU, "houailou");
-        commune_map.put(Commune.KONE, "kone");
-        commune_map.put(Commune.KAALA_GOMEN, "kaala-gomen");
-        commune_map.put(Commune.POUEBO, "pouebo");
-        commune_map.put(Commune.THIO, "thio");
-        commune_map.put(Commune.TADINE, "tadine");
-        commune_map.put(Commune.MONT_DORE, "mont-dore");
-        commune_map.put(Commune.KOUAOUA, "kouaoua");
-        commune_map.put(Commune.POYA, "poya");
-        commune_map.put(Commune.BELEP, "belep");
-        commune_map.put(Commune.ILE_DES_PINS, "ile des pins");
-        commune_map.put(Commune.DUMBEA, "dumbea");
-        commune_map.put(Commune.BOURAIL, "bourail");
-        commune_map.put(Commune.CANALA, "canala");
-        commune_map.put(Commune.FAYAOUE, "fayaoue");
-        commune_map.put(Commune.POUM, "poum");
-        commune_map.put(Commune.TOUHO, "touho");
-        commune_map.put(Commune.POUEMBOUT, "pouembout");
-        commune_map.put(Commune.KOUMAC, "koumac");
-        commune_map.put(Commune.PAITA, "paita");
-        commune_map.put(Commune.SARRAMEA, "sarramea");
-        commune_map.put(Commune.LIFOU, "lifou");
-        commune_map.put(Commune.OUEGOA, "ouegoa");
-        commune_map.put(Commune.YATE, "yate");
-        commune_map.put(Commune.LA_FOA, "la foa");
-        commune_map.put(Commune.HIENGHENE, "hienghene");
-        commune_map.put(Commune.MARE, "mare");
-        commune_map.put(Commune.POINDIMIE, "poindimie");
-        commune_map.put(Commune.PONERIHOUEN, "ponerihouen");
-        commune_map.put(Commune.VOH, "voh");
-        commune_map.put(Commune.TONTOUTA, "tontouta");
+        communeMap.put(Commune.BOULOUPARIS, "boulouparis");
+        communeMap.put(Commune.MOINDOU, "moindou");
+        communeMap.put(Commune.NOUMEA, "noumea");
+        communeMap.put(Commune.HOUAILOU, "houailou");
+        communeMap.put(Commune.KONE, "kone");
+        communeMap.put(Commune.KAALA_GOMEN, "kaala-gomen");
+        communeMap.put(Commune.POUEBO, "pouebo");
+        communeMap.put(Commune.THIO, "thio");
+        communeMap.put(Commune.TADINE, "tadine");
+        communeMap.put(Commune.MONT_DORE, "mont-dore");
+        communeMap.put(Commune.KOUAOUA, "kouaoua");
+        communeMap.put(Commune.POYA, "poya");
+        communeMap.put(Commune.BELEP, "belep");
+        communeMap.put(Commune.ILE_DES_PINS, "ile des pins");
+        communeMap.put(Commune.DUMBEA, "dumbea");
+        communeMap.put(Commune.BOURAIL, "bourail");
+        communeMap.put(Commune.CANALA, "canala");
+        communeMap.put(Commune.FAYAOUE, "fayaoue");
+        communeMap.put(Commune.POUM, "poum");
+        communeMap.put(Commune.TOUHO, "touho");
+        communeMap.put(Commune.POUEMBOUT, "pouembout");
+        communeMap.put(Commune.KOUMAC, "koumac");
+        communeMap.put(Commune.PAITA, "paita");
+        communeMap.put(Commune.SARRAMEA, "sarramea");
+        communeMap.put(Commune.LIFOU, "lifou");
+        communeMap.put(Commune.OUEGOA, "ouegoa");
+        communeMap.put(Commune.YATE, "yate");
+        communeMap.put(Commune.LA_FOA, "la foa");
+        communeMap.put(Commune.HIENGHENE, "hienghene");
+        communeMap.put(Commune.MARE, "mare");
+        communeMap.put(Commune.POINDIMIE, "poindimie");
+        communeMap.put(Commune.PONERIHOUEN, "ponerihouen");
+        communeMap.put(Commune.VOH, "voh");
+        communeMap.put(Commune.TONTOUTA, "tontouta");
 
         for (Commune commune : Commune.values()) {
-            logger.info("Ajout de la commune : " + commune_map.get(commune));
-            commune_name.add(commune_map.get(commune));
+            logger.info("Ajout de la commune : {}", communeMap.get(commune));
+            communeNames.add(communeMap.get(commune));
         }
-        logger.info("" + commune_name.size() + " communes ajoutées.");
+        logger.info("{} communes ajoutées.", communeNames.size());
 
         logger.info(HYPHEN_SEPARATOR);
-        return commune_name;
+        return communeNames;
     }
 
     /**
@@ -198,62 +200,63 @@ public class Agences {
      */
     public static Commune getCommune(String communeName) {
 
-        logger.info("Récupération de la commune: <" + communeName + ">");
+        logger.info("Récupération de la commune: <{}>", communeName);
 
-        HashMap<String, Commune> commune = new HashMap<>();
+        HashMap<String, Commune> communes = new HashMap<>();
 
-        commune.put("boulouparis", Commune.BOULOUPARIS);
-        commune.put("moindou", Commune.MOINDOU);
-        commune.put("noumea", Commune.NOUMEA);
-        commune.put("houailou", Commune.HOUAILOU);
-        commune.put("kone", Commune.KONE);
-        commune.put("kaala-gomen", Commune.KAALA_GOMEN);
-        commune.put("pouebo", Commune.POUEBO);
-        commune.put("thio", Commune.THIO);
-        commune.put("tadine", Commune.TADINE);
-        commune.put("mont-dore", Commune.MONT_DORE);
-        commune.put("kouaoua", Commune.KOUAOUA);
-        commune.put("poya", Commune.POYA);
-        commune.put("belep", Commune.BELEP);
-        commune.put("ile des pins", Commune.ILE_DES_PINS);
-        commune.put("dumbea", Commune.DUMBEA);
-        commune.put("bourail", Commune.BOURAIL);
-        commune.put("canala", Commune.CANALA);
-        commune.put("fayaoue", Commune.FAYAOUE);
-        commune.put("poum", Commune.POUM);
-        commune.put("touho", Commune.TOUHO);
-        commune.put("pouembout", Commune.POUEMBOUT);
-        commune.put("koumac", Commune.KOUMAC);
-        commune.put("paita", Commune.PAITA);
-        commune.put("sarramea", Commune.SARRAMEA);
-        commune.put("lifou", Commune.LIFOU);
-        commune.put("ouegoa", Commune.OUEGOA);
-        commune.put("yate", Commune.YATE);
-        commune.put("la foa", Commune.LA_FOA);
-        commune.put("hienghene", Commune.HIENGHENE);
-        commune.put("mare", Commune.MARE);
-        commune.put("poindimie", Commune.POINDIMIE);
-        commune.put("ponerihouen", Commune.PONERIHOUEN);
-        commune.put("voh", Commune.VOH);
-        commune.put("tontouta", Commune.TONTOUTA);
+        communes.put("boulouparis", Commune.BOULOUPARIS);
+        communes.put("moindou", Commune.MOINDOU);
+        communes.put("noumea", Commune.NOUMEA);
+        communes.put("houailou", Commune.HOUAILOU);
+        communes.put("kone", Commune.KONE);
+        communes.put("kaala-gomen", Commune.KAALA_GOMEN);
+        communes.put("pouebo", Commune.POUEBO);
+        communes.put("thio", Commune.THIO);
+        communes.put("tadine", Commune.TADINE);
+        communes.put("mont-dore", Commune.MONT_DORE);
+        communes.put("kouaoua", Commune.KOUAOUA);
+        communes.put("poya", Commune.POYA);
+        communes.put("belep", Commune.BELEP);
+        communes.put("ile des pins", Commune.ILE_DES_PINS);
+        communes.put("dumbea", Commune.DUMBEA);
+        communes.put("bourail", Commune.BOURAIL);
+        communes.put("canala", Commune.CANALA);
+        communes.put("fayaoue", Commune.FAYAOUE);
+        communes.put("poum", Commune.POUM);
+        communes.put("touho", Commune.TOUHO);
+        communes.put("pouembout", Commune.POUEMBOUT);
+        communes.put("koumac", Commune.KOUMAC);
+        communes.put("paita", Commune.PAITA);
+        communes.put("sarramea", Commune.SARRAMEA);
+        communes.put("lifou", Commune.LIFOU);
+        communes.put("ouegoa", Commune.OUEGOA);
+        communes.put("yate", Commune.YATE);
+        communes.put("la foa", Commune.LA_FOA);
+        communes.put("hienghene", Commune.HIENGHENE);
+        communes.put("mare", Commune.MARE);
+        communes.put("poindimie", Commune.POINDIMIE);
+        communes.put("ponerihouen", Commune.PONERIHOUEN);
+        communes.put("voh", Commune.VOH);
+        communes.put("tontouta", Commune.TONTOUTA);
 
         if (communeName == null) {
-            logger.error("<" + communeName + "> ne correspond à aucune commune.");
+            logger.error("<{}> ne correspond à aucune commune.", communeName);
             logger.info(HYPHEN_SEPARATOR);
             return null;
         }
         if ("".equals(communeName)) {
-            logger.error("<" + communeName + "> ne correspond à aucune commune.");
+            logger.error("<{}> ne correspond à aucune commune.", communeName);
             logger.info(HYPHEN_SEPARATOR);
             return null;
         }
 
-        if (commune.containsKey(StringUtils.stripAccents(communeName.toLowerCase()))) {
-            logger.info("correspondance trouvée pour <" + communeName + "> : <" + commune.get(StringUtils.stripAccents(communeName.toLowerCase())) + ">");
+        Commune commune = communes.get(StringUtils.stripAccents(communeName.toLowerCase(Locale.getDefault())));
+        if (commune != null) {
+            logger.info("correspondance trouvée pour <{}> : <{}>", communeName, commune);
             logger.info(HYPHEN_SEPARATOR);
-            return commune.get(communeName);
+            return commune;
         } else {
-            logger.error("" + communeName + " ne correspond à aucune commune.");
+            logger.error("{} ne correspond à aucune commune.", communeName);
             logger.info(HYPHEN_SEPARATOR);
             return null;
         }
@@ -265,19 +268,19 @@ public class Agences {
      * @return the list of all the agencies.
      * @throws IOException
      */
-    public static ArrayList<Agence> getAgences() throws IOException {
+    public static List<Agence> getAgences() throws IOException {
 
         logger.info("Récupération de la liste de toutes les agences");
 
-        ArrayList<Agence> listeAgences = new ArrayList<>();
+        ArrayList<Agence> agences = new ArrayList<>();
 
         for (Commune value : Commune.values()) {
-            ArrayList<Agence> listeAgences_commune = Agences.getAgences(value);
-            listeAgences.addAll(listeAgences_commune);
+            List<Agence> agencesCommune = Agences.getAgences(value);
+            agences.addAll(agencesCommune);
         }
 
         logger.info(HYPHEN_SEPARATOR);
-        return listeAgences;
+        return agences;
     }
 
     /**
@@ -287,8 +290,8 @@ public class Agences {
      * @return the list of agencies for the Commune in parameter.
      * @throws IOException
      */
-    public static ArrayList<Agence> getAgences(Commune commune) throws IOException {
-
+    public static List<Agence> getAgences(Commune commune) throws IOException {
+ 
         logger.info("Récupération de la liste des agences de <{}>", commune);
 
         ArrayList<Agence> listeAgences = new ArrayList<>();
@@ -298,7 +301,7 @@ public class Agences {
             logger.error("Commune incorrecte.");
             return listeAgences;
         }
-
+        
         URL url = new URL("" + BASE_URL + Agences.getUrl(commune));
         JsonNode jsonNode = mapper.readValue(url, JsonNode.class);
         int total = jsonNode.get("hits").get("total").asInt();
@@ -309,45 +312,50 @@ public class Agences {
 
             try {
                 Agence agence = new Agence();
-                JsonNode nodeAgency = jsonNode.get("hits").get("hits").get(i).get("_source");
-                String[] coordonneesXY = Agences.getCoordonneesXY(nodeAgency.get("coordonneesXyRefloc"));
+                JsonNode nodeAgence = jsonNode.get("hits").get("hits").get(i).get("_source");
 
                 agence.setCommune(commune.toString());
-                agence.setIdAgence(nodeAgency.get("id").asInt());
-                agence.setDesignation(nodeAgency.get("designation").asText());
-                agence.setType(nodeAgency.get("type").asText());
-                agence.setCodeESirius(nodeAgency.get("codeESirius").asText());
-                agence.setIdRefloc(nodeAgency.get("idRefloc").asText());
-                agence.setCodePostalRefloc(nodeAgency.get("codePostalRefloc").asText());
-                agence.setCodePostal(nodeAgency.get("codePostal").asText());
-                agence.setLieuDitOuTribu(nodeAgency.get("lieuDitOuTribu").asText());
-                agence.setLocaliteRefloc(nodeAgency.get("localiteRefloc").asText());
-                agence.setLocalite(nodeAgency.get("localite").asText());
+                agence.setIdAgence(nodeAgence.get("id").asInt());
+                agence.setDesignation(nodeAgence.get("designation").asText());
+                agence.setType(nodeAgence.get("type").asText());
+                agence.setCodeESirius(nodeAgence.get("codeESirius").asText());
+                agence.setIdRefloc(nodeAgence.get("idRefloc").asText());
+                agence.setCodePostalRefloc(nodeAgence.get("codePostalRefloc").asText());
+                agence.setCodePostal(nodeAgence.get("codePostal").asText());
+                agence.setLieuDitOuTribu(nodeAgence.get("lieuDitOuTribu").asText());
+                agence.setLocaliteRefloc(nodeAgence.get("localiteRefloc").asText());
+                agence.setLocalite(nodeAgence.get("localite").asText());
 
+                String[] coordonneesXY = Agences.getCoordonneesXY(nodeAgence.get("coordonneesXyRefloc"));
                 if (coordonneesXY != null) {
                     agence.setCoordonneeX(Double.parseDouble(coordonneesXY[0]));
                     agence.setCoordonneeY(Double.parseDouble(coordonneesXY[1]));
                 }
 
-                try {
-                    agence.setRealMaxWaitingTimeMs(ConvertToMillis(nodeAgency.get("borneEsirius").get("realMaxWaitingTime").asText()));
-                } catch (Exception e) {
-                    logger.warn("Le temps d'attente maximum de l'agence <{}> est introuvable...", agence.getDesignation());
+                JsonNode position = nodeAgence.findPath("position");
+                if (!position.isEmpty()) {
+                    agence.setPosition(new LonLat(position.get("lon").asDouble(), position.get("lat").asDouble()));
                 }
 
                 try {
-                    long[] coordonneesXYPrecises = Agences.getCoordonneesXYPrecises(nodeAgency.get("coordonneesXyPrecisesRefloc"));
+                    agence.setRealMaxWaitingTimeMs(convertToMillis(nodeAgence.get("borneEsirius").get("realMaxWaitingTime").asText()));
+                } catch (Exception e) {
+                    logger.warn("Le temps d'attente maximum de l'agence <{}> est introuvable...", agence.getDesignation(), e);
+                }
+
+                try {
+                    long[] coordonneesXYPrecises = Agences.getCoordonneesXYPrecises(nodeAgence.get("coordonneesXyPrecisesRefloc"));
 
                     if (coordonneesXYPrecises != null) {
                         agence.setCoordonneeXPrecise(coordonneesXYPrecises[0]);
                         agence.setCoordonneeYPrecise(coordonneesXYPrecises[1]);
                     }
                 } catch (Exception e) {
-                    logger.warn("Les coordonnées X et Y précises de l'agence <{}> sont introuvables...", agence.getDesignation());
+                    logger.warn("Les coordonnées X et Y précises de l'agence <{}> sont introuvables...", agence.getDesignation(), e);
                 }
 
                 listeAgences.add(agence);
-                logger.info("Agence <{}> : {}", agence.getIdAgence(), agence.toString());
+                logger.info("Agence <{}> : {}", agence.getIdAgence(), agence);
 
             } catch (Exception e) {
                 logger.warn("Erreur lors de la récupération des informations...", e);
@@ -364,13 +372,11 @@ public class Agences {
      * @param duree A String duration.
      * @return the converted duration in milliseconds
      */
-    public static long ConvertToMillis(String duree) {
+    public static long convertToMillis(String duree) {
         logger.info("Conversion de la duree en millisecondes");
 
-        LocalTime duree_localTime = LocalTime.parse(duree, DateTimeFormatter.ISO_LOCAL_TIME);
-        long millis = ChronoUnit.MILLIS.between(LocalTime.MIN, duree_localTime);
-
-        return millis;
+        LocalTime localTime = LocalTime.parse(duree, DateTimeFormatter.ISO_LOCAL_TIME);
+        return ChronoUnit.MILLIS.between(LocalTime.MIN, localTime);
     }
 
     /**

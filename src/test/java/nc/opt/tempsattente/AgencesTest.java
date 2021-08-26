@@ -7,6 +7,7 @@ package nc.opt.tempsattente;
 
 import static nc.opt.tempsattente.Agences.BASE_URL;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -128,7 +129,7 @@ public class AgencesTest {
     public void testGetCommuneGoodUpperAccents() {
         System.out.println("\ngetCommune_good_upper_accents_TEST");
         String commune_name = "Nouméa";
-        assertNull(Agences.getCommune(commune_name), "Une correspondance a été trouvée.");
+        assertNotNull(Agences.getCommune(commune_name), "Une correspondance a été trouvée.");
     }
 
     /**
@@ -159,7 +160,7 @@ public class AgencesTest {
         System.out.println("\nconvertWaitingTimeToMillis_TEST");
 
         String duree_string = "00:04:10";
-        long duree = Agences.ConvertToMillis(duree_string);
+        long duree = Agences.convertToMillis(duree_string);
 
         LocalDateTime start = LocalDateTime.parse("2020-03-07 23:56:00",
             DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
@@ -177,7 +178,6 @@ public class AgencesTest {
     @Test
     public void testDemo() {
         System.out.println("\ndemo_TEST");
-        Agences agences = new Agences();
         try {
 
             System.out.println("<" + Agences.getAgences().size() + "> agences trouvées");
