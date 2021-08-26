@@ -1,5 +1,4 @@
 ![Build](https://github.com/opt-nc/opt-temps-attente-agences-sdk/actions/workflows/maven.yml/badge.svg)
-![Coverage](.github/badges/jacoco.svg)
 
 # tempsattente-sdk
 
