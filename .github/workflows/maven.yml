@@ -29,8 +29,16 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-maven-
 
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v1
+      with:
+        languages: java
+
     - name: Build with Maven
       run: mvn -B package --file pom.xml
+
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v1
 
     - name: Publish Unit Test Results
       uses: EnricoMi/publish-unit-test-result-action@v1
