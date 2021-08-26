@@ -1,5 +1,5 @@
 [![](https://jitpack.io/v/adriens/opt-temps-attente-agences-sdk.svg)](https://jitpack.io/#adriens/opt-temps-attente-agences-sdk)
-
+![example workflow](https://github.com/opt-nc/opt-temps-attente-agences-sdk/actions/workflows/maven.yml/badge.svg)
 
 
 # tempsattente-sdk
