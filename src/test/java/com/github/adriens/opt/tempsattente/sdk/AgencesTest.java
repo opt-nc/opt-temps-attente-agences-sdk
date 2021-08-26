@@ -5,6 +5,11 @@
  */
 package com.github.adriens.opt.tempsattente.sdk;
 
+import static com.github.adriens.opt.tempsattente.sdk.Agences.BASE_URL;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -16,10 +21,8 @@ import java.util.logging.Logger;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.Test;
 
-import static com.github.adriens.opt.tempsattente.sdk.Agences.BASE_URL;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test class of class Agences.
@@ -42,7 +45,7 @@ public class AgencesTest {
         System.out.println("\ngetAgences(Commune)_TEST");
 
         try {
-            assertEquals(17, Agences.getAgences(Agences.Commune.NOUMEA).size(), "Longueur de listes différentes");
+            assertEquals(15, Agences.getAgences(Agences.Commune.NOUMEA).size(), "Longueur de listes différentes");
 
         } catch (IOException ex) {
             Logger.getLogger(AgencesTest.class.getName()).log(Level.SEVERE, null, ex);
@@ -79,8 +82,9 @@ public class AgencesTest {
         int total = jsonNode.get("hits").get("total").asInt();
 
         try {
-            System.out.println("\n" + Agences.getAgences().size() );
-            assertEquals(total, Agences.getAgences().size(), "Longueur de liste différentes.");
+            System.out.println("\n" + Agences.getAgences().size());
+            // NOTE: 1 Agence n'a pas de ville, donc elle n'apparait pas ici (ce qui exeplique le "-1")
+            assertEquals(total - 1, Agences.getAgences().size(), "Longueur de liste différentes.");
 
         } catch (IOException ex) {
             Logger.getLogger(AgencesTest.class.getName()).log(Level.SEVERE, null, ex);
@@ -157,8 +161,10 @@ public class AgencesTest {
         String duree_string = "00:04:10";
         long duree = Agences.ConvertToMillis(duree_string);
 
-        LocalDateTime start = LocalDateTime.parse("2020-03-07 23:56:00", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-        LocalDateTime end = LocalDateTime.parse("2020-03-08 00:00:10", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        LocalDateTime start = LocalDateTime.parse("2020-03-07 23:56:00",
+            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        LocalDateTime end = LocalDateTime.parse("2020-03-08 00:00:10",
+            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
         System.out.println("duree entre : " + start + " et " + end + " : " + duree + " ms.");
 
@@ -175,12 +181,15 @@ public class AgencesTest {
         try {
 
             System.out.println("<" + Agences.getAgences().size() + "> agences trouvées");
-            System.out.println("<" + Agences.getAgences(Agences.Commune.NOUMEA).size() + "> agences trouvées pour <" + Agences.Commune.NOUMEA + ">");
+            System.out.println("<" + Agences.getAgences(Agences.Commune.NOUMEA).size() + "> agences trouvées pour <"
+                    + Agences.Commune.NOUMEA + ">");
             System.out.println("Correspondance trouvée pour l'ID 4177 : " + Agence.getAgence(4177).toString());
 
-            assertEquals(17, Agences.getAgences(Agences.Commune.NOUMEA).size(), "La liste est vide.");
-            assertEquals(65, Agences.getAgences().size(), "La liste est vide.");
-            assertEquals("Agence philatélique CALEDOSCOPE", Agence.getAgence(4177).getDesignation(), "Les agences ne correspondent pas");
+            assertEquals(15, Agences.getAgences(Agences.Commune.NOUMEA).size(), "La liste est vide.");
+            assertEquals(59, Agences.getAgences().size(), "La liste est vide.");
+            assertEquals("Agence philatélique",
+                Agence.getAgence(4177).getDesignation(),
+                "Les agences ne correspondent pas");
 
         } catch (IOException e) {
             Logger.getLogger(AgencesTest.class.getName()).log(Level.SEVERE, null, e);
