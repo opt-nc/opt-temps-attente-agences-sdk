@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.github.adriens.opt.tempsattente.sdk;
+package nc.opt.tempsattente;
 
-import static com.github.adriens.opt.tempsattente.sdk.Agences.logger;
+import static nc.opt.tempsattente.Agences.logger;
+
 import java.io.IOException;
 import java.util.ArrayList;
 

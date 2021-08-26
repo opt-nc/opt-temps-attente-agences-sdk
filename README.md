@@ -1,4 +1,3 @@
-[![](https://jitpack.io/v/adriens/opt-temps-attente-agences-sdk.svg)](https://jitpack.io/#adriens/opt-temps-attente-agences-sdk)
 ![example workflow](https://github.com/opt-nc/opt-temps-attente-agences-sdk/actions/workflows/maven.yml/badge.svg)
 
 
@@ -9,19 +8,6 @@ Java SDK pour le temps d'attente dans les agences OPT de Nouvelle-Calédonie
 ## Utiliser
 
 ### Dépendance
-
-Ajouter le dépôt:
-
-```xml
-<repositories>
-  <repository>
-    <id>jitpack.io</id>
-    <url>https://jitpack.io</url>
-  </repository>
-</repositories>
-```
-
-Puis la dépendance:
 
 ```xml
 <dependency>
