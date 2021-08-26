@@ -37,3 +37,8 @@ jobs:
       if: always()
       with:
         files: target/surefire-reports/*.xml
+
+    - name: Generate JaCoCo Badge
+      uses: cicirello/jacoco-badge-generator@v2
+      with:
+        generate-branches-badge: true
