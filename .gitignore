@@ -2,3 +2,9 @@
 /target/
 .idea/
 tempsattente-sdk.iml
+
+# VSCode & Eclipse
+.vscode
+.settings
+.project
+.classpath
