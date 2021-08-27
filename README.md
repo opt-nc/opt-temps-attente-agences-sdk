@@ -7,6 +7,20 @@ Java SDK pour le temps d'attente dans les agences OPT de Nouvelle-Calédonie
 ## Utiliser
 
 ### Dépendance
+Dépendance
+
+Ajouter le dépôt:
+
+```xml
+<repositories>
+  <repository>
+    <id>github</id>
+    <url>https://maven.pkg.github.com</url>
+  </repository>
+</repositories>
+```
+
+Puis la dépendance:
 
 ```xml
 <dependency>
