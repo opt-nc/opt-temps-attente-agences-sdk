@@ -55,7 +55,6 @@ jobs:
         java-version: '8'
         distribution: 'adopt'
         cache: 'maven'
-        server-id: github
             
     - name: Publish to GitHub Packages Apache Maven
       run: mvn -B deploy -Dmaven.test.skip=true
@@ -76,7 +75,6 @@ jobs:
         java-version: '8'
         distribution: 'adopt'
         cache: 'maven'
-        server-id: github 
 
     - name: Configure Git user
       run: |
