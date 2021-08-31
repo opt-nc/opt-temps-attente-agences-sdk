@@ -81,7 +81,7 @@ jobs:
         git config user.name "GitHub Actions"        
             
     - name: Maven release prepare
-      run: mvn -B -Dproject.scm.id=github -Dmaven.test.skip=true release:prepare
+      run: mvn -B -Dproject.scm.id=github -Dmaven.test.skip=true -DtagNameFormat="@{project.version}" release:prepare
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
 
