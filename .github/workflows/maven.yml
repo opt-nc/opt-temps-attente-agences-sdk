@@ -42,7 +42,7 @@ jobs:
   
   publish-snapshot:
     needs: [build]
-    if: github.ref != 'refs/heads/main'
+    if: github.ref != 'refs/heads/master'
 
     runs-on: ubuntu-latest
 
@@ -62,7 +62,7 @@ jobs:
 
   release:
     needs: [build]
-    if: github.ref == 'refs/heads/main' && github.actor != 'actions@github.com'
+    if: github.ref == 'refs/heads/master' && github.actor != 'actions@github.com'
 
     runs-on: ubuntu-latest
 
