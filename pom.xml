@@ -67,13 +67,6 @@
         </plugins>
     </build>
 
-    <distributionManagement>
-        <repository>
-            <id>jitpack.io</id>
-		    <url>https://jitpack.io</url>
-        </repository>
-    </distributionManagement>
-
     <scm>
         <developerConnection>scm:git:https://github.com/opt-nc/opt-temps-attente-agences-sdk.git</developerConnection>
     </scm>
