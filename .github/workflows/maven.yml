@@ -80,14 +80,19 @@ jobs:
         git config user.email "actions@github.com"
         git config user.name "GitHub Actions"        
             
-    - name: Maven release & deploy
-      run: mvn -B -Dproject.scm.id=github -Dmaven.test.skip=true release:prepare release:perform
+    - name: Maven release prepare
+      run: mvn -B -Dproject.scm.id=github -Dmaven.test.skip=true release:prepare
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
 
     - name: Extract Maven project version
       run: echo ::set-output name=version::$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
       id: project
+
+    - name: Maven release & deploy
+      run: mvn -B -Dproject.scm.id=github -Dmaven.test.skip=true release:perform
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
 
     - name: Create GitHub Release
       id: create_release
