@@ -31,4 +31,3 @@ jobs:
       if: matrix.jdk == 8
       with:
         files: target/surefire-reports/*.xml
-  
