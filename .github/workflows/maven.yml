@@ -23,16 +23,8 @@ jobs:
         distribution: 'adopt'
         cache: 'maven'
 
-    - name: Initialize CodeQL
-      uses: github/codeql-action/init@v1
-      with:
-        languages: java
-
     - name: Build, Test
       run: mvn -B test --file pom.xml
-
-    - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v1
 
     - name: Publish Unit Test Results
       uses: EnricoMi/publish-unit-test-result-action@v1
