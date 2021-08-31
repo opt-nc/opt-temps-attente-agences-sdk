@@ -76,6 +76,6 @@
 	</distributionManagement>
 
     <scm>
-        <developerConnection>scm:git:https://github.com/opt-nc/opt-temps-attente-agences-sdk.git</developerConnection>
+        <developerConnection>scm:git:https://github.com/opt-nc</developerConnection>
     </scm>
 </project>
