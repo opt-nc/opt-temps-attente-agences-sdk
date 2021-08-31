@@ -15,7 +15,7 @@ Ajouter le dépôt:
 <repositories>
   <repository>
     <id>github</id>
-    <url>https://maven.pkg.github.com</url>
+    <url>https://maven.pkg.github.com/opt-nc/opt-temps-attente-agences-sdk</url>
   </repository>
 </repositories>
 ```
