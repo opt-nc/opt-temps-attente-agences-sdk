@@ -10,8 +10,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        #jdk: [8, 11, 14]
-        jdk: [8]
+        jdk: [8, 11, 14]
 
     runs-on: ubuntu-latest
 
@@ -24,22 +23,22 @@ jobs:
         distribution: 'adopt'
         cache: 'maven'
 
-    # - name: Initialize CodeQL
-    #   uses: github/codeql-action/init@v1
-    #   with:
-    #     languages: java
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v1
+      with:
+        languages: java
 
     - name: Build, Test
       run: mvn -B test --file pom.xml
 
-    # - name: Perform CodeQL Analysis
-    #   uses: github/codeql-action/analyze@v1
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v1
 
-    # - name: Publish Unit Test Results
-    #   uses: EnricoMi/publish-unit-test-result-action@v1
-    #   if: matrix.jdk == 8
-    #   with:
-    #     files: target/surefire-reports/*.xml
+    - name: Publish Unit Test Results
+      uses: EnricoMi/publish-unit-test-result-action@v1
+      if: matrix.jdk == 8
+      with:
+        files: target/surefire-reports/*.xml
   
   publish-snapshot:
     needs: [build]
