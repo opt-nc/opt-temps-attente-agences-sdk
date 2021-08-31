@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>nc.opt.tempsattente</groupId>
-    <artifactId>tempsattente-sdk</artifactId>
-    <version>2.1-SNAPSHOT</version>
+    <groupId>com.github.opt-nc</groupId>
+    <artifactId>opt-temps-attente-agences-sdk</artifactId>
+    <version>2.0</version>
     <packaging>jar</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -67,16 +67,7 @@
         </plugins>
     </build>
 
-    <distributionManagement>
-        <repository>
-            <id>github</id>
-            <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/opt-nc/opt-temps-attente-agences-sdk</url>
-        </repository>
-    </distributionManagement>
-
     <scm>
         <developerConnection>scm:git:https://github.com/opt-nc/opt-temps-attente-agences-sdk.git</developerConnection>
-      <tag>tempsattente-sdk-2.0</tag>
-  </scm>
+    </scm>
 </project>

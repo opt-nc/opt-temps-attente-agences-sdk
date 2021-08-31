@@ -1,4 +1,5 @@
 ![Build](https://github.com/opt-nc/opt-temps-attente-agences-sdk/actions/workflows/maven.yml/badge.svg)
+[![](https://jitpack.io/v/opt-nc/opt-temps-attente-agences-sdk.svg)](https://jitpack.io/#opt-nc/opt-temps-attente-agences-sdk)
 
 # tempsattente-sdk
 
@@ -14,8 +15,8 @@ Ajouter le dépôt:
 ```xml
 <repositories>
   <repository>
-    <id>github</id>
-    <url>https://maven.pkg.github.com</url>
+    <id>jitpack.io</id>
+		<url>https://jitpack.io</url>
   </repository>
 </repositories>
 ```
@@ -24,9 +25,9 @@ Puis la dépendance:
 
 ```xml
 <dependency>
-  <groupId>nc.opt.tempsattente</groupId>
-  <artifactId>tempsattente-sdk</artifactId>
-  <version>${opt-tempsattente-sdk.version}</version>
+  <groupId>com.github.opt-nc</groupId>
+  <artifactId>opt-temps-attente-agences-sdk</artifactId>
+  <version>Tag</version>
 </dependency>
 ```
 

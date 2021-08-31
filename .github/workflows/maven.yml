@@ -23,84 +23,11 @@ jobs:
         distribution: 'adopt'
         cache: 'maven'
 
-    - name: Initialize CodeQL
-      uses: github/codeql-action/init@v1
-      with:
-        languages: java
-
     - name: Build, Test
-      run: mvn -B test --file pom.xml
-
-    - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v1
+      run: mvn -B install --file pom.xml
 
     - name: Publish Unit Test Results
       uses: EnricoMi/publish-unit-test-result-action@v1
       if: matrix.jdk == 8
       with:
         files: target/surefire-reports/*.xml
-  
-  publish-snapshot:
-    needs: [build]
-    if: github.ref != 'refs/heads/master'
-
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v2
-    - name: Set up JDK 8
-      uses: actions/setup-java@v2
-      with:
-        java-version: '8'
-        distribution: 'adopt'
-        cache: 'maven'
-            
-    - name: Publish to GitHub Packages Apache Maven
-      run: mvn -B deploy -Dmaven.test.skip=true
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-  release:
-    needs: [build]
-    if: github.ref == 'refs/heads/master' && github.actor != 'actions@github.com'
-
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v2
-    - name: Set up JDK 8
-      uses: actions/setup-java@v2
-      with:
-        java-version: '8'
-        distribution: 'adopt'
-        cache: 'maven'
-
-    - name: Configure Git user
-      run: |
-        git config user.email "actions@github.com"
-        git config user.name "GitHub Actions"        
-            
-    - name: Maven release prepare
-      run: mvn -B -Dproject.scm.id=github -Dmaven.test.skip=true -DtagNameFormat="@{project.version}" release:prepare
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
-
-    - name: Extract Maven project version
-      run: echo ::set-output name=version::$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
-      id: project
-
-    - name: Maven release & deploy
-      run: mvn -B -Dproject.scm.id=github -Dmaven.test.skip=true release:perform
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
-
-    - name: Create GitHub Release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: ${{ steps.project.outputs.version }}
-        release_name: ${{ steps.project.outputs.version }}
-        draft: false
-        prerelease: false
