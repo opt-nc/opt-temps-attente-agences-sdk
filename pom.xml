@@ -71,7 +71,7 @@
         <repository>
             <id>github</id>
             <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/opt-nc/tempsattente-sdk</url>
+            <url>https://maven.pkg.github.com/opt-nc/opt-temps-attente-agences-sdk</url>
         </repository>
     </distributionManagement>
 
