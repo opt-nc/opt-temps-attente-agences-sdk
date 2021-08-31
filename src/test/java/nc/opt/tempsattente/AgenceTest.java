@@ -6,6 +6,7 @@
 package nc.opt.tempsattente;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.io.IOException;
@@ -238,6 +239,16 @@ public class AgenceTest {
         long result = instance.getCoordonneeYPrecise();
 
         assertEquals(expResult, result, "CoordonneeYPrecise non modifiée");
+    }
+
+    @Test
+    public void testPositionGps() throws IOException {
+        Agence result = Agence.getAgence(4176);
+        assertNotNull(result, "Agence de test manquante");
+
+        assertNotNull(result.getPosition(), "Position manquante");
+        assertEquals(166.4431673905479, result.getPosition().getLon());
+        assertEquals(-22.275318886068582, result.getPosition().getLat());
     }
 
     /**

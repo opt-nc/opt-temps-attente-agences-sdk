@@ -6,6 +6,10 @@ public class LonLat {
     private double lat;
     private double lon;
 
+    public LonLat() {
+        // nécessaire pour les outils de déserialisation JSON
+    }
+
     public LonLat(double lon, double lat) {
         this.lon = lon;
         this.lat = lat;
@@ -15,8 +19,16 @@ public class LonLat {
         return lat;
     }
 
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
     public double getLon() {
         return lon;
+    }
+
+    public void setLon(double lon) {
+        this.lon = lon;
     }
 
     @Override

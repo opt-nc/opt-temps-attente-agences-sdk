@@ -7,6 +7,8 @@ package nc.opt.tempsattente;
 
 import java.io.IOException;
 import java.net.URL;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -16,6 +18,7 @@ import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -295,9 +298,31 @@ public class Agences {
         return load(new URL("" + BASE_URL + Agences.getUrl(commune)));
     }
 
+    /**
+     * Return list of agencies within a given distance of a geopoint.
+     * 
+     * @param lon Longitude of geopoint
+     * @param lat Latitude of geopoint
+     * @param distanceInMeters Max distance in meters of geopoint
+     */
+    public static List<Agence> getAgencesByDistance(double lon, double lat, long distanceInMeters) throws IOException {
+
+        String queryString = String.format(Locale.ENGLISH,
+            "{\"query\":{\"geo_distance\": {\"distance\": \"%dm\",\"position\": {\"lat\": %f,\"lon\": %f}}}}", distanceInMeters, lat, lon);
+
+        logger.info("Récupération de la liste des agences par distance {}", queryString);
+
+        String url = BASE_URL
+            + "&source_content_type=" + URLEncoder.encode("application/json", StandardCharsets.UTF_8.name())
+            + "&source=" + URLEncoder.encode(queryString, StandardCharsets.UTF_8.name());
+
+        return load(new URL(url));
+    }
+
     private static List<Agence> load(URL url) throws IOException {
         ObjectMapper mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         JsonNode jsonNode = mapper.readValue(url, JsonNode.class);
+
         int total = jsonNode.get("hits").get("total").asInt();
 
         logger.info("{} résultats trouvés.", total);
@@ -309,17 +334,17 @@ public class Agences {
                 Agence agence = new Agence();
                 JsonNode nodeAgence = jsonNode.get("hits").get("hits").get(i).get("_source");
 
-                agence.setCommune(nodeAgence.get("localiteRefloc").asText());
+                agence.setCommune(Optional.ofNullable(nodeAgence.get("localiteRefloc")).map(n -> n.asText()).orElse(null));
                 agence.setIdAgence(nodeAgence.get("id").asInt());
-                agence.setDesignation(nodeAgence.get("designation").asText());
-                agence.setType(nodeAgence.get("type").asText());
-                agence.setCodeESirius(nodeAgence.get("codeESirius").asText());
-                agence.setIdRefloc(nodeAgence.get("idRefloc").asText());
-                agence.setCodePostalRefloc(nodeAgence.get("codePostalRefloc").asText());
-                agence.setCodePostal(nodeAgence.get("codePostal").asText());
-                agence.setLieuDitOuTribu(nodeAgence.get("lieuDitOuTribu").asText());
-                agence.setLocaliteRefloc(nodeAgence.get("localiteRefloc").asText());
-                agence.setLocalite(nodeAgence.get("localite").asText());
+                agence.setDesignation(Optional.ofNullable(nodeAgence.get("designation")).map(n -> n.asText()).orElse(null));
+                agence.setType(Optional.ofNullable(nodeAgence.get("type")).map(n -> n.asText()).orElse(null));
+                agence.setCodeESirius(Optional.ofNullable(nodeAgence.get("codeESirius")).map(n -> n.asText()).orElse(null));
+                agence.setIdRefloc(Optional.ofNullable(nodeAgence.get("idRefloc")).map(n -> n.asText()).orElse(null));
+                agence.setCodePostalRefloc(Optional.ofNullable(nodeAgence.get("codePostalRefloc")).map(n -> n.asText()).orElse(null));
+                agence.setCodePostal(Optional.ofNullable(nodeAgence.get("codePostal")).map(n -> n.asText()).orElse(null));
+                agence.setLieuDitOuTribu(Optional.ofNullable(nodeAgence.get("lieuDitOuTribu")).map(n -> n.asText()).orElse(null));
+                agence.setLocaliteRefloc(Optional.ofNullable(nodeAgence.get("localiteRefloc")).map(n -> n.asText()).orElse(null));
+                agence.setLocalite(Optional.ofNullable(nodeAgence.get("localite")).map(n -> n.asText()).orElse(null));
 
                 String[] coordonneesXY = Agences.getCoordonneesXY(nodeAgence.get("coordonneesXyRefloc"));
                 if (coordonneesXY != null) {
@@ -382,7 +407,7 @@ public class Agences {
      * @return a array of the X and Y coordinates of the agency as String.
      */
     public static String[] getCoordonneesXY(JsonNode nodeCoordonnesXY) {
-        return nodeCoordonnesXY == null ? null : nodeCoordonnesXY.asText().split(";");
+        return nodeCoordonnesXY.isNull() ? null : nodeCoordonnesXY.asText().split(";");
     }
 
     /**

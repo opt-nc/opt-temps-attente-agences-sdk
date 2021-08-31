@@ -84,13 +84,16 @@ public class AgencesTest {
 
         try {
             System.out.println("\n" + Agences.getAgences().size());
-            // NOTE: 1 Agence n'a pas de ville, donc elle n'apparait pas ici (ce qui exeplique le "-1")
-            assertEquals(total - 1, Agences.getAgences().size(), "Longueur de liste différentes.");
+            assertEquals(total, Agences.getAgences().size(), "Longueur de liste différentes.");
 
         } catch (IOException ex) {
             Logger.getLogger(AgencesTest.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
 
+    @Test
+    public void testGetAgencesByDistance() throws Exception {
+        assertEquals(5, Agences.getAgencesByDistance(166.4260482788086, -22.25097078275085, 3000).size());
     }
 
     /**
@@ -171,7 +174,7 @@ public class AgencesTest {
 
         assertEquals(start.plus(duree, ChronoUnit.MILLIS), end, "La duree est incorrecte");
     }
-
+    
     /**
      * Demo test method, of class Agences.
      */
@@ -186,7 +189,7 @@ public class AgencesTest {
             System.out.println("Correspondance trouvée pour l'ID 4177 : " + Agence.getAgence(4177).toString());
 
             assertEquals(15, Agences.getAgences(Agences.Commune.NOUMEA).size(), "La liste est vide.");
-            assertEquals(59, Agences.getAgences().size(), "La liste est vide.");
+            assertEquals(60, Agences.getAgences().size(), "La liste est vide.");
             assertEquals("Agence philatélique",
                 Agence.getAgence(4177).getDesignation(),
                 "Les agences ne correspondent pas");
