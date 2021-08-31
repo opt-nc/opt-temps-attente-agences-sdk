@@ -71,11 +71,11 @@
 		<repository>
 			<id>github</id>
 			<name>GitHub Packages</name>
-			<url>https://maven.pkg.github.com/opt-nc/tempsattente-sdk</url>
+			<url>https://maven.pkg.github.com/opt-nc</url>
 		</repository>
 	</distributionManagement>
 
     <scm>
-        <developerConnection>scm:git:https://github.com/opt-nc</developerConnection>
+        <developerConnection>scm:git:https://github.com/opt-nc/opt-temps-attente-agences-sdk.git</developerConnection>
     </scm>
 </project>
