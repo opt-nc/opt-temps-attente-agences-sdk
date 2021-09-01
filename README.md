@@ -1,11 +1,13 @@
 ![Build](https://github.com/opt-nc/opt-temps-attente-agences-sdk/actions/workflows/maven.yml/badge.svg)
 [![](https://jitpack.io/v/opt-nc/opt-temps-attente-agences-sdk.svg)](https://jitpack.io/#opt-nc/opt-temps-attente-agences-sdk)
 
-# tempsattente-sdk
+# ❔A propos
 
-Java SDK pour le temps d'attente dans les agences OPT de Nouvelle-Calédonie
+Java SDK pour récupérer aisément le temps d'attente dans les agences OPT de Nouvelle-Calédonie.
 
-## Utiliser
+Les temps d'attente sont ceux affichés sur le [site officiel de l'OPT-NC](https://www.opt.nc/service/l-opt-pres-de-chez-moi-trouver-une-agence).
+
+## 👉Utiliser
 
 ### Dépendance
 
@@ -30,7 +32,7 @@ Puis la dépendance:
 </dependency>
 ```
 
-### Code snippet
+### 🚀Exemple
 
 ```java
 System.out.println("<" + Agences.getAgences().size() + "> agences trouvées");
