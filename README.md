@@ -7,9 +7,15 @@ Java SDK pour récupérer aisément le temps d'attente dans les agences OPT de N
 
 Les temps d'attente sont ceux affichés sur le [site officiel de l'OPT-NC](https://www.opt.nc/service/l-opt-pres-de-chez-moi-trouver-une-agence).
 
-## 👉Utiliser
+# 🔖Liens connexes
 
-### Dépendance
+Ce SDK a permis la création de  :
+
+- [L'API REST des temps d'attente](https://github.com/opt-nc/opt-temps-attente-agences-api)
+- L'image docker [optnc/opt-temps-attente-agences-api](https://hub.docker.com/r/optnc/opt-temps-attente-agences-api)
+
+
+## 👉Utiliser
 
 Ajouter le dépôt:
 
