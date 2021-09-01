@@ -8,7 +8,6 @@ Java SDK pour le temps d'attente dans les agences OPT de Nouvelle-Calédonie
 ## Utiliser
 
 ### Dépendance
-Dépendance
 
 Ajouter le dépôt:
 
