@@ -46,7 +46,7 @@ public class AgencesTest {
         System.out.println("\ngetAgences(Commune)_TEST");
 
         try {
-            assertEquals(15, Agences.getAgences(Agences.Commune.NOUMEA).size(), "Longueur de listes différentes");
+            assertEquals(16, Agences.getAgences(Agences.Commune.NOUMEA).size(), "Longueur de listes différentes");
 
         } catch (IOException ex) {
             Logger.getLogger(AgencesTest.class.getName()).log(Level.SEVERE, null, ex);
