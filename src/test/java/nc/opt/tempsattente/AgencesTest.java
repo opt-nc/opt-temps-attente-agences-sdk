@@ -188,7 +188,7 @@ public class AgencesTest {
                     + Agences.Commune.NOUMEA + ">");
             System.out.println("Correspondance trouvée pour l'ID 4177 : " + Agence.getAgence(4177).toString());
 
-            assertEquals(15, Agences.getAgences(Agences.Commune.NOUMEA).size(), "La liste est vide.");
+            assertEquals(16, Agences.getAgences(Agences.Commune.NOUMEA).size(), "La liste est vide.");
             assertEquals(60, Agences.getAgences().size(), "La liste est vide.");
             assertEquals("Agence philatélique",
                 Agence.getAgence(4177).getDesignation(),
