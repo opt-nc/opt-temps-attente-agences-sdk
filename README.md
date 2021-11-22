@@ -18,6 +18,31 @@ Ce SDK a permis la création de  :
 
 ## 👉Utiliser
 
+### depuis le repo Jitpack
+
+Ajouter le dépôt:
+
+```xml
+<repositories>
+  <repository>
+    <id>jitpack.io</id>
+    <url>https://jitpack.io</url>
+  </repository>
+</repositories>
+```
+
+Puis la dépendance:
+
+```xml
+<dependency>
+  <groupId>com.github.opt-nc</groupId>
+  <artifactId>opt-temps-attente-agences-sdk</artifactId>
+  <version>Tag</version>
+</dependency>
+```
+
+### Depuis le repo Maven de GitHub 
+
 Ajouter le dépôt:
 
 ```xml
