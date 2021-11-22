@@ -33,4 +33,5 @@ jobs:
         files: target/surefire-reports/*.xml
 
     - name: Build, Test
+      if: matrix.jdk == 8
       run: mvn -B deploy
