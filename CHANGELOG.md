@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/opt-nc/opt-temps-attente-agences-sdk/compare/v2.0.0...v2.0.1) (2021-11-22)
+
+
+### Bug Fixes
+
+* **ci:** :zap: Correcton semantic-release pour maven,début de la numérotation erronnée ([d9132c3](https://github.com/opt-nc/opt-temps-attente-agences-sdk/commit/d9132c3d71af09e1fe750df472b57dbee02cab29)), closes [#6](https://github.com/opt-nc/opt-temps-attente-agences-sdk/issues/6)
+
 ## [1.0.1](https://github.com/opt-nc/opt-temps-attente-agences-sdk/compare/v1.0.0...v1.0.1) (2021-11-22)
 
 
