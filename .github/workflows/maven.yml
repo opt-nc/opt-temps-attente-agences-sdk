@@ -49,7 +49,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 14.x
-      - name: Install Semantic release and maven-semantic-release plugin
+      - name: Install Semantic release
         run: |
           npm install -g semantic-release \
           @semantic-release/exec \
