@@ -22,8 +22,8 @@ Ajouter le dépôt:
 ```xml
 <repositories>
   <repository>
-    <id>jitpack.io</id>
-    <url>https://jitpack.io</url>
+    <id>github</id>
+    <url>https://maven.pkg.github.com/opt-nc/opt-temps-attente-agences-sdk</url>
   </repository>
 </repositories>
 ```
@@ -32,7 +32,7 @@ Puis la dépendance:
 
 ```xml
 <dependency>
-  <groupId>com.github.opt-nc</groupId>
+  <groupId>nc.opt.tempsattente</groupId>
   <artifactId>opt-temps-attente-agences-sdk</artifactId>
   <version>Tag</version>
 </dependency>
