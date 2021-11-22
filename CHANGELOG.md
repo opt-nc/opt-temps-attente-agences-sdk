@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/opt-nc/opt-temps-attente-agences-sdk/compare/v1.0.0...v1.0.1) (2021-11-22)
+
+
+### Bug Fixes
+
+* **ci:** :zap: Correcton semantic-release pour maven, version à 3 chiffres ([6f60772](https://github.com/opt-nc/opt-temps-attente-agences-sdk/commit/6f607723c31464a59ddfec67c4b8d1b3a3fd9436)), closes [#6](https://github.com/opt-nc/opt-temps-attente-agences-sdk/issues/6)
+
 # 1.0.0 (2021-11-22)
 
 
