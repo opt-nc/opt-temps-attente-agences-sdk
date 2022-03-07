@@ -1,3 +1,11 @@
+## [2.0.2](https://github.com/opt-nc/opt-temps-attente-agences-sdk/compare/v2.0.1...v2.0.2) (2022-03-07)
+
+
+### Bug Fixes
+
+* **deps:** bump jackson-databind from 2.13.0 to 2.13.2 ([0420232](https://github.com/opt-nc/opt-temps-attente-agences-sdk/commit/042023229bfb407b7bb0fcbfdeb05588fd5b916c))
+* **deps:** bump logback-classic from 1.2.7 to 1.2.11 ([8f20d92](https://github.com/opt-nc/opt-temps-attente-agences-sdk/commit/8f20d92f759777bc70cdc9f9ff347c542bb0e0b2))
+
 ## [2.0.1](https://github.com/opt-nc/opt-temps-attente-agences-sdk/compare/v2.0.0...v2.0.1) (2021-11-22)
 
 
