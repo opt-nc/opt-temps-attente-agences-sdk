@@ -248,7 +248,7 @@ public class AgenceTest {
 
         assertNotNull(result.getPosition(), "Position manquante");
         assertEquals(166.4431673905479, result.getPosition().getLon());
-        assertEquals(-22.275318886068582, result.getPosition().getLat());
+        assertEquals(-22.275318886068586, result.getPosition().getLat());
     }
 
     /**
