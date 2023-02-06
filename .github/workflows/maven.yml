@@ -5,12 +5,11 @@ name: Build
 
 on: [push]
 
-permissions:
-  checks: write
-  pull-requests: write
-
 jobs:
   build:
+    permissions:
+      checks: write
+      pull-requests: write
     strategy:
       fail-fast: false
       matrix:
