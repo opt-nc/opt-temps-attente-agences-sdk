@@ -5,13 +5,13 @@
  */
 package nc.opt.tempsattente;
 
-import static nc.opt.tempsattente.Agences.BASE_URL;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.net.Proxy;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -19,11 +19,9 @@ import java.time.temporal.ChronoUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import org.junit.jupiter.api.Test;
+import static nc.opt.tempsattente.Agences.BASE_URL;
+import static nc.opt.tempsattente.Agences.getProxy;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Test class of class Agences.
@@ -197,6 +195,32 @@ public class AgencesTest {
         } catch (IOException e) {
             Logger.getLogger(AgencesTest.class.getName()).log(Level.SEVERE, null, e);
         }
+    }
+
+    @Test
+    public void testHttpProxy(){
+        System.setProperty("http.proxyHost","localhost");
+        System.setProperty("http.proxyPort","9000");
+        Proxy proxy = getProxy();
+        assertNotNull(proxy);
+    }
+
+    @Test
+    public void testHttpsProxy(){
+        System.setProperty("https.proxyHost","localhost");
+        System.setProperty("https.proxyPort","8443");
+        Proxy proxy = getProxy();
+        assertNotNull(proxy);
+    }
+
+    @Test
+    public void testNoProxy(){
+        System.getProperties().remove("http.proxyHost");
+        System.getProperties().remove("https.proxyHost");
+        System.getProperties().remove("https.proxyPort");
+        System.getProperties().remove("http.proxyPort");
+        Proxy proxy = getProxy();
+        assertNull(proxy);
     }
 
 }
