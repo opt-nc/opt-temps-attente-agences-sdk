@@ -1,3 +1,10 @@
+# [2.1.0](https://github.com/opt-nc/opt-temps-attente-agences-sdk/compare/v2.0.3...v2.1.0) (2023-03-01)
+
+
+### Features
+
+* **proxy:** set configuration ([1f81256](https://github.com/opt-nc/opt-temps-attente-agences-sdk/commit/1f81256b136c71a47249a4c26438d0045c07b16a)), closes [#55](https://github.com/opt-nc/opt-temps-attente-agences-sdk/issues/55)
+
 ## [2.0.3](https://github.com/opt-nc/opt-temps-attente-agences-sdk/compare/v2.0.2...v2.0.3) (2023-02-06)
 
 
