@@ -6,6 +6,8 @@
 package nc.opt.tempsattente;
 
 import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -321,6 +323,11 @@ public class Agences {
 
     private static List<Agence> load(URL url) throws IOException {
         ObjectMapper mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+        Proxy proxy = getProxy();
+        if(proxy != null){
+            url.openConnection(proxy);
+        }
         JsonNode jsonNode = mapper.readValue(url, JsonNode.class);
 
         int total = jsonNode.get("hits").get("total").asInt();
@@ -433,6 +440,27 @@ public class Agences {
                 return tCoordonneesXYPrecises;
             }
         }
+    }
+
+
+    public static Proxy getProxy(){
+
+        String httpHost = System.getProperty("http.proxyHost");
+        String httpPort = System.getProperty("http.proxyPort");
+        String httpsHost = System.getProperty("https.proxyHost");
+        String httpsPort = System.getProperty("https.proxyPort");
+
+        boolean httpsProxySet = httpsHost != null  && httpsPort != null;
+        boolean httpProxySet = httpHost != null  && httpPort != null;
+
+        Proxy proxy = null;
+        if(httpProxySet || httpsProxySet) {
+            logger.info((httpsProxySet ? "HTTPS" : "HTTP") + " proxy configuration detected. Set it.");
+            proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(httpsProxySet ? httpsHost : httpHost,
+                    httpsProxySet ? Integer.valueOf(httpsPort): Integer.valueOf(httpPort)));
+        }
+
+        return proxy;
     }
 
 }
